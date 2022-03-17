@@ -1,0 +1,125 @@
+{% extends "broker/list.html" %}
+{% load i18n %}
+
+{% block model_list %}
+	{% if listings %}
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">{% translate "Type" %}</th>
+				<th scope="col">{% translate "Available On" %}</th>
+				<th scope="col">{% translate "Price" %}</th>
+				<th scope="col">{% translate "Description" %}</th>
+				<th scope="col">{% translate "Address" %}</th>
+				<th scope="col">{% translate "Size" %}</th>
+				<th scope="col">{% translate "Nr. of Rooms" %}</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody id="listings-table-body">
+		{% for listing in listings %}
+			<tr onclick="toggleSuggestions(
+				{% comment %}
+				This function will trigger an Ajax call, which sends a request to the Rest API.
+				Here we build the JS-Object that the client will send to the Rest Server at /rest/seekings/.
+				The endpoint there will call broker.utils.filter_search_seeking, which supports these fields:
+					- seeking_type
+					- max_rent
+					- min_rent
+					- max_purchase_price
+					- min_purchase_price
+					- min_number_of_rooms
+					- max_number_of_rooms
+					- min_size_sq_m
+					- max_size_sq_m
+					- min_number_of_persons
+					- max_number_of_persons
+					- min_starting_date
+					- max_starting_date
+					- min_ending_date
+					- max_ending_date
+					- min_number_of_months
+					- max_number_of_months
+					- must_be_furnished
+					- must_have_internet
+					- is_smoker
+					- has_pets
+					- min_age (derived from seeking.contact.date_of_birth)
+					- max_age (derived from seeking.contact.date_of_birth)
+				{% endcomment %}
+				'listing',
+				{{ listing.id }},
+				{
+			    		'seeking_type': '{{ listing.listing_type }}',
+			    		{% if listing.listing_type == 'rental' %}
+			    			'min_rent': '{{ listing.rental_price }}',
+			    		{% elif listing.listing_type == 'for_sale' %}
+			    			'min_purchase_price': '{{ listing.for_sale_price }}',
+			    		{% endif %}
+
+			    		'max_number_of_rooms': '{{ listing.apartment.number_of_rooms }}',
+					'max_size_sq_m': '{{ listing.apartment.size_sq_m }}',
+			    		{% comment %}
+			    		See Feature #368
+			    		See Feature #383
+			    		{% endcomment %}
+					'max_number_of_persons': '{{ listing.number_of_people }}',
+
+			    		{% comment %}
+					We're interested here in all seekings where the seeking's start date
+					is after the date on which the listing becomes available.
+			    		{% endcomment %}
+					'min_starting_date': '{{ listing.date_available|date:"Y-m-d" }}',
+
+
+
+					{% comment %}
+					TODO: See Feature #408. To avoid unnecessary 'false negatives',
+					      new listings should not get default values for these two fields,
+					      as users would be likely to neglect them in the first place.
+					{% endcomment %}
+					{% if listing.minimum_months %}
+						'min_number_of_months': '{{ listing.minimum_months }}',
+					{% endif %}
+					{% if listing.maximum_months %}
+						'max_number_of_months': '{{ listing.maximum_months }}',
+					{% endif %}
+
+
+			    		{% if listing.apartment.is_furnished is False %}
+			    			'must_be_furnished': 'False',
+			    		{% endif %}
+			    		{% if listing.apartment.has_internet is False %}
+			    			'must_have_internet': 'False',
+			    		{% endif %}
+			    		{% if listing.pets_ok is False %}
+			    			'has_pets': 'False',
+			    		{% endif %}
+
+			    		{% comment %}
+					TODO: See Feature #409, 410
+			    		{% endcomment %}
+				});" class="broker-row"
+			>
+				<td>{{ listing.id }}</td>
+				<td>{{ listing.listing_type }}</td>
+				<td>{{ listing.date_available }}</td>
+				{% if listing.listing_type == 'rental' %}
+					<td>{{ listing.rental_price }}</td>
+				{% elif listing.listing_type == 'for_sale' %}
+					<td>{{ listing.for_sale_price }}</td>
+				{% endif %}
+				<td>{{ listing }}</td>
+				<td>{{ listing.apartment.house.real_estate.address }}</td>
+				<td>{{ listing.apartment.size_sq_m }}m<sup>2</sup></td>
+				<td>{{ listing.apartment.number_of_rooms }}</td>
+				<td><a href="#" onclick="editInAdmin('listing', {{ listing.id }})">{% translate "Edit Listing" %}</a></td>
+			</tr>
+			<tr id="suggestions-row-listing{{ listing.id }}" class="suggestions-row">
+			</tr>
+		{% endfor %}
+		</tbody>
+	{% else %}
+		{% translate "No listings found!" %}
+	{% endif %}
+{% endblock %}

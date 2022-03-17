@@ -1,0 +1,80 @@
+{% extends "listings/list.html" %}
+{% load i18n %}
+{% load humanize %}
+
+{% block filter_search_form %}
+{% if show_filter_search_in_listview %}
+	<div class="container detail-text">
+		<br><br>
+		{% include "listings/filter-search-listview.html" %}
+	</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if search_results %}
+	<br>
+	{% for listing in search_results %}
+	<a href="{% url 'listings:detail' listing.id %}">
+	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
+		{% comment %}
+	  		Change the widths of these columns?
+			There is a actually a lot you can do,
+			see https://getbootstrap.com/docs/4.4/layout/grid/
+		{% endcomment %}
+		{% if listing.listing_type == 'rental' %}
+		<div class="col media">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
+
+		<div class="col">
+		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
+		<h3 class="color-elem-1">{{ listing }}</h3>
+		<p>{% translate "Starting" %} {{ listing.date_available }} {% translate "for" %} {{ listing.minimum_months }}-{{ listing.maximum_months}} {% translate "months" %}</p>
+		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price|intcomma }}</h3>
+		<p>{{ listing.apartment.number_of_rooms }} {% translate "rooms" %} | {% translate "ca." %} {{ listing.apartment.size_sq_m }} m<sup>2</sup> | {% translate "for" %} {{ listing.number_of_people }} {% translate "people" %}</p>
+		</div>
+
+		{% elif listing.listing_type == 'for_sale' %}
+		<div class="col media">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
+
+		<div class="col">
+		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
+		<h3 class="color-elem-1">{{ listing }}</h3>
+		{% comment %}
+	  	TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+		{% endcomment %}
+		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
+		<div class="row">
+			<span class="col-3">{% translate "For sale price" %}:</span>
+			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
+		</div>
+		<div class="row">
+			<span class="col-3">{% translate "Living space" %}:</span>
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
+			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
+		</div>
+		<div class="row">
+			<span class="col-3">Number of rooms:</span>
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
+			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} {% translate "rooms" %}</span>
+		</div>
+		<p>{{ listing.long_description }}</p>
+		</div>
+		{% endif %}
+
+	</div>
+	</a>
+	{% endfor %}
+{% else %}
+	<br>
+	<br>
+	<p>{% translate "No search results were found." %}</p>
+{% endif %}
+{% endblock %}

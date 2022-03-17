@@ -1,0 +1,27 @@
+{% extends "broker/list.html" %}
+{% load i18n %}
+
+{% block model_list %}
+	{% if matchings %}
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Status</th>
+				<th scope="col">{% translate "Listing" %}</th>
+				<th scope="col">{% translate "Seeking" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for matching in matchings %}
+			<tr onclick="editInAdmin('matching', {{ matching.id }});" class="broker-row">
+				<td>{{ matching.id }}</td>
+				<td>{{ matching.status }}</td>
+				<td>{{ matching.listing }}</td>
+				<td>{{ matching.seeking }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	{% else %}
+		{% translate "No matchings found!" %}
+	{% endif %}
+{% endblock %}

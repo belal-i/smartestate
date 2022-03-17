@@ -1,0 +1,23 @@
+{% extends "broker/base.html" %}
+{% load i18n %}
+{% block content %}
+<h3>{% translate "Matchings" %}</h3>
+{% include "broker/list-matching.html" %}
+<a href="{% url 'broker:matchings' %}">{% translate "See all Matchings" %}</a>
+<br>
+<a href="/admin/broker/matching/add">{% translate "Add a Matching" %}</a>
+<br>
+<br>
+<h3>{% translate "Listings" %}</h3>
+{% include "broker/list-listing.html" %}
+<a href="{% url 'broker:listings' %}">{% translate "See all Listings" %}</a>
+<br>
+<a href="/admin/listings/listing/add">{% translate "Add a Listing" %}</a>
+<br>
+<br>
+<h3>{% translate "Seekings" %}</h3>
+{% include "broker/list-seeking.html" %}
+<a href="{% url 'broker:seekings' %}">{% translate "See all Seekings" %}</a>
+<br>
+<a href="/admin/broker/seeking/add">{% translate "Add a Seeking" %}</a>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "broker/base.html" %}
+{% load i18n %}
+{% block search_filter %}
+<input type="button" class="form-toggle-button" value="{% translate "Hide/Show search form" %}">
+<form action="#" method="get" class="search-form" id="seekings-search">
+	<table class="table-sm table-bordered">
+		<tr>
+			<th>{{ form.seeking_type.label_tag }}</th>
+			<td>{{ form.seeking_type }}</th>
+			<td><input type="button" value="{% translate "Search" %}" id="seekings-search-submit"></th>
+		</tr>
+		<tr class="rental-form-fields">
+			<th>{{ form.max_rent.label_tag }}</th>
+			<td>{{ form.max_rent }}</th>
+			<th>{{ form.min_rent.label_tag }}</th>
+			<td>{{ form.min_rent }}</th>
+		</tr>
+		<tr class="for-sale-form-fields">
+			<th>{{ form.max_purchase_price.label_tag }}</th>
+			<td>{{ form.max_purchase_price }}</th>
+			<th>{{ form.min_purchase_price.label_tag }}</th>
+			<td>{{ form.min_purchase_price }}</th>
+		</tr>
+		<tr>
+			<th>{{ form.min_number_of_rooms.label_tag }}</th>
+			<td>{{ form.min_number_of_rooms }}</th>
+			<th>{{ form.max_number_of_rooms.label_tag }}</th>
+			<td>{{ form.max_number_of_rooms }}</th>
+			<th>{{ form.min_size_sq_m.label_tag }}</th>
+			<td>{{ form.min_size_sq_m }}</th>
+			<th>{{ form.max_size_sq_m.label_tag }}</th>
+			<td>{{ form.max_size_sq_m }}</th>
+		</tr>
+		<tr>
+			<th>{{ form.min_number_of_persons.label_tag }}</th>
+			<td>{{ form.min_number_of_persons }}</th>
+			<th>{{ form.max_number_of_persons.label_tag }}</th>
+			<td>{{ form.max_number_of_persons }}</th>
+		</tr>
+		<tr>
+			<th>{{ form.min_starting_date.label_tag }}</th>
+			<td>{{ form.min_starting_date }}</th>
+			<th>{{ form.max_starting_date.label_tag }}</th>
+			<td>{{ form.max_starting_date }}</th>
+			<th>{{ form.min_ending_date.label_tag }}</th>
+			<td>{{ form.min_ending_date }}</th>
+			<th>{{ form.max_ending_date.label_tag }}</th>
+			<td>{{ form.max_ending_date }}</th>
+		</tr>
+		<tr>
+			<th>{{ form.min_number_of_months.label_tag }}</th>
+			<td>{{ form.min_number_of_months }}</th>
+			<th>{{ form.max_number_of_months.label_tag }}</th>
+			<td>{{ form.max_number_of_months }}</th>
+			<th>{{ form.must_be_furnished.label_tag }}</th>
+			<td>{{ form.must_be_furnished }}</th>
+			<th>{{ form.must_have_internet.label_tag }}</th>
+			<td>{{ form.must_have_internet }}</th>
+		</tr>
+		<tr>
+			<th>{{ form.is_smoker.label_tag }}</th>
+			<td>{{ form.is_smoker }}</th>
+			<th>{{ form.has_pets.label_tag }}</th>
+			<td>{{ form.has_pets }}</th>
+			<th>{{ form.min_age.label_tag }}</th>
+			<td>{{ form.min_age }}</th>
+			<th>{{ form.max_age.label_tag }}</th>
+			<td>{{ form.max_age }}</th>
+		</tr>
+		<tr>
+			<td><input type="button" value="{% translate "Reset" %}" class="form-reset-button"></th>
+		</tr>
+	</table>
+</form>
+{% endblock %}
+
+
+{% block content %}
+<h3>{% translate "Seekings" %}</h3>
+<a href="/admin/broker/seeking/add">{% translate "Add a Seeking" %}</a>
+{% include "broker/list-seeking.html" %}
+<a href="/admin/broker/seeking/add">{% translate "Add a Seeking" %}</a>
+{% endblock %}
