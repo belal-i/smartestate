@@ -1,0 +1,11 @@
+{% if latest_listings %}
+	<h1>These are our listings</h1>
+	<ul>
+	{% for listing in latest_listings %}
+	<li><a href="/listings/{{ listing.id }}">{{ listing }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>We currently have no listings available.</p>
+{% endif %}
+<a href="/">Home</a>

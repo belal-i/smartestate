@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -52,10 +53,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'smartestate.urls'
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(PROJECT_ROOT, 'templates').replace('\\', '/')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
