@@ -9,7 +9,9 @@ from django.db import models
 ################
 
 class Listing(models.Model):
-    id = models.BigAutoField(primary_key=True)
+    # TODO: If we add an apartment as a listing, then we have to create a
+    # real estate for it. But then we also have to specifically map that
+    # real estate into this listing, for the __str__ method to work.
     real_estate = models.ForeignKey('RealEstate', on_delete=models.CASCADE, 
         null=True, blank=True)
     house = models.ForeignKey('House', on_delete=models.CASCADE, 
@@ -18,30 +20,18 @@ class Listing(models.Model):
         null=True, blank=True)
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
-    #rental_listing = models.OneToOneField('RentalListing',
-    #    on_delete=models.CASCADE, null=True, blank=True)
-    #for_sale_listing = models.OneToOneField('ForSaleListing',
-    #    on_delete=models.CASCADE, null=True, blank=True)
+    LISTING_TYPE_CHOICES = (
+        ('rental','RENTAL'),
+        ('for_sale','FOR_SALE'),
+    )
+    listing_type = models.CharField(max_length=8,
+        choices=LISTING_TYPE_CHOICES, default='rental')
+    rental_price = models.DecimalField(max_digits=7, decimal_places=2,
+        null=True, blank=True)
+    for_sale_price = models.DecimalField(max_digits=10, decimal_places=2,
+        null=True, blank=True)
     def __str__(self):
         return self.real_estate.__str__()
-
-class RentalListing(models.Model):
-    rent = models.DecimalField(max_digits=7, decimal_places=2,
-        null=True, blank=True)
-    listing = models.OneToOneField('Listing', on_delete=models.CASCADE,
-        null=True, blank=True)
-    # TODO: This breaks the app
-    def __str__(self):
-        return self.listing.__str__()
-    
-class ForSaleListing(models.Model):
-    price = models.DecimalField(max_digits=10, decimal_places=2,
-        null=True, blank=True)
-    listing = models.OneToOneField('Listing', on_delete=models.CASCADE,
-        null=True, blank=True)
-    # TODO: This breaks the app
-    def __str__(self):
-        return self.listing.__str__()
 
 class RealEstate(models.Model):
     address = models.OneToOneField('Address', on_delete=models.CASCADE,
