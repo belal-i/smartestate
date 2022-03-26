@@ -28,6 +28,7 @@ RUN pip install --no-cache-dir amqp \
     # See https://stackoverflow.com/questions/67409452/gunicorn-importerror-cannot-import-name-already-handled-from-eventlet-wsgi
     && pip install eventlet==0.33.0 https://github.com/benoitc/gunicorn/archive/refs/heads/master.zip#egg=gunicorn==20.1.0 \
     && pip install gunicorn \
+    && pip install pymysql \
     #&& pip install kombu \
     #&& pip install prompt-toolkit \
     #&& pip install psycopg2 \
