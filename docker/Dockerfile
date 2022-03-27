@@ -46,7 +46,7 @@ RUN pip install --no-cache-dir amqp \
 WORKDIR /app
 COPY  . .
 RUN chmod +x docker/*.sh \
-    && chown app_user:app_user .
+    && chown -R app_user:app_user .
 USER app_user:app_user
 
 ENTRYPOINT [ "docker/entrypoint.sh" ]
