@@ -28,6 +28,10 @@ SECRET_KEY = 'django-insecure--nmneuq-s^zj%y0ydmb*w9926)p_oc6&0u=7%xx(t*h43j+j8c
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+if os.getenv('HOST_DOMAIN') is not None:
+    CSRF_TRUSTED_ORIGINS = ['https://*.' + os.getenv('HOST_DOMAIN')]
+else:
+    CSRF_TRUSTED_ORIGINS = ['https://*.*']
 
 
 # Application definition
