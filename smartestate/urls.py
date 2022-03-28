@@ -23,6 +23,7 @@ from . import settings
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
     path('listings/', include('listings.urls')),
     path('admin/', admin.site.urls),
 ]

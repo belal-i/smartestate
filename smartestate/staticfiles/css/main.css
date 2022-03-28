@@ -13,6 +13,7 @@ h1,h2,h3 {
 
 .menu li {
 	display: inline;
+	margin: 10%;
 }
 a {
 	text-decoration: none;
