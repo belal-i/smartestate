@@ -18,8 +18,11 @@ def index(request):
     return render(request, 'listings/index.html', context)
 
 def detail(request, listing_id):
+    site_title = Config.objects.filter(
+        config_var="site_title")[0].config_val
     listing = get_object_or_404(Listing, pk=listing_id)
     context = {
+        'site_title': site_title,
         'listing': listing,
     }
     return render(request, 'listings/detail.html', context)

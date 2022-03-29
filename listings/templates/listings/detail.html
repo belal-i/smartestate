@@ -6,7 +6,14 @@
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 	</head>
 	<body>
-		<h1>{{ listing }}</h1>
+		<!-- TODO: Piece together your templates like this: https://stackoverflow.com/questions/408133/combining-multiple-django-templates-in-a-single-request
+		-->
+		<a href="/"><h1>{{ site_title }}</h1></a>
+		<ul class="menu">
+			<li><a href="/listings">Listings</a></li>
+			<li><a href="/about">About</a></li>
+		</ul>
+		<h3>{{ listing }}</h3>
 		{% if listing.listing_type == 'rental' %}
 			<p>Monthly rent: {{ listing.rental_price }}</p>
 		{% elif listing.listing_type == 'for_sale' %}
@@ -16,6 +23,5 @@
 		{% endif %}
 		<a href="/listings">Back to listings</a>
 		<br>
-		<a href="/">Home</a>
 	</body>
 </html>
