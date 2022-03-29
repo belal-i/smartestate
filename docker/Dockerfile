@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir amqp \
     && pip install eventlet==0.33.0 https://github.com/benoitc/gunicorn/archive/refs/heads/master.zip#egg=gunicorn==20.1.0 \
     && pip install gunicorn \
     && pip install pymysql \
+    && pip install pyyaml \
     #&& pip install kombu \
     #&& pip install prompt-toolkit \
     #&& pip install psycopg2 \
