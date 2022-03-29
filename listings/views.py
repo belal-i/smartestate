@@ -6,7 +6,7 @@ from config.models import Config
 # Create your views here.
 
 def index(request):
-    site_title = Config.objects.get_or_create(
+    site_title = Config.objects.filter(
         config_var="site_title")[0].config_val
     rental_listings = Listing.objects.filter(listing_type='rental')[:5]
     for_sale_listings = Listing.objects.filter(listing_type='for_sale')[:5]
