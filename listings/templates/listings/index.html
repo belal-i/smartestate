@@ -17,7 +17,7 @@
 	<h3>Rental Listings</h3>
 	<table class="listings_table">
 	{% for listing in rental_listings %}
-	<tr>
+	<tr class="listing_entry">
 		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
 		<td>{{ listing.rental_price }}</td>
 	</tr>
@@ -26,9 +26,9 @@
 {% endif %}
 {% if for_sale_listings %}
 	<h3>For Sale Listings</h3>
-	<table>
+	<table class="listings_table">
 	{% for listing in for_sale_listings %}
-	<tr>
+	<tr class="listing_entry">
 		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
 		<td>{{ listing.for_sale_price }}</td>
 	</tr>
