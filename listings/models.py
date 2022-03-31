@@ -30,6 +30,8 @@ class Listing(models.Model):
         null=True, blank=True)
     for_sale_price = models.DecimalField(max_digits=10, decimal_places=2,
         null=True, blank=True)
+    description = models.CharField(max_length=1024,
+        default='A short description of your listing')
     def __str__(self):
         return self.real_estate.__str__()
 
