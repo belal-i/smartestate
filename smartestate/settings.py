@@ -37,6 +37,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'config.apps.ConfigConfig',
     'listings.apps.ListingsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

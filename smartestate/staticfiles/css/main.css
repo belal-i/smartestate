@@ -1,6 +1,6 @@
 body {
 	margin: 40px auto;
-	max-width: 650px;
+	max-width: 80%;
 	line-height: 1.6;
 	font-size: 18px;
 	color: #444;
@@ -13,10 +13,32 @@ h1,h2,h3 {
 
 .menu li {
 	display: inline;
-	background-color: #aea;
+	margin: 10%;
+	padding: 0.5%;
+}
+.menu li:hover {
+	display: inline;
+	margin: 10%;
+	background-color: #cdcdcd;
+}
+a {
+	text-decoration: none;
+	color: #444;
 }
 
 .menu {
-	background-color: #222;
 	list-style-type: none;
+	border-bottom: 1px solid black;
+}
+
+
+table {
+	border-spacing: 0 2px;
+}
+.listings_table td {
+	padding: 5%;
+}
+
+.listing_entry:hover {
+	background-color: #cdcdcd;
 }

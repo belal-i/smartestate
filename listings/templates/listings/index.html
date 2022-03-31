@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>SmartEstate - Listings</title>
+		<title>{{ site_title }} - Listings</title>
 		{% load static %} 
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 	</head>
 	<body>
-	<a href="/"><h1>SmartEstate</h1></a>
+	<!-- TODO: See Feature #263. Piece together your templates like this: https://stackoverflow.com/questions/408133/combining-multiple-django-templates-in-a-single-request
+	-->
+	<a href="/"><h1>{{ site_title }}</h1></a>
 	<ul class="menu">
 		<li><a href="/listings">Listings</a></li>
+		<li><a href="/about">About</a></li>
 	</ul>
 {% if rental_listings %}
 	<h3>Rental Listings</h3>
-	<ul>
+	<table class="listings_table">
 	{% for listing in rental_listings %}
-	<li><a href="/listings/{{ listing.id }}">{{ listing }}</a></li>
+	<tr class="listing_entry">
+		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
+		<td>{{ listing.rental_price }}</td>
+	</tr>
 	{% endfor %}
-	</ul>
+	</table>
 {% endif %}
 {% if for_sale_listings %}
 	<h3>For Sale Listings</h3>
-	<ul>
+	<table class="listings_table">
 	{% for listing in for_sale_listings %}
-	<li><a href="/listings/{{ listing.id }}">{{ listing }}</a></li>
+	<tr class="listing_entry">
+		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
+		<td>{{ listing.for_sale_price }}</td>
+	</tr>
 	{% endfor %}
-	</ul>
+	</table>
 {% endif %}
 {% if not rental_listings and not for_sale_listings %}
 	<p>We currently have no listings available.</p>
 {% endif %}
-<a href="/">Home</a>
 	</body>
 </html>

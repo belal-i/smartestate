@@ -1,0 +1,16 @@
+- model: config.Config
+  pk: 1
+  fields:
+    config_var: site_title
+    config_val: SmartEstate
+- model: config.Config
+  pk: 2
+  fields:
+    config_var: cover_text
+    config_val: "Welcome to SmartEstate! SmartEstate lets real estate owners, brokers, managers, landlords, etc. manage their listings all from one conventient, cloud native web app. Please stay tuned, more info is coming soon."
+- model: config.Config
+  pk: 3
+  fields:
+    config_var: about_text
+    config_val: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+
