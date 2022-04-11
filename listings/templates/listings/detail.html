@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ listing }}</title>
-		{% load static %} 
-		<link rel="stylesheet" href="{% static 'css/main.css' %}">
-	</head>
-	<body>
-		<!-- TODO: See Feature #263. Piece together your templates like this: https://stackoverflow.com/questions/408133/combining-multiple-django-templates-in-a-single-request
-		-->
-		<a href="/"><h1>{{ site_title }}</h1></a>
-		<ul class="menu">
-			<li><a href="/listings">Listings</a></li>
-			<li><a href="/about">About</a></li>
-		</ul>
-		<h3>{{ listing }}</h3>
-		{% if listing.listing_type == 'rental' %}
-			<p>Monthly rent: {{ listing.rental_price }}</p>
-		{% elif listing.listing_type == 'for_sale' %}
-			<p>For sale price: {{ listing.for_sale_price }}</p>
-		{% else %}
-			<p>{{ listing }}</p>
-		{% endif %}
-		<p>Description: {{ listing.description }}</p>
-		<a href="/listings">Back to listings</a>
-		<br>
-	</body>
-</html>
+{% extends "smartestate/base.html" %}
+{% block title %}
+{{ listing }}
+{% endblock %}
+
+{% block content %}
+<h3>{{ listing }}</h3>
+{% if listing.listing_type == 'rental' %}
+	<p>Monthly rent: {{ listing.rental_price }}</p>
+{% elif listing.listing_type == 'for_sale' %}
+	<p>For sale price: {{ listing.for_sale_price }}</p>
+{% else %}
+	<p>{{ listing }}</p>
+{% endif %}
+<p>Description: {{ listing.description }}</p>
+<a href="/listings">Back to listings</a>
+<br>
+{% endblock %}
