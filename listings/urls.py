@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # Ex: listings/
-    path('', views.index, name='index'),
+    path('', views.list, name='list'),
     # Ex: listings/5
     path('<int:listing_id>', views.detail, name='detail'),
 ]

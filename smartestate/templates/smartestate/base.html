@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %} 
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<title>{% block title %}{{site_title}}{% endblock %}</title>
+	</head>
+	<body>
+		<div id="banner">
+			{% block banner %}
+			<a href="/"><h1>{{ site_title }}</h1></a>
+			<ul class="menu">
+				<li><a href="/listings">Listings</a></li>
+				<li><a href="/about">About</a></li>
+			</ul>
+			{% endblock %}
+		</div>
+
+		<div id="content">
+			{% block content %}
+			<p>{{ cover_text }}</p>
+			{% endblock %}
+		</div>
+	</body>
+</html>
