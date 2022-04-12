@@ -1,5 +1,6 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, \
+    validate_comma_separated_integer_list
 
 from datetime import date
 
@@ -60,6 +61,7 @@ class Listing(models.Model):
 class RealEstate(models.Model):
     address = models.OneToOneField('Address', on_delete=models.CASCADE,
         primary_key=True)
+    surroundings = models.TextField(max_length=1024, null=True, blank=True)
     def __str__(self):
         return self.address.__str__()
 
@@ -68,11 +70,34 @@ class House(models.Model):
     # That's why this is one-to-one.
     real_estate = models.OneToOneField('RealEstate', on_delete=models.CASCADE,
         primary_key=True)
+    number_of_stories = models.PositiveIntegerField(default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(100)])
+    date_of_construction = models.DateField(null=True, blank=True)
     def __str__(self):
         return self.real_estate.__str__()
 
 class Apartment(models.Model):
     house = models.ForeignKey('House', on_delete=models.CASCADE)
+    is_primary = models.BooleanField(default=False)
+    number_of_rooms = models.PositiveIntegerField(default=3,
+        validators=[MinValueValidator(1), MaxValueValidator(100)])
+    size_sq_m = models.PositiveIntegerField(default=5,
+        validators=[MinValueValidator(1), MaxValueValidator(500)])
+    story = models.CharField(default="0", max_length=7,
+        validators=[validate_comma_separated_integer_list])
+    room_details = models.TextField(max_length=1024,
+        null=True, blank=True)
+    flooring = models.CharField(max_length=128, null=True, blank=True)
+    furnishing = models.TextField(max_length=512,
+        null=True, blank=True)
+    kitchen_info = models.TextField(max_length=512,
+        null=True, blank=True)
+    technical_equipment = models.TextField(max_length=512,
+        null=True, blank=True, help_text='Washing machine, dryer, TV, etc.')
+    has_internet = models.BooleanField(default=True)
+    internet_info = models.CharField(max_length=256, null=True, blank=True)
+    specials = models.TextField(max_length=512, null=True, blank=True,
+        help_text='Extra features that make this apartment attractive')
     def __str__(self):
         return self.house.__str__()
 
