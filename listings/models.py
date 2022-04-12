@@ -134,7 +134,7 @@ class Address(models.Model):
     def __str__(self):
         # TODO: Quick fix...
         try:
-            return self.street + " " + self.number + ", " + self.city
+            return self.street + ", " + self.zip_code + " " + self.city
         except TypeError:
             return "-"
 
