@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+from datetime import date
 
 # Create your models here.
 
@@ -23,12 +26,34 @@ class Listing(models.Model):
         choices=LISTING_TYPE_CHOICES, default='rental')
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)
+    security_deposit = models.DecimalField(max_digits=7, decimal_places=2,
+        null=True, blank=True)
+    info_about_rental_price = models.CharField(max_length=64,
+         blank=True, null=True, default='Does not include utilities')
     for_sale_price = models.DecimalField(max_digits=10, decimal_places=2,
         null=True, blank=True)
+    minimum_down_payment = models.DecimalField(max_digits=10, decimal_places=2,
+        null=True, blank=True)
     short_description = models.CharField(max_length=128,
-        default='A short description of your listing')
-    long_description = models.CharField(max_length=1024,
-        default='A detailed description of your listing')
+        default='A beautiful new vacancy',
+        help_text='A short description of your listing')
+    long_description = models.CharField(max_length=1024, default='',
+         null=True, blank=True,
+         help_text='A detailed description of your listing')
+    date_available = models.DateField(default=date.today)
+    minimum_months = models.PositiveIntegerField(default=3,
+        null=True, blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(128)])
+    maximum_months = models.PositiveIntegerField(default=60,
+        null=True, blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(128)])
+    number_of_people = models.PositiveIntegerField(default=1,
+        null=True, blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(20)])
+    limitations = models.CharField(max_length=256, null=True, blank=True,
+        default='', help_text='Limiting factors to qualify for approval \
+            (no smoking, must be full-time employee, etc.)')
+    pets_ok = models.BooleanField(default=False)
     def __str__(self):
         return self.short_description
 
