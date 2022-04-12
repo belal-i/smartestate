@@ -88,7 +88,7 @@ class Apartment(models.Model):
     is_primary = models.BooleanField(default=False)
     number_of_rooms = models.PositiveIntegerField(default=3,
         validators=[MinValueValidator(1), MaxValueValidator(100)])
-    size_sq_m = models.PositiveIntegerField(default=5,
+    size_sq_m = models.PositiveIntegerField(default=30,
         validators=[MinValueValidator(1), MaxValueValidator(500)])
     story = models.CharField(default="0", max_length=7,
         validators=[validate_comma_separated_integer_list])
