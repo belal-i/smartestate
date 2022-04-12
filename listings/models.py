@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator, \
     validate_comma_separated_integer_list
 
+from config.models import Config
+
 from datetime import date
 
 # Create your models here.
@@ -25,6 +27,11 @@ class Listing(models.Model):
     )
     listing_type = models.CharField(max_length=8,
         choices=LISTING_TYPE_CHOICES, default='rental')
+    currency = models.CharField(max_length=4,
+        default=Config.objects.get_or_create(
+            config_var='default_currency'
+        )[0].config_val
+    )
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)
     security_deposit = models.DecimalField(max_digits=7, decimal_places=2,
