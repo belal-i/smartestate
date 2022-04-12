@@ -6,26 +6,50 @@
 
 {% block content %}
 {% if rental_listings %}
-	<h3>Rental Listings</h3>
-	<table class="listings_table">
+	<h2>Rental Listings</h2>
+	<div class="listings">
 	{% for listing in rental_listings %}
-	<tr class="listing_entry">
-		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
-		<td>{{ listing.rental_price }}</td>
-	</tr>
+	<div class="listing_entry">
+	<a href="/listings/{{ listing.id }}">
+		<h3>{{ listing }}</h3>
+		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
+		<h3>{{ listing.currency }}{{ listing.rental_price }}</h3>
+		<p>{{ listing.apartment.number_of_rooms }} rooms | ca. {{ listing.apartment.size_sq_m }} m<sup>2</sup> | for {{ listing.number_of_people }} people</p>
+	</a>
+	</div>
 	{% endfor %}
-	</table>
+	</div>
 {% endif %}
 {% if for_sale_listings %}
-	<h3>For Sale Listings</h3>
-	<table class="listings_table">
+	<h2>For Sale Listings</h2>
+	<div class="listings">
 	{% for listing in for_sale_listings %}
-	<tr class="listing_entry">
-		<td><a href="/listings/{{ listing.id }}">{{ listing }}</a></td>
-		<td>{{ listing.for_sale_price }}</td>
-	</tr>
+	<div class="listing_entry">
+	<a href="/listings/{{ listing.id }}">
+		<h3>{{ listing }}</h3>
+		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
+		<table>
+			<tr>
+				<td>For sale price:</td>
+				<td>{{ listing.currency }}{{ listing.for_sale_price }}</td>
+			</tr>
+			<tr>
+				<td>Living space:</td>
+				<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+				<td>{{ listing.apartment.size_sq_m}} m<sup>2</sup></td>
+			</tr>
+			<tr>
+				<td>Number of rooms:</td>
+				<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+				<td>{{ listing.apartment.number_of_rooms}} rooms</td>
+			</tr>
+		</table>
+		<p>{{ listing.long_description }}</p>
+	</a>
+	</div>
 	{% endfor %}
-	</table>
+	</div>
 {% endif %}
 {% if not rental_listings and not for_sale_listings %}
 	<p>We currently have no listings available.</p>

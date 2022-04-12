@@ -4,15 +4,123 @@
 {% endblock %}
 
 {% block content %}
-<h3>{{ listing }}</h3>
+<h3>{{ listing.short_description }}</h3>
+<p>{{ listing.long_description }}</p>
 {% if listing.listing_type == 'rental' %}
-	<p>Monthly rent: {{ listing.rental_price }}</p>
+	<table class="detail_table">
+		<tr>
+			<td>Available on</td>
+			<td>{{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.maximum_months }} months</td>
+		</tr>
+		<tr>
+			<td>Monthly rent</td>
+			<td><p>{{ listing.rental_price }}</p><p>{{ listing.info_about_rental_price }}</p></td>
+		</tr>
+		<tr>
+			<td>Security deposit</td>
+			<td>{{ listing.security_deposit }}</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>{{ listing.apartment.size_sq_m }} m<sup>2</sup></td>
+		</tr>
+		<tr>
+			<td>Listing type</td>
+			<!-- TODO: There might be a better way to do this: Don't use apartment.is_primary,
+	   			but maybe something like apartment_type.
+			-->
+			{% if listing.apartment.is_primary %}
+				<td>{{ listing.apartment.number_of_rooms }} room house</td>
+			{% else %}
+				<td>{{ listing.apartment.number_of_rooms }} room apartment</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td>{{ listing.apartment.house.real_estate.address }}</td>
+		</tr>
+		<tr>
+			<td>Requirements</td>
+			<td>{{ listing.limitations }}</td>
+		</tr>
+		<tr>
+			<td>Story</td>
+			<td>{{ listing.apartment.story }}</td>
+		</tr>
+		<tr>
+			<td>Year of construction</td>
+			<td>{{ listing.apartment.house.date_of_construction }}</td>
+		</tr>
+		<tr>
+			<td>Rooms</td>
+			<td>{{ listing.apartment.room_details }}</td>
+		</tr>
+		<tr>
+			<td>Flooring</td>
+			<td>{{ listing.apartment.flooring }}</td>
+		</tr>
+		<tr>
+			<td>Furnishing</td>
+			<td>{{ listing.apartment.furnishing }}</td>
+		</tr>
+		<tr>
+			<td>Kitchen</td>
+			<td>{{ listing.apartment.kitchen_info }}</td>
+		</tr>
+		<tr>
+			<td>Technical equipment</td>
+			<td>{{ listing.apartment.technical_equipment }}</td>
+		</tr>
+		{% if listing.apartment.has_internet %}
+			<tr>
+				<td>Internet</td>
+				<td>{{ listing.apartment.internet_info }}</td>
+			</tr>
+		{% endif %}
+		<tr>
+			<td>Specials</td>
+			<td>{{ listing.apartment.specials }}</td>
+		</tr>
+		<tr>
+			<td>Surroundings</td>
+			<td>{{ listing.apartment.house.real_estate.surroundings }}</td>
+		</tr>
+	</table>
 {% elif listing.listing_type == 'for_sale' %}
+	<table class="detail_table">
+		<tr>
+			<td>Size</td>
+			<td>{{listing.apartment.size_sq_m }} m<sup>2</sup></td>
+		</tr>
+		<tr>
+			<td>Rooms</td>
+			<td>{{listing.apartment.number_of_rooms }} rooms</td>
+		</tr>
+		<tr>
+			<td>For sale price</td>
+			<td>{{listing.for_sale_price }} rooms</td>
+		</tr>
+		<tr>
+			<td>Location</td>
+			<td>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</td>
+		</tr>
+		<tr>
+			<td>Year of construction</td>
+			<td>{{ listing.apartment.house.date_of_construction }}</td>
+		</tr>
+		<tr>
+			<td>Flooring</td>
+			<td>{{ listing.apartment.flooring }}</td>
+		</tr>
+		<tr>
+			<td>Technical details</td>
+			<td>{{ listing.apartment.technical_equipment }}</td>
+		</tr>
+	</table>
 	<p>For sale price: {{ listing.for_sale_price }}</p>
 {% else %}
 	<p>{{ listing }}</p>
 {% endif %}
-<p>Description: {{ listing.long_description }}</p>
 <a href="/listings">Back to listings</a>
 <br>
 {% endblock %}
