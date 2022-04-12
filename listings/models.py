@@ -37,7 +37,7 @@ class Listing(models.Model):
     short_description = models.CharField(max_length=128,
         default='A beautiful new vacancy',
         help_text='A short description of your listing')
-    long_description = models.CharField(max_length=1024, default='',
+    long_description = models.TextField(max_length=1024, default='',
          null=True, blank=True,
          help_text='A detailed description of your listing')
     date_available = models.DateField(default=date.today)
@@ -113,7 +113,8 @@ class Phone(models.Model):
         return self.value
 
 class Email(models.Model):
-    value = models.CharField(max_length=20)
+    # TODO: EmailField
+    value = models.EmailField(max_length=40)
     def __str__(self):
         return self.value
 
