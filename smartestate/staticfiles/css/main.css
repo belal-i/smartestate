@@ -32,13 +32,15 @@ a {
 }
 
 
-table {
-	border-spacing: 0 2px;
-}
-.listings_table td {
-	padding: 5%;
+.listing_entry {
+	border-bottom: 0.5px solid grey;
 }
 
 .listing_entry:hover {
 	background-color: #cdcdcd;
+}
+
+.detail_table tr td {
+	border-bottom: 0.5px solid grey;
+	padding: 2%;
 }
