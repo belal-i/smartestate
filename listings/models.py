@@ -142,7 +142,6 @@ class Phone(models.Model):
         return self.value
 
 class Email(models.Model):
-    # TODO: EmailField
     value = models.EmailField(max_length=40)
     def __str__(self):
         return self.value
