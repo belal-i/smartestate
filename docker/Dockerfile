@@ -30,6 +30,7 @@ RUN pip install --no-cache-dir amqp \
     && pip install gunicorn \
     && pip install pymysql \
     && pip install pyyaml \
+    && pip install Pillow \
     #&& pip install kombu \
     #&& pip install prompt-toolkit \
     #&& pip install psycopg2 \
