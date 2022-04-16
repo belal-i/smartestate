@@ -9,14 +9,22 @@
 	<h2>Rental Listings</h2>
 	<div class="listings">
 	{% for listing in rental_listings %}
-	<div class="listing_entry">
 	<a href="/listings/{{ listing.id }}">
+	<div class="listing_entry">
+
+		<div class="listing_entry_img">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
+
+		<div class="listing_entry_info">
 		<h3>{{ listing }}</h3>
 		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
 		<h3>{{ listing.currency }}{{ listing.rental_price }}</h3>
 		<p>{{ listing.apartment.number_of_rooms }} rooms | ca. {{ listing.apartment.size_sq_m }} m<sup>2</sup> | for {{ listing.number_of_people }} people</p>
-	</a>
+		</div>
+
 	</div>
+	</a>
 	{% endfor %}
 	</div>
 {% endif %}
@@ -24,8 +32,14 @@
 	<h2>For Sale Listings</h2>
 	<div class="listings">
 	{% for listing in for_sale_listings %}
-	<div class="listing_entry">
 	<a href="/listings/{{ listing.id }}">
+	<div class="listing_entry">
+
+		<div class="listing_entry_img">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
+
+		<div class="listing_entry_info">
 		<h3>{{ listing }}</h3>
 		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
@@ -46,8 +60,10 @@
 			</tr>
 		</table>
 		<p>{{ listing.long_description }}</p>
-	</a>
+		</div>
+
 	</div>
+	</a>
 	{% endfor %}
 	</div>
 {% endif %}
