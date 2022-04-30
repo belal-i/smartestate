@@ -128,6 +128,47 @@
 		</tr>
 	</table>
 {% elif listing.listing_type == 'for_sale' %}
+	<script>
+		function setMainImage(imageSourceUrl) {
+			document.getElementById("main_image").src = imageSourceUrl;
+		}
+	</script>
+	{% if listing.image_set.all.0 %}
+		<img id="main_image" src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		<br>
+	{% endif %}
+	<!--
+	Listing images
+	-->
+	{% for image_model in listing.image_set.all %}
+		<a href="#" onclick="setMainImage('{{ image_model.image.url }}');">
+		<img src="{{ image_model.image.url }}" width=100 height=75>
+		</a>
+	{% endfor %}
+	<!--
+	Apartment images
+	-->
+	{% for image_model in listing.apartment.image_set.all %}
+		<a href="#" onclick="setMainImage('{{ image_model.image.url }}');">
+		<img src="{{ image_model.image.url }}" width=100 height=75>
+		</a>
+	{% endfor %}
+	<!--
+	Images of the house
+	-->
+	{% for image_model in listing.apartment.house.image_set.all %}
+		<a href="#" onclick="setMainImage('{{ image_model.image.url }}');">
+		<img src="{{ image_model.image.url }}" width=100 height=75>
+		</a>
+	{% endfor %}
+	<!--
+	Images of the surroundings
+	-->
+	{% for image_model in listing.apartment.house.real_estate.image_set.all %}
+		<a href="#" onclick="setMainImage('{{ image_model.image.url }}');">
+		<img src="{{ image_model.image.url }}" width=100 height=75>
+		</a>
+	{% endfor %}
 	<table class="detail_table">
 		<tr>
 			<td>Size</td>
@@ -139,7 +180,7 @@
 		</tr>
 		<tr>
 			<td>For sale price</td>
-			<td>{{listing.for_sale_price }} rooms</td>
+			<td>{{listing.for_sale_price }}</td>
 		</tr>
 		<tr>
 			<td>Location</td>
