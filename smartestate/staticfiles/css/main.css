@@ -19,3 +19,7 @@ a {
 .color-elem-2 {
 	color: #b5a372;
 }
+
+.text-dark {
+	color: #eee !important;
+}
