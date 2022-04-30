@@ -2,6 +2,9 @@ a {
 	text-decoration: none !important;
 }
 
+p, span {
+	color: rgba(0,0,0,.9);
+}
 .listing-entry:hover {
 	opacity: 0.75;
 }
