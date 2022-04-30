@@ -1,4 +1,5 @@
 {% extends "smartestate/base.html" %}
+{% load humanize %}
 
 {% block title %}
 {{ site_title }} - Listings
@@ -23,7 +24,7 @@
 		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
 		<h3 class="color-elem-1">{{ listing }}</h3>
 		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
-		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price }}</h3>
+		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price|intcomma }}</h3>
 		<p>{{ listing.apartment.number_of_rooms }} rooms | ca. {{ listing.apartment.size_sq_m }} m<sup>2</sup> | for {{ listing.number_of_people }} people</p>
 		</div>
 
@@ -52,7 +53,7 @@
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
 		<div class="row">
 			<span class="col-3">For sale price:</span>
-			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price }}</td>
+			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
 		</div>
 		<div class="row">
 			<span class="col-3">Living space:</span>
