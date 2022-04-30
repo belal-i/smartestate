@@ -48,22 +48,20 @@
 		<h3>{{ listing }}</h3>
 		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
-		<table>
-			<tr>
-				<td>For sale price:</td>
-				<td>{{ listing.currency }}{{ listing.for_sale_price }}</td>
-			</tr>
-			<tr>
-				<td>Living space:</td>
-				<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
-				<td>{{ listing.apartment.size_sq_m}} m<sup>2</sup></td>
-			</tr>
-			<tr>
-				<td>Number of rooms:</td>
-				<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
-				<td>{{ listing.apartment.number_of_rooms}} rooms</td>
-			</tr>
-		</table>
+		<div class="row">
+			<span class="col-3">For sale price:</span>
+			<span class="col-9">{{ listing.currency }}{{ listing.for_sale_price }}</td>
+		</div>
+		<div class="row">
+			<span class="col-3">Living space:</span>
+			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			<span class="col-9">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
+		</div>
+		<div class="row">
+			<span class="col-3">Number of rooms:</span>
+			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			<span class="col-9">{{ listing.apartment.number_of_rooms}} rooms</span>
+		</div>
 		<p>{{ listing.long_description }}</p>
 		</div>
 
