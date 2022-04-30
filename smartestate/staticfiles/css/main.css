@@ -13,3 +13,10 @@ a {
 	opacity: 0.75;
 	cursor: pointer;
 }
+
+.color-elem-1 {
+	color: #28a745;
+}
+.color-elem-2 {
+	color: #b5a372;
+}
