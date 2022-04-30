@@ -7,16 +7,19 @@
 {% block content %}
 {% if rental_listings %}
 	<h2>Rental Listings</h2>
-	<div class="listings">
 	{% for listing in rental_listings %}
 	<a href="/listings/{{ listing.id }}">
-	<div class="listing_entry">
-
-		<div class="listing_entry_img">
+	<div class="row border-bottom shadow p-3 mb-5 bg-white rounded listing-entry">
+		<!--TODO:
+	  		Change the widths of these columns?
+			There is a actually a lot you can do,
+			see https://getbootstrap.com/docs/4.4/layout/grid/
+		-->
+		<div class="col media">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
 		</div>
 
-		<div class="listing_entry_info">
+		<div class="col">
 		<h3>{{ listing }}</h3>
 		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
 		<h3>{{ listing.currency }}{{ listing.rental_price }}</h3>
@@ -26,20 +29,22 @@
 	</div>
 	</a>
 	{% endfor %}
-	</div>
 {% endif %}
+
+<!-- TODO:
+	Do rental listings and for sale listings in separate views!
+-->
 {% if for_sale_listings %}
 	<h2>For Sale Listings</h2>
-	<div class="listings">
 	{% for listing in for_sale_listings %}
 	<a href="/listings/{{ listing.id }}">
-	<div class="listing_entry">
+	<div class="row border-bottom shadow p-3 mb-5 bg-white rounded listing-entry">
 
-		<div class="listing_entry_img">
+		<div class="col">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
 		</div>
 
-		<div class="listing_entry_info">
+		<div class="col">
 		<h3>{{ listing }}</h3>
 		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
@@ -65,7 +70,6 @@
 	</div>
 	</a>
 	{% endfor %}
-	</div>
 {% endif %}
 {% if not rental_listings and not for_sale_listings %}
 	<p>We currently have no listings available.</p>
