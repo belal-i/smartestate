@@ -1,49 +1,24 @@
-body {
-	margin: 40px auto;
-	max-width: 80%;
-	line-height: 1.6;
-	font-size: 18px;
-	color: #444;
-	padding: 0 10px;
-}
-
-h1,h2,h3 {
-	line-height: 1.2;
-}
-
-.menu li {
-	display: inline;
-	margin: 10%;
-	padding: 0.5%;
-}
-.menu li:hover {
-	display: inline;
-	margin: 10%;
-	background-color: #cdcdcd;
-}
 a {
-	text-decoration: none;
-	color: #444;
+	text-decoration: none !important;
 }
 
-.menu {
-	list-style-type: none;
-	border-bottom: 1px solid black;
+p, span {
+	color: rgba(0,0,0,.9);
+}
+.listing-entry:hover {
+	opacity: 0.75;
 }
 
-
-.listing_entry {
-	border-bottom: 0.5px solid grey;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.thumbnail-select:hover {
+	/* TODO: This color does not work, would be cool if it did.*/
+	color: #28a745;
+	opacity: 0.75;
+	cursor: pointer;
 }
 
-.listing_entry:hover {
-	background-color: #cdcdcd;
+.color-elem-1 {
+	color: #28a745;
 }
-
-.detail_table tr td {
-	border-bottom: 0.5px solid grey;
-	padding: 2%;
+.color-elem-2 {
+	color: #b5a372;
 }
-
