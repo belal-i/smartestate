@@ -1,4 +1,7 @@
 {% extends "smartestate/base.html" %}
+
+{% load humanize %}
+
 {% block title %}
 {{ listing }}
 {% endblock %}
@@ -72,11 +75,11 @@ Images of the surroundings
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3">Monthly rent</div>
-		<div class="col-9"><p>{{ listing.rental_price }}</p><p>{{ listing.info_about_rental_price }}</p></div>
+		<div class="col-9"><p>{{ listing.rental_price|intcomma }}</p><p>{{ listing.info_about_rental_price }}</p></div>
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3">Security deposit</div>
-		<div class="col-9">{{ listing.security_deposit }}</div>
+		<div class="col-9">{{ listing.security_deposit|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3">Size</div>
@@ -145,10 +148,6 @@ Images of the surroundings
 	</div>
 {% elif listing.listing_type == 'for_sale' %}
 	<div class="row border-bottom p-3">
-		<div class="col-3">For sale price</div>
-		<div class="col-9">{{ listing.for_sale_price }}</div>
-	</div>
-	<div class="row border-bottom p-3">
 		<div class="col-3">Size</div>
 		<div class="col-9">{{listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
@@ -158,7 +157,7 @@ Images of the surroundings
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3">For sale price</div>
-		<div class="col-9">{{listing.for_sale_price }}</div>
+		<div class="col-9">{{ listing.for_sale_price|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3">Location</div>
