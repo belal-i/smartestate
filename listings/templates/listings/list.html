@@ -10,7 +10,7 @@
 	<h2>Rental Listings</h2>
 	{% for listing in rental_listings %}
 	<a href="/listings/{{ listing.id }}">
-	<div class="row shadow p-3 mb-5 bg-white rounded listing-entry">
+	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
 		<!--TODO:
 	  		Change the widths of these columns?
 			There is a actually a lot you can do,
@@ -40,7 +40,7 @@
 	<h2>For Sale Listings</h2>
 	{% for listing in for_sale_listings %}
 	<a href="/listings/{{ listing.id }}">
-	<div class="row shadow p-3 mb-5 bg-white rounded listing-entry">
+	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
 
 		<div class="col">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
@@ -52,16 +52,16 @@
 		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
 		<div class="row">
-			<span class="col-3">For sale price:</span>
+			<span class="col-3 text">For sale price:</span>
 			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
 		</div>
 		<div class="row">
-			<span class="col-3">Living space:</span>
+			<span class="col-3 text">Living space:</span>
 			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
 		</div>
 		<div class="row">
-			<span class="col-3">Number of rooms:</span>
+			<span class="col-3 text">Number of rooms:</span>
 			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
 			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} rooms</span>
 		</div>

@@ -94,14 +94,19 @@
 			var mode = 1;
 			$("#toggle-day-night").click(function() {
 				mode *= -1;
-				$(".navbar").toggleClass("navbar-light");
-				$(".navbar").toggleClass("bg-light");
 				$(".navbar").toggleClass("navbar-dark");
 				$(".navbar").toggleClass("bg-dark");
 				$(".nav-item").toggleClass("text-dark");
-				$("body").toggleClass("bg-light");
+				$(".listing-entry").toggleClass("bg-dark");
+				$(".detail-images").toggleClass("bg-dark");
+				$(".detail-short").toggleClass("bg-dark");
+				$(".detail-long").toggleClass("bg-dark");
+				$(".detail-text").toggleClass("text-dark");
+				$(".back-to-listings").toggleClass("bg-dark");
 				$("body").toggleClass("bg-dark");
+				$("h2").toggleClass("text-dark");
 				$("p").toggleClass("text-dark");
+				$("span").toggleClass("text-dark");
 			});
 		</script>
 	</body>
