@@ -1,0 +1,42 @@
+{% extends "listings/list.html" %}
+{% load humanize %}
+{% block content %}
+{% if for_sale_listings %}
+	<br>
+	{% for listing in for_sale_listings %}
+	<a href="/listings/{{ listing.id }}">
+	<div class="row shadow p-3 mb-5 bg-white rounded listing-entry">
+
+		<div class="col">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
+
+		<div class="col">
+		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
+		<h3 class="color-elem-1">{{ listing }}</h3>
+		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
+		<div class="row">
+			<span class="col-3">For sale price:</span>
+			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
+		</div>
+		<div class="row">
+			<span class="col-3">Living space:</span>
+			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
+		</div>
+		<div class="row">
+			<span class="col-3">Number of rooms:</span>
+			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} rooms</span>
+		</div>
+		<p>{{ listing.long_description }}</p>
+		</div>
+
+	</div>
+	</a>
+	{% endfor %}
+{% else %}
+	<p>We currently have no for sale listings available.</p>
+{% endif %}
+{% endblock %}

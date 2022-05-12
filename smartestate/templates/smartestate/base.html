@@ -36,12 +36,23 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<!-- TODO: Use Django to add the class 'active' to the
-	     					   appropriate li tag.
-					-->
-					<li class="nav-item 
+					<li class="nav-item dropdown 
 						{% if request.path == '/listings/' %} active {% endif %}">
-						<a href="/listings" class="nav-link">Listings</a>
+						<a
+							href="#"
+							class="nav-link dropdown-toggle"
+							data-toggle="dropdown"
+							role="button"
+							aria-haspopup="true"
+							aria-expanded="false">Listings</a>
+						<div class="dropdown-menu">
+							<a
+								href="/rental-listings"
+								class="dropdown-item">Rental Listings</a>
+							<a
+								href="/for-sale-listings"
+								class="dropdown-item">For Sale Listings</a>
+						</div>
 					</li>
 					<li class="nav-item
 						{% if request.path == '/about/' %} active {% endif %}">
