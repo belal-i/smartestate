@@ -106,7 +106,7 @@ class Apartment(models.Model):
         return self.house.__str__()
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='uploads/', default='house.jpg')
+    image = models.ImageField(upload_to='uploads/listings/', default='assets/house.jpg')
     image_name = models.CharField(max_length=32, default='untitled')
     real_estate = models.ForeignKey('RealEstate', on_delete=models.CASCADE,
         null=True, blank=True)
