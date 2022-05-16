@@ -21,7 +21,20 @@
 	<body>
 		{% block banner %}
 		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
-			<a href="/" class="navbar-brand"><h1 class="color-elem-1">{{ site_title }}</h1></a>
+			{% if logo_url != "" %}
+				<a href="/" class="navbar-brand">
+					<img
+						src="{{ logo_url }}"
+						class="d-inline-block align-top"
+						width=105 height=75
+					>
+					<h1 class="color-elem-1 d-inline-block align-top site-title">{{ site_title }}</h1>
+				</a>
+			{% else %}
+				<a href="/" class="navbar-brand">
+					<h1 class="color-elem-1 d-inline-block align-top">{{ site_title }}</h1>
+				</a>
+			{% endif %}
 			<button
 				class="navbar-toggler"
 				type="button"

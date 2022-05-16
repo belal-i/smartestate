@@ -24,6 +24,8 @@ class Config(models.Model):
         null=True, blank=True,
         help_text="The text displayed on your site's about page")
 
+    logo_image = models.ImageField(upload_to='uploads/config/',
+        blank=True, null=True)
 
     def __str__(self):
         return "Site configuration"

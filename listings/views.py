@@ -7,19 +7,31 @@ from config.models import Config
 
 def list_rental(request):
     site_title = Config.objects.get_or_create()[0].site_title
+    try:
+        logo_url   = Config.objects.get_or_create()[0].logo_image.url
+    except ValueError:
+        logo_url   = ""
+
     rental_listings = Listing.objects.filter(listing_type='rental')
     context = {
         'rental_listings': rental_listings,
         'site_title': site_title,
+        'logo_url': logo_url,
     }
     return render(request, 'listings/list-rental.html', context)
 
 def list_for_sale(request):
     site_title = Config.objects.get_or_create()[0].site_title
+    try:
+        logo_url   = Config.objects.get_or_create()[0].logo_image.url
+    except ValueError:
+        logo_url   = ""
+
     for_sale_listings = Listing.objects.filter(listing_type='for_sale')
     context = {
         'for_sale_listings': for_sale_listings,
         'site_title': site_title,
+        'logo_url': logo_url,
     }
     return render(request, 'listings/list-for-sale.html', context)
 
@@ -28,9 +40,15 @@ def list_redirect(request):
 
 def detail(request, listing_id):
     site_title = Config.objects.get_or_create()[0].site_title
+    try:
+        logo_url   = Config.objects.get_or_create()[0].logo_image.url
+    except ValueError:
+        logo_url   = ""
+
     listing = get_object_or_404(Listing, pk=listing_id)
     context = {
         'site_title': site_title,
         'listing': listing,
+        'logo_url': logo_url,
     }
     return render(request, 'listings/detail.html', context)

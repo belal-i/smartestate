@@ -22,3 +22,8 @@ p, span {
 .color-elem-2 {
 	color: #b5a372;
 }
+
+.site-title {
+	display: inline-block;
+	margin-top: 3%;
+}
