@@ -8,6 +8,7 @@ from django.db import models
 
 class Config(models.Model):
 
+    # See https://stackoverflow.com/questions/39412968/allow-only-one-instance-of-a-model-in-django
     def save(self, *args, **kwargs):
         self.pk = self.id = 1
         return super().save(*args, **kwargs)
