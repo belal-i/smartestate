@@ -24,6 +24,8 @@ class Config(models.Model):
         null=True, blank=True,
         help_text="The text displayed on your site's about page")
 
+    # See Feature #326: When we have a logo for our app, set it as default here.
+    # Users can replace it with their own, or remove altogether.
     logo_image = models.ImageField(upload_to='uploads/config/',
         blank=True, null=True)
 
