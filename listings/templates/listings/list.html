@@ -1,78 +1,13 @@
 {% extends "smartestate/base.html" %}
-{% load humanize %}
 
 {% block title %}
 {{ site_title }} - Listings
 {% endblock %}
 
 {% block content %}
-{% if rental_listings %}
-	<h2>Rental Listings</h2>
-	{% for listing in rental_listings %}
-	<a href="/listings/{{ listing.id }}">
-	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
-		<!--TODO:
-	  		Change the widths of these columns?
-			There is a actually a lot you can do,
-			see https://getbootstrap.com/docs/4.4/layout/grid/
-		-->
-		<div class="col media">
-		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
-		</div>
-
-		<div class="col">
-		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
-		<h3 class="color-elem-1">{{ listing }}</h3>
-		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
-		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price|intcomma }}</h3>
-		<p>{{ listing.apartment.number_of_rooms }} rooms | ca. {{ listing.apartment.size_sq_m }} m<sup>2</sup> | for {{ listing.number_of_people }} people</p>
-		</div>
-
-	</div>
-	</a>
-	{% endfor %}
-{% endif %}
-
-<!-- TODO:
-	Do rental listings and for sale listings in separate views!
--->
-{% if for_sale_listings %}
-	<h2>For Sale Listings</h2>
-	{% for listing in for_sale_listings %}
-	<a href="/listings/{{ listing.id }}">
-	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
-
-		<div class="col">
-		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
-		</div>
-
-		<div class="col">
-		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
-		<h3 class="color-elem-1">{{ listing }}</h3>
-		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
-		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
-		<div class="row">
-			<span class="col-3 text">For sale price:</span>
-			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
-		</div>
-		<div class="row">
-			<span class="col-3 text">Living space:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
-			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
-		</div>
-		<div class="row">
-			<span class="col-3 text">Number of rooms:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
-			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} rooms</span>
-		</div>
-		<p>{{ listing.long_description }}</p>
-		</div>
-
-	</div>
-	</a>
-	{% endfor %}
-{% endif %}
 {% if not rental_listings and not for_sale_listings %}
+	<br>
+	<br>
 	<p>We currently have no listings available.</p>
 {% endif %}
 {% endblock %}

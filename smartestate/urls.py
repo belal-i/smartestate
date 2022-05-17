@@ -18,13 +18,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from . import views
+from . import views as home_views
+from listings import views as listings_views
 from . import settings
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('about/', views.about, name='about'),
+    path('', home_views.home, name='home'),
+    path('about/', home_views.about, name='about'),
     path('listings/', include('listings.urls')),
+    path('rental-listings/', listings_views.list_rental),
+    path('for-sale-listings/', listings_views.list_for_sale),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

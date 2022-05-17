@@ -26,3 +26,7 @@ p, span {
 .text-dark {
 	color: #eee !important;
 }
+.site-title {
+	display: inline-block;
+	margin-top: 3%;
+}
