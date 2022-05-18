@@ -1,12 +1,30 @@
 {% extends "listings/list.html" %}
 {% load humanize %}
 {% block content %}
-{% if for_sale_listings %}
+{% if search_results %}
 	<br>
-	{% for listing in for_sale_listings %}
+	{% for listing in search_results %}
 	<a href="/listings/{{ listing.id }}">
 	<div class="row shadow p-3 mb-5 bg-white rounded listing-entry">
+		<!--TODO:
+	  		Change the widths of these columns?
+			There is a actually a lot you can do,
+			see https://getbootstrap.com/docs/4.4/layout/grid/
+		-->
+		{% if listing.listing_type == 'rental' %}
+		<div class="col media">
+		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
+		</div>
 
+		<div class="col">
+		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
+		<h3 class="color-elem-1">{{ listing }}</h3>
+		<p>Starting {{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.minimum_months}} months</p>
+		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price|intcomma }}</h3>
+		<p>{{ listing.apartment.number_of_rooms }} rooms | ca. {{ listing.apartment.size_sq_m }} m<sup>2</sup> | for {{ listing.number_of_people }} people</p>
+		</div>
+
+		{% elif listing.listing_type == 'for_sale' %}
 		<div class="col media">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
 		</div>
@@ -32,6 +50,7 @@
 		</div>
 		<p>{{ listing.long_description }}</p>
 		</div>
+		{% endif %}
 
 	</div>
 	</a>
@@ -39,6 +58,6 @@
 {% else %}
 	<br>
 	<br>
-	<p>We currently have no for sale listings available.</p>
+	<p>No search results were found.</p>
 {% endif %}
 {% endblock %}
