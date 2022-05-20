@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.db.models import Q
 
 from .models import *
 from config.models import Config
@@ -52,3 +53,30 @@ def detail(request, listing_id):
         'logo_url': logo_url,
     }
     return render(request, 'listings/detail.html', context)
+
+def get_search_results(keyword):
+    return Listing.objects.filter(
+        Q(short_description__icontains = keyword) |
+        Q(long_description__icontains = keyword) |
+        Q(apartment__specials__icontains = keyword) |
+        Q(apartment__house__real_estate__address__street__icontains =
+            keyword) |
+        Q(apartment__house__real_estate__address__city__icontains =
+            keyword)
+    )
+
+def search_results(request):
+    site_title = Config.objects.get_or_create()[0].site_title
+    try:
+        logo_url   = Config.objects.get_or_create()[0].logo_image.url
+    except ValueError:
+        logo_url   = ""
+
+    search_results = get_search_results(request.GET['search'])
+
+    context = {
+        'search_results': search_results,
+        'site_title': site_title,
+        'logo_url': logo_url,
+    }
+    return render(request, 'listings/search-results.html', context)
