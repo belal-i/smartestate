@@ -56,12 +56,12 @@ def detail(request, listing_id):
 
 def get_search_results(keyword):
     return Listing.objects.filter(
-        Q(short_description__contains = keyword) |
-        Q(long_description__contains = keyword) |
-        Q(apartment__specials__contains = keyword) |
-        Q(apartment__house__real_estate__address__street__contains =
+        Q(short_description__icontains = keyword) |
+        Q(long_description__icontains = keyword) |
+        Q(apartment__specials__icontains = keyword) |
+        Q(apartment__house__real_estate__address__street__icontains =
             keyword) |
-        Q(apartment__house__real_estate__address__city__contains =
+        Q(apartment__house__real_estate__address__city__icontains =
             keyword)
     )
 
