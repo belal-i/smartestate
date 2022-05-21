@@ -17,6 +17,7 @@ $(document).ready(function() {
 		var dayNightIconPath = $("#toggle-day-night-icon").attr("src");
 		dayNightIconPath = dayNightIconPath.replace("night", "day");
 		$("#toggle-day-night-icon").attr("src", dayNightIconPath);
+		$("#toggle-day-night-icon").css({"filter": "invert(100%)"});
 	}
 });
 $("#toggle-day-night").click(function() {
