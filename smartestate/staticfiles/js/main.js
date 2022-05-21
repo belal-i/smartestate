@@ -47,6 +47,11 @@ $("#toggle-day-night").click(function() {
 		dayNightIconPath = dayNightIconPath.replace("day", "night");
 	}
 	$("#toggle-day-night-icon").attr("src", dayNightIconPath);
+	if(mode == 1) {
+		$("#toggle-day-night-icon").css({"filter": "invert(100%)"});
+	} else {
+		$("#toggle-day-night-icon").css({"filter": "none"});
+	}
 	mode *= -1;
 	Cookies.set("mode", mode, {sameSite: "strict"});
 });
