@@ -29,6 +29,7 @@ urlpatterns = [
     path('rental-listings/', listings_views.list_rental),
     path('for-sale-listings/', listings_views.list_for_sale),
     path('admin/', admin.site.urls),
+    path('cookies/', include('cookie_consent.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
