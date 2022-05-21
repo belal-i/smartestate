@@ -27,3 +27,8 @@ p, span {
 	display: inline-block;
 	margin-top: 3%;
 }
+
+#cookie-banner {
+	position: fixed;
+	bottom: 0;
+}
