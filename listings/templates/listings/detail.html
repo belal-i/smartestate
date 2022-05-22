@@ -16,7 +16,7 @@
 	}
 </script>
 {% if listing.image_set.all.0 %}
-	<div class="shadow p-3 mb-5 bg-white rounded">
+	<div class="shadow p-3 mb-5 bg-light rounded detail-images">
 		<img id="main_image" src="{{ listing.image_set.all.0.image.url }}" width="100%" height="auto" class="pb-5">
 	<br>
 {% endif %}
@@ -59,7 +59,7 @@ Images of the surroundings
 
 <!-- Description -->
 
-<div class="shadow p-3 mb-5 bg-white rounded">
+<div class="shadow p-3 mb-5 bg-light rounded detail-short">
 	<h3 class="border-bottom color-elem-1">{{ listing.short_description }}</h3>
 	<p>{{ listing.long_description }}</p>
 </div>
@@ -67,119 +67,119 @@ Images of the surroundings
 
 <!-- Details -->
 
-<div class="shadow p-3 mb-5 bg-white rounded">
+<div class="shadow p-3 mb-5 bg-light rounded detail-long">
 {% if listing.listing_type == 'rental' %}
 	<div class="row border-bottom p-3">
-		<div class="col-3">Available on</div>
-		<div class="col-9">{{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.maximum_months }} months</div>
+		<div class="col-3 detail-text">Available on</div>
+		<div class="col-9 detail-text">{{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.maximum_months }} months</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Monthly rent</div>
-		<div class="col-9"><p>{{ listing.rental_price|intcomma }}</p><p>{{ listing.info_about_rental_price }}</p></div>
+		<div class="col-3 detail-text">Monthly rent</div>
+		<div class="col-9 detail-text"><p>{{ listing.rental_price|intcomma }}</p><p>{{ listing.info_about_rental_price }}</p></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Security deposit</div>
-		<div class="col-9">{{ listing.security_deposit|intcomma }}</div>
+		<div class="col-3 detail-text">Security deposit</div>
+		<div class="col-9 detail-text">{{ listing.security_deposit|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Size</div>
-		<div class="col-9">{{ listing.apartment.size_sq_m }} m<sup>2</sup></div>
+		<div class="col-3 detail-text">Size</div>
+		<div class="col-9 detail-text">{{ listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Listing type</div>
+		<div class="col-3 detail-text">Listing type</div>
 		<!-- TODO: See Feature #285. Don't use apartment.is_primary,
 			but maybe something like apartment_type.
 		-->
 		{% if listing.apartment.is_primary %}
-			<div class="col-9">{{ listing.apartment.number_of_rooms }} room house</div>
+			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room house</div>
 		{% else %}
-			<div class="col-9">{{ listing.apartment.number_of_rooms }} room apartment</div>
+			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room apartment</div>
 		{% endif %}
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Address</div>
-		<div class="col-9">{{ listing.apartment.house.real_estate.address }}</div>
+		<div class="col-3 detail-text">Address</div>
+		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.address }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Requirements</div>
-		<div class="col-9">{{ listing.limitations }}</div>
+		<div class="col-3 detail-text">Requirements</div>
+		<div class="col-9 detail-text">{{ listing.limitations }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Story</div>
-		<div class="col-9">{{ listing.apartment.story }}</div>
+		<div class="col-3 detail-text">Story</div>
+		<div class="col-9 detail-text">{{ listing.apartment.story }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Year of construction</div>
-		<div class="col-9">{{ listing.apartment.house.date_of_construction }}</div>
+		<div class="col-3 detail-text">Year of construction</div>
+		<div class="col-9 detail-text">{{ listing.apartment.house.date_of_construction }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Rooms</div>
-		<div class="col-9">{{ listing.apartment.room_details }}</div>
+		<div class="col-3 detail-text">Rooms</div>
+		<div class="col-9 detail-text">{{ listing.apartment.room_details }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Flooring</div>
-		<div class="col-9">{{ listing.apartment.flooring }}</div>
+		<div class="col-3 detail-text">Flooring</div>
+		<div class="col-9 detail-text">{{ listing.apartment.flooring }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Furnishing</div>
-		<div class="col-9">{{ listing.apartment.furnishing }}</div>
+		<div class="col-3 detail-text">Furnishing</div>
+		<div class="col-9 detail-text">{{ listing.apartment.furnishing }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Kitchen</div>
-		<div class="col-9">{{ listing.apartment.kitchen_info }}</div>
+		<div class="col-3 detail-text">Kitchen</div>
+		<div class="col-9 detail-text">{{ listing.apartment.kitchen_info }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Technical equipment</div>
-		<div class="col-9">{{ listing.apartment.technical_equipment }}</div>
+		<div class="col-3 detail-text">Technical equipment</div>
+		<div class="col-9 detail-text">{{ listing.apartment.technical_equipment }}</div>
 	</div>
 	{% if listing.apartment.has_internet %}
 		<div class="row border-bottom p-3">
-			<div class="col-3">Internet</div>
-			<div class="col-9">{{ listing.apartment.internet_info }}</div>
+			<div class="col-3 detail-text">Internet</div>
+			<div class="col-9 detail-text">{{ listing.apartment.internet_info }}</div>
 		</div>
 	{% endif %}
 	<div class="row border-bottom p-3">
-		<div class="col-3">Specials</div>
-		<div class="col-9">{{ listing.apartment.specials }}</div>
+		<div class="col-3 detail-text">Specials</div>
+		<div class="col-9 detail-text">{{ listing.apartment.specials }}</div>
 	</div>
 	<div class="row p-3">
-		<div class="col-3">Surroundings</div>
-		<div class="col-9">{{ listing.apartment.house.real_estate.surroundings }}</div>
+		<div class="col-3 detail-text">Surroundings</div>
+		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.surroundings }}</div>
 	</div>
 {% elif listing.listing_type == 'for_sale' %}
 	<div class="row border-bottom p-3">
-		<div class="col-3">Size</div>
-		<div class="col-9">{{listing.apartment.size_sq_m }} m<sup>2</sup></div>
+		<div class="col-3 detail-text">Size</div>
+		<div class="col-9 detail-text">{{listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Rooms</div>
-		<div class="col-9">{{listing.apartment.number_of_rooms }} rooms</div>
+		<div class="col-3 detail-text">Rooms</div>
+		<div class="col-9 detail-text">{{listing.apartment.number_of_rooms }} rooms</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">For sale price</div>
-		<div class="col-9">{{ listing.for_sale_price|intcomma }}</div>
+		<div class="col-3 detail-text">For sale price</div>
+		<div class="col-9 detail-text">{{ listing.for_sale_price|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Location</div>
-		<div class="col-9">{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</div>
+		<div class="col-3 detail-text">Location</div>
+		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Year of construction</div>
-		<div class="col-9">{{ listing.apartment.house.date_of_construction }}</div>
+		<div class="col-3 detail-text">Year of construction</div>
+		<div class="col-9 detail-text">{{ listing.apartment.house.date_of_construction }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3">Flooring</div>
-		<div class="col-9">{{ listing.apartment.flooring }}</div>
+		<div class="col-3 detail-text">Flooring</div>
+		<div class="col-9 detail-text">{{ listing.apartment.flooring }}</div>
 	</div>
 	<div class="row p-3">
-		<div class="col-3">Technical details</div>
-		<div class="col-9">{{ listing.apartment.technical_equipment }}</div>
+		<div class="col-3 detail-text">Technical details</div>
+		<div class="col-9 detail-text">{{ listing.apartment.technical_equipment }}</div>
 	</div>
 {% else %}
 	<p>{{ listing }}</p>
 {% endif %}
 </div>
-<div class="shadow p-3 mb-5 bg-white rounded">
+<div class="shadow p-3 mb-5 bg-light rounded back-to-listings">
 <a href="/listings">Back to listings</a>
 </div>
 <br>
