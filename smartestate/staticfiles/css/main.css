@@ -23,7 +23,14 @@ p, span {
 	color: #b5a372;
 }
 
+.text-dark {
+	color: #eee !important;
+}
 .site-title {
 	display: inline-block;
 	margin-top: 3%;
+}
+
+#toggle-day-night-icon:hover {
+	cursor: pointer;
 }
