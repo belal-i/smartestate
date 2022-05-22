@@ -122,8 +122,12 @@
 			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 			crossorigin="anonymous">
 		</script>
-		<script type="module" src="{% static 'js/js.cookie.js' %}"></script>
+		{% comment %}
+		See Bug #329, cannot import modules, for now, have to copy-paste the code
+		directly, which is kind of ugly.
+		<script type="module" src="{% static 'js/js.cookie.mjs' %}"></script>
 		<script nomodule defer src="{% static 'js/js.cookie.js' %}"></script>
+		{% endcomment %}
 		<script type="module" src="{% static 'js/main.js' %}"></script>
 		<script nomodule defer src="{% static 'js/main.js' %}"></script>
 	</body>
