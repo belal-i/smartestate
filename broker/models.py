@@ -17,7 +17,13 @@ class Contact(models.Model):
     company = models.ManyToManyField('Company', blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        try:
+            return self.first_name + " " + self.last_name
+        except TypeError:
+            try:
+                return self.last_name
+            except TypeError:
+                return "Unnamed contact"
 
 
 class Address(models.Model):
@@ -91,4 +97,9 @@ class Seeking(models.Model):
     notes = models.TextField(max_length=2048, null=True, blank=True)
     contact_source = models.CharField(max_length=64, null=True, blank=True,
         help_text="How did this person find out about us?")
+    def __str__(self):
+        if self.contact is not None:
+            return self.contact.__str__()
+        else:
+            return "Anonymous seeking"
 
