@@ -28,6 +28,7 @@ urlpatterns = [
     path('listings/', include('listings.urls')),
     path('rental-listings/', listings_views.list_rental),
     path('for-sale-listings/', listings_views.list_for_sale),
+    path('broker/', include('broker.urls')),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
