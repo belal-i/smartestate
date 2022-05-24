@@ -3,6 +3,8 @@ from datetime import date
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from listings.models import *
+
 
 # Create your models here.
 
@@ -68,7 +70,7 @@ class Seeking(models.Model):
     # TODO: Perhaps implement a seeking_contact model, with some
     #       seeking-related info, and that has a relation to the 
     #       "plain" contact model.
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, 
+    contact = models.ForeignKey('Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
     max_rent = models.DecimalField(null=True, blank=True,
         max_digits=7, decimal_places=2)
@@ -102,4 +104,20 @@ class Seeking(models.Model):
             return self.contact.__str__()
         else:
             return "Anonymous seeking"
+
+class Matching(models.Model):
+    listing = models.ForeignKey('listings.Listing', on_delete=models.CASCADE,
+        null=True, blank=True)
+    seeking = models.ForeignKey('Seeking', on_delete=models.CASCADE,
+        null=True, blank=True)
+    STATUS_CHOICES = (
+        ('possible','POSSIBLE'),
+        ('pending','PENDING'),
+        ('closed','CLOSED'),
+    )
+    status = models.CharField(max_length=8, default='possible',
+        choices=STATUS_CHOICES)
+    note = models.TextField(max_length=256, null=True, blank=True)
+    def __str__(self):
+        return self.listing.__str__() + " -- " + self.seeking.__str__()
 

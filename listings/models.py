@@ -24,7 +24,7 @@ class Listing(models.Model):
         null=True, blank=True)
 
     # TODO: Make this ManyToMany?
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, 
+    contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
     LISTING_TYPE_CHOICES = (
         ('rental','RENTAL'),
@@ -68,7 +68,7 @@ class Listing(models.Model):
         return self.short_description
 
 class RealEstate(models.Model):
-    address = models.OneToOneField(Address, on_delete=models.CASCADE,
+    address = models.OneToOneField('broker.Address', on_delete=models.CASCADE,
         primary_key=True)
     surroundings = models.TextField(max_length=1024, null=True, blank=True)
     def __str__(self):
