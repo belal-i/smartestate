@@ -10,6 +10,9 @@ from .models import *
 
 def start(request):
     if not request.user.is_authenticated:
+                                       # Instead of /admin/, maybe do something like
+                                       # settings.LOGIN_URL, but right now it does
+                                       # not work. See: https://docs.djangoproject.com/en/4.0/topics/auth/default/
         return redirect('%s?next=%s' % ('/admin/', request.path))
     listings = Listing.objects.all()[:10]
     seekings = Seeking.objects.all()[:10]

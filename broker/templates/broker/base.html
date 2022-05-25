@@ -23,6 +23,7 @@
 			{% comment %}
 			TODO: Write a context processor to use things like logo_url without having to pass them specifically
 			      into the template in the view.
+			https://docs.djangoproject.com/en/dev/ref/templates/api/#writing-your-own-context-processors
 			{% if logo_url != "" %}
 				<a href="{% url 'home' %}" class="navbar-brand">
 					<img
