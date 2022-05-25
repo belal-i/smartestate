@@ -1,0 +1,8 @@
+{% extends "broker/base.html" %}
+{% block content %}
+<h1>Matchings</h1>
+{% include "broker/list-matching.html" %}
+<a href="{% url 'broker:listings' %}">Listings</a>
+<a href="{% url 'broker:seekings' %}">Seekings</a>
+<a href="{% url 'broker:start' %}">Back</a>
+{% endblock %}
