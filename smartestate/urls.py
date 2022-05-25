@@ -22,7 +22,6 @@ from . import views as home_views
 from listings import views as listings_views
 from . import settings
 
-# app_name ?
 urlpatterns = [
     path('', home_views.home, name='home'),
     path('about/', home_views.about, name='about'),
