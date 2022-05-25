@@ -4,7 +4,7 @@
 {% if search_results %}
 	<br>
 	{% for listing in search_results %}
-	<a href="/listings/{{ listing.id }}">
+	<a href="{% url 'listings:detail' listing.id %}">
 	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
 		<!--TODO:
 	  		Change the widths of these columns?
