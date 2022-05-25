@@ -23,7 +23,7 @@
 		{% block banner %}
 		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
 			{% if logo_url != "" %}
-				<a href="/" class="navbar-brand">
+				<a href="{% url 'home' %}" class="navbar-brand">
 					<img
 						src="{{ logo_url }}"
 						class="d-inline-block align-top"
@@ -32,7 +32,7 @@
 					<h1 class="color-elem-1 d-inline-block align-top site-title">{{ site_title }}</h1>
 				</a>
 			{% else %}
-				<a href="/" class="navbar-brand">
+				<a href="{% url 'home' %}" class="navbar-brand">
 					<h1 class="color-elem-1 d-inline-block align-top">{{ site_title }}</h1>
 				</a>
 			{% endif %}
@@ -51,7 +51,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item dropdown 
-						{% if request.path == '/listings/' %} active {% endif %}">
+						{% if request.path == '/rental-listings/' or request.path == '/for-sale-listings/' %} active {% endif %}">
 						<a
 							href="#"
 							class="nav-link dropdown-toggle"
@@ -61,19 +61,19 @@
 							aria-expanded="false">Listings</a>
 						<div class="dropdown-menu">
 							<a
-								href="/rental-listings"
+								href="{% url 'rental_listings' %}"
 								class="dropdown-item">Rental Listings</a>
 							<a
-								href="/for-sale-listings"
+								href="{% url 'for_sale_listings' %}"
 								class="dropdown-item">For Sale Listings</a>
 						</div>
 					</li>
 					<li class="nav-item
 						{% if request.path == '/about/' %} active {% endif %}">
-						<a href="/about" class="nav-link">About</a>
+						<a href="{% url 'about' %}" class="nav-link">About</a>
 					</li>
 				</ul>
-				<form class="form-inline" action="/listings/search" method="get">
+				<form class="form-inline" action="{% url 'listings:search_results' %}" method="get">
 					<!-- TODO: Implement support for this in the backend. -->
 					<!-- TODO: Make this smaller. -->
 					<input
