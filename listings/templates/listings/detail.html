@@ -180,7 +180,11 @@ Images of the surroundings
 {% endif %}
 </div>
 <div class="shadow p-3 mb-5 bg-light rounded back-to-listings">
-<a href="/listings">Back to listings</a>
+{% if listing.listing_type == 'rental' %}
+	<a href="{% url 'rental_listings' %}">Back to listings</a>
+{% elif listing.listing_type == 'for_sale' %}
+	<a href="{% url 'for_sale_listings' %}">Back to listings</a>
+{% endif %}
 </div>
 <br>
 {% endblock %}

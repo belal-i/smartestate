@@ -4,7 +4,7 @@
 {% if for_sale_listings %}
 	<br>
 	{% for listing in for_sale_listings %}
-	<a href="/listings/{{ listing.id }}">
+	<a href="{% url 'listings:detail' listing.id %}">
 	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
 
 		<div class="col media">
