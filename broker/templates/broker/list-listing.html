@@ -2,11 +2,36 @@
 
 {% block model_list %}
 	{% if listings %}
-		{% for listing in listings %}
+		<thead>
 			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Type</th>
+				<th scope="col">Available On</th>
+				<th scope="col">Price</th>
+				<th scope="col">Description</th>
+				<th scope="col">Address</th>
+				<th scope="col">Size</th>
+				<th scope="col">Rooms</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for listing in listings %}
+			<tr onclick="editInAdmin('listing', {{ listing.id }});" class="broker-row">
+				<td>{{ listing.id }}</td>
+				<td>{{ listing.listing_type }}</td>
+				<td>{{ listing.date_available }}</td>
+				{% if listing.listing_type == 'rental' %}
+					<td>{{ listing.rental_price }}</td>
+				{% elif listing.listing_type == 'for_sale' %}
+					<td>{{ listing.for_sale_price }}</td>
+				{% endif %}
 				<td>{{ listing }}</td>
+				<td>{{ listing.apartment.house.real_estate.address }}</td>
+				<td>{{ listing.apartment.size_sq_m }}m<sup>2</sup></td>
+				<td>{{ listing.apartment.number_of_rooms }}</td>
 			</tr>
 		{% endfor %}
+		</tbody>
 	{% else %}
 		No listings found!
 	{% endif %}

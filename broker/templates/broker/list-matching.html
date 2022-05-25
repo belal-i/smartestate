@@ -2,11 +2,24 @@
 
 {% block model_list %}
 	{% if matchings %}
-		{% for matching in matchings %}
+		<thead>
 			<tr>
-				<td>{{ matching }}</td>
+				<th scope="col">ID</th>
+				<th scope="col">Status</th>
+				<th scope="col">Listing</th>
+				<th scope="col">Seeking</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for matching in matchings %}
+			<tr onclick="editInAdmin('matching', {{ matching.id }});" class="broker-row">
+				<td>{{ matching.id }}</td>
+				<td>{{ matching.status }}</td>
+				<td>{{ matching.listing }}</td>
+				<td>{{ matching.seeking }}</td>
 			</tr>
 		{% endfor %}
+		</tbody>
 	{% else %}
 		No matchings found!
 	{% endif %}

@@ -1,10 +1,22 @@
 {% extends "broker/base.html" %}
 {% block content %}
-<h1>Start</h1>
+<h3>Matchings</h3>
 {% include "broker/list-matching.html" %}
+<a href="{% url 'broker:matchings' %}">See all Matchings</a>
+<br>
+<a href="/admin/broker/matching/add">Add a Matching</a>
+<br>
+<br>
+<h3>Listings</h3>
 {% include "broker/list-listing.html" %}
+<a href="{% url 'broker:listings' %}">See all Listings</a>
+<br>
+<a href="/admin/listings/listing/add">Add a Listing</a>
+<br>
+<br>
+<h3>Seekings</h3>
 {% include "broker/list-seeking.html" %}
-<a href="{% url 'broker:listings' %}">Listings</a>
-<a href="{% url 'broker:seekings' %}">Seekings</a>
-<a href="{% url 'broker:matchings' %}">Matchings</a>
+<a href="{% url 'broker:seekings' %}">See all Seekings</a>
+<br>
+<a href="/admin/broker/seeking/add">Add a Seeking</a>
 {% endblock %}

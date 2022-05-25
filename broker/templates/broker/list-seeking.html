@@ -2,11 +2,43 @@
 
 {% block model_list %}
 	{% if seekings %}
-		{% for seeking in seekings %}
+		<thead>
 			<tr>
-				<td>{{ seeking }}</td>
+				<th scope="col">ID</th>
+				<th scope="col">Type</th>
+				<th scope="col">Start Date</th>
+				<th scope="col">Max Price</th>
+				<th scope="col">Min Rooms</th>
+				<th scope="col">Tenant/Buyer Name</th>
+				<th scope="col">Number of Persons</th>
+				{% comment %}
+				TODO: Maybe rename the model field to this, this is better than line_of_work...
+				{% endcomment %}
+				<th scope="col">Occupation</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for seeking in seekings %}
+			<tr onclick="editInAdmin('seeking', {{ seeking.id }});" class="broker-row">
+				<td>{{ seeking.id }}</td>
+				<td>{{ seeking.seeking_type }}</td>
+				<td>{{ seeking.starting_date }}</td>
+
+				{% if seeking.seeking_type == 'rental' %}
+					<td>{{ seeking.max_rent }}</td>
+				{% elif seeking.seeking_type == 'for_sale' %}
+					<td>{{ seeking.max_purchase_price }}</td>
+				{% endif %}
+				<td>{{ seeking.min_number_of_rooms }}</td>
+				<td>{{ seeking.contact.first_name }} {{ seeking.contact.last_name }}</td>
+				{% comment %}
+				TODO: Put the age also?
+				{% endcomment %}
+				<td>{{ seeking.number_of_persons }}</td>
+				<td>{{ seeking.line_of_work }}</td>
 			</tr>
 		{% endfor %}
+		</tbody>
 	{% else %}
 		No seekings found!
 	{% endif %}

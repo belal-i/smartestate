@@ -97,6 +97,11 @@
 				</a>
 			</div>
 		</nav>
+		{% if user.is_authenticated %}
+		<span style="position: fixed;" class="sticky-top">
+		Logged in - <a href="{% url 'broker:start' %}">Use Brokerage</a> - <a href="/admin">Use Admin</a>
+		</span>
+		{% endif %}
 		{% endblock %}
 
 		<div class="container">
