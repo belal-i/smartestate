@@ -22,12 +22,14 @@ from . import views as home_views
 from listings import views as listings_views
 from . import settings
 
+# app_name ?
 urlpatterns = [
     path('', home_views.home, name='home'),
     path('about/', home_views.about, name='about'),
     path('listings/', include('listings.urls')),
-    path('rental-listings/', listings_views.list_rental),
-    path('for-sale-listings/', listings_views.list_for_sale),
+    path('rental-listings/', listings_views.list_rental, name='rental_listings'),
+    path('for-sale-listings/', listings_views.list_for_sale,
+        name='for_sale_listings'),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
