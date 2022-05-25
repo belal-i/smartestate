@@ -1,3 +1,7 @@
+Setting up:
+
+You have to set up the cookie group in the Django admin, and make it optional, for the cookie banner to appear.
+
 Requirements:
 
 datetime
