@@ -9,9 +9,3 @@ def home(request):
         "cover_text": cover_text,
         }
     )
-def about(request):
-    about_text = Config.objects.get_or_create()[0].about_text
-    return render(request, 'smartestate/about.html', {
-        "about_text": about_text,
-        }
-    )

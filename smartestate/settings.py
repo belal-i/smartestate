@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'config.context_processors.site_title',
                 'config.context_processors.logo_url',
+                'pages.context_processors.all_pages',
             ],
         },
     },

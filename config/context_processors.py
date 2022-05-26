@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from .models import Config
 
 def site_title(request):
