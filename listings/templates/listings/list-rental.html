@@ -6,11 +6,11 @@
 	{% for listing in rental_listings %}
 	<a href="{% url 'listings:detail' listing.id %}">
 	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
-		<!--TODO:
+		{% comment %}
 	  		Change the widths of these columns?
 			There is a actually a lot you can do,
 			see https://getbootstrap.com/docs/4.4/layout/grid/
-		-->
+		{% endcomment %}
 		<div class="col media">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
 		</div>
