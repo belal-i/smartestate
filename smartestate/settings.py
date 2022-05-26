@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'config.apps.ConfigConfig',
     'listings.apps.ListingsConfig',
     'broker.apps.BrokerConfig',
+    'pages.apps.PagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'cookie_consent',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+                'config.context_processors.site_title',
+                'config.context_processors.logo_url',
+                'pages.context_processors.all_pages',
             ],
         },
     },
@@ -140,3 +146,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+COOKIE_CONSENT_NAME = "cookie_consent"

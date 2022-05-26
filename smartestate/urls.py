@@ -24,13 +24,14 @@ from . import settings
 
 urlpatterns = [
     path('', home_views.home, name='home'),
-    path('about/', home_views.about, name='about'),
     path('listings/', include('listings.urls')),
+    path('pages/', include('pages.urls')),
     path('rental-listings/', listings_views.list_rental, name='rental_listings'),
     path('for-sale-listings/', listings_views.list_for_sale,
         name='for_sale_listings'),
     path('broker/', include('broker.urls')),
     path('admin/', admin.site.urls),
+    path('cookies/', include('cookie_consent.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
