@@ -14,7 +14,9 @@
 		<div class="col">
 		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
 		<h3 class="color-elem-1">{{ listing }}</h3>
-		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+		{% comment %}
+	  	TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+		{% endcomment %}
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
 		<div class="row">
 			<span class="col-3">For sale price:</span>
@@ -22,12 +24,16 @@
 		</div>
 		<div class="row">
 			<span class="col-3">Living space:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
 			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
 		</div>
 		<div class="row">
 			<span class="col-3">Number of rooms:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
 			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} rooms</span>
 		</div>
 		<p>{{ listing.long_description }}</p>

@@ -8,7 +8,9 @@
 
 {% block content %}
 
-<!-- Images -->
+{% comment %}
+Images
+{% endcomment %}
 
 <script>
 	function setMainImage(imageSourceUrl) {
@@ -20,33 +22,33 @@
 		<img id="main_image" src="{{ listing.image_set.all.0.image.url }}" width="100%" height="auto" class="pb-5">
 	<br>
 {% endif %}
-<!--
+{% comment %}
 Listing images
--->
+{% endcomment %}
 {% for image_model in listing.image_set.all %}
 	<a class="thumbnail-select" onclick="setMainImage('{{ image_model.image.url }}');">
 	<img src="{{ image_model.image.url }}" width=100 height=75>
 	</a>
 {% endfor %}
-<!--
+{% comment %}
 Apartment images
--->
+{% endcomment %}
 {% for image_model in listing.apartment.image_set.all %}
 	<a class="thumbnail-select" onclick="setMainImage('{{ image_model.image.url }}');">
 	<img src="{{ image_model.image.url }}" width=100 height=75>
 	</a>
 {% endfor %}
-<!--
+{% comment %}
 Images of the house
--->
+{% endcomment %}
 {% for image_model in listing.apartment.house.image_set.all %}
 	<a class="thumbnail-select" onclick="setMainImage('{{ image_model.image.url }}');">
 	<img src="{{ image_model.image.url }}" width=100 height=75>
 	</a>
 {% endfor %}
-<!--
+{% comment %}
 Images of the surroundings
--->
+{% endcomment %}
 {% for image_model in listing.apartment.house.real_estate.image_set.all %}
 	<a class="thumbnail-select" onclick="setMainImage('{{ image_model.image.url }}');">
 	<img src="{{ image_model.image.url }}" width=100 height=75>
@@ -57,7 +59,9 @@ Images of the surroundings
 	</div>
 {% endif%}
 
-<!-- Description -->
+{% comment %}
+Description
+{% endcomment %}
 
 <div class="shadow p-3 mb-5 bg-light rounded detail-short">
 	<h3 class="border-bottom color-elem-1">{{ listing.short_description }}</h3>
@@ -65,7 +69,9 @@ Images of the surroundings
 </div>
 
 
-<!-- Details -->
+{% comment %}
+Details
+{% endcomment %}
 
 <div class="shadow p-3 mb-5 bg-light rounded detail-long">
 {% if listing.listing_type == 'rental' %}
@@ -87,11 +93,14 @@ Images of the surroundings
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3 detail-text">Listing type</div>
-		<!-- TODO: See Feature #285. Don't use apartment.is_primary,
+
+		{% comment %}
+		See Feature #285. Don't use apartment.is_primary,
 			but maybe something like apartment_type.
-		-->
+		{% endcomment %}
 		{% if listing.apartment.is_primary %}
 			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room house</div>
+
 		{% else %}
 			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room apartment</div>
 		{% endif %}
