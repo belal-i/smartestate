@@ -19,6 +19,9 @@ class Contact(models.Model):
     email = models.ManyToManyField('Email', blank=True)
     company = models.ManyToManyField('Company', blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
+    def get_age(self):
+        return date.today().year - self.date_of_birth.year
+
     def __str__(self):
         try:
             return self.first_name + " " + self.last_name

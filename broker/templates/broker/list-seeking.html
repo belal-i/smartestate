@@ -10,6 +10,7 @@
 				<th scope="col">Max Price</th>
 				<th scope="col">Min Rooms</th>
 				<th scope="col">Tenant/Buyer Name</th>
+				<th scope="col">Tenant/Buyer Age</th>
 				<th scope="col">Number of Persons</th>
 				<th scope="col">Occupation</th>
 			</tr>
@@ -28,9 +29,7 @@
 				{% endif %}
 				<td>{{ seeking.min_number_of_rooms }}</td>
 				<td>{{ seeking.contact.first_name }} {{ seeking.contact.last_name }}</td>
-				{% comment %}
-				TODO: Put the age also?
-				{% endcomment %}
+				<td>{{ seeking.contact.get_age }}</td>
 				<td>{{ seeking.number_of_persons }}</td>
 				<td>{{ seeking.occupation }}</td>
 			</tr>
