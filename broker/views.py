@@ -16,7 +16,8 @@ def start(request):
         return redirect('%s?next=%s' % ('/admin/', request.path))
     listings = Listing.objects.all()[:10]
     seekings = Seeking.objects.all()[:10]
-    # TODO: For now, excluding closed matchings from this view, because
+    # TODO: See Feature #345. 
+    #       For now, excluding closed matchings from this view, because
     #       sorting them would put closed matchings at the top.
     #       But in the future, we might figure out how to sort them in
     #       order of 'pending', 'possible', 'closed'.

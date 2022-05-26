@@ -15,7 +15,8 @@ from broker.models import *
 
 class Listing(models.Model):
 
-    # TODO: Either deprecate this, or implement support for this relation
+    # TODO: See Feature #346
+    #       Either deprecate this, or implement support for this relation
     #       in our views.
     house = models.ForeignKey('House', on_delete=models.CASCADE, 
         null=True, blank=True)
@@ -23,7 +24,7 @@ class Listing(models.Model):
     apartment = models.ForeignKey('Apartment', on_delete=models.CASCADE, 
         null=True, blank=True)
 
-    # TODO: Make this ManyToMany?
+    # TODO: See Feature #343. Make this ManyToMany?
     contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
     LISTING_TYPE_CHOICES = (
@@ -32,7 +33,7 @@ class Listing(models.Model):
     )
     listing_type = models.CharField(max_length=8,
         choices=LISTING_TYPE_CHOICES, default='rental')
-    # TODO: Figure out how to handle this default in site-wide configuration.
+    # TODO: Set the default in Feature #303.
     currency = models.CharField(max_length=4, default='$')
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)
