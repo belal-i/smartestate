@@ -11,9 +11,6 @@
 				<th scope="col">Min Rooms</th>
 				<th scope="col">Tenant/Buyer Name</th>
 				<th scope="col">Number of Persons</th>
-				{% comment %}
-				TODO: Maybe rename the model field to this, this is better than line_of_work...
-				{% endcomment %}
 				<th scope="col">Occupation</th>
 			</tr>
 		</thead>
@@ -35,7 +32,7 @@
 				TODO: Put the age also?
 				{% endcomment %}
 				<td>{{ seeking.number_of_persons }}</td>
-				<td>{{ seeking.line_of_work }}</td>
+				<td>{{ seeking.occupation }}</td>
 			</tr>
 		{% endfor %}
 		</tbody>

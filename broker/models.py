@@ -9,8 +9,9 @@ from listings.models import *
 # Create your models here.
 
 class Contact(models.Model):
-    # TODO: Give an optional is_primary field, to help deal with models that
-    #       have more than one contact?
+    # TODO: See Feature #343. 
+    #       Give an optional is_primary field, to help deal with models that
+    #       have more than one contact.
     first_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=32)
     address = models.ManyToManyField('Address', blank=True)
@@ -40,7 +41,10 @@ class Address(models.Model):
         try:
             return self.street + ", " + self.zip_code + " " + self.city
         except TypeError:
-            return "-"
+            try:
+                return self.street
+            except TypeError:
+                return "-"
 
 
 class Phone(models.Model):
@@ -66,12 +70,13 @@ class Seeking(models.Model):
     )
     seeking_type = models.CharField(max_length=8,
         choices=SEEKING_TYPE_CHOICES, default='rental')
-    # TODO: Make this ManyToMany?
-    # TODO: Perhaps implement a seeking_contact model, with some
-    #       seeking-related info, and that has a relation to the 
-    #       "plain" contact model.
+
+    # TODO: See Feature #343.
+    #       You could make this many-to-many, and implement some kind of
+    #       parent-child inheritance into the Contact model.
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
+
     max_rent = models.DecimalField(null=True, blank=True,
         max_digits=7, decimal_places=2)
     max_purchase_price = models.DecimalField(null=True, blank=True,
@@ -83,14 +88,14 @@ class Seeking(models.Model):
     number_of_persons = models.IntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(12)])
 
-    # TODO: Implement some automatic synchronization between these fields####
+    # TODO: See Feature #344
+    #       Implement some automatic synchronization between these fields.
     starting_date = models.DateField(null=True, blank=True, default=date.today)
     ending_date = models.DateField(null=True, blank=True)
     number_of_months = models.IntegerField(null=True, blank=True)
-    ####
 
     must_be_furnished = models.BooleanField(default=False)
-    line_of_work = models.CharField(null=True, blank=True, max_length=64,
+    occupation = models.CharField(null=True, blank=True, max_length=64,
         help_text="Type of job that this tenant/buyer has")
     employer = models.ForeignKey(Company, on_delete=models.CASCADE,
         null=True, blank=True)
