@@ -20,7 +20,10 @@ class Contact(models.Model):
     company = models.ManyToManyField('Company', blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     def get_age(self):
-        return date.today().year - self.date_of_birth.year
+        try:
+            return date.today().year - self.date_of_birth.year
+        except AttributeError:
+            return "unknown"
 
     def __str__(self):
         try:
