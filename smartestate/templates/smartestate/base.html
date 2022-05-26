@@ -108,10 +108,13 @@
 		</nav>
 		{% endblock %}
 
-		<div class="container">
+		{% comment %}
+		detail-text added for dark-mode support
+		{% endcomment %}
+		<div class="container detail-text">
 			{% block content %}
 			<br><br>
-			<p>{{ cover_text|safe }}</p>
+			{{ cover_text|safe }}
 			{% endblock %}
 		</div>
 
