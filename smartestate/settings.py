@@ -71,15 +71,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
                 'config.context_processors.site_title',
                 'config.context_processors.logo_url',
                 'pages.context_processors.all_pages',
             ],
         },
     },
-]
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'django.template.context_processors.request',
 ]
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
