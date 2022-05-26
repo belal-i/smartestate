@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'config.apps.ConfigConfig',
     'listings.apps.ListingsConfig',
+    'broker.apps.BrokerConfig',
     'pages.apps.PagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
