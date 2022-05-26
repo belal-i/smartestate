@@ -2,12 +2,11 @@
 <html lang="en">
 	<head>
 
-		<!-- Meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>SmartEstate -- Broker </title>
 
-		<!-- Bootstrap CSS -->
+		{% comment %} Bootstrap CSS {% endcomment %}
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -17,34 +16,32 @@
 	</head>
 	<body>
 		{% block banner %}
+		{% comment %}
+		This is kind of a hack to get the header lined up with the rest of the menu, when there is
+		a logo image. Maybe we can do this better in the future.
+		{% endcomment %}
+		<style>
+			.site-title {
+				display: inline-block;
+				margin-top: 3%;
+			}
+		</style>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 
-
-			{% comment %}
-			TODO: Write a context processor to use things like logo_url without having to pass them specifically
-			      into the template in the view.
-			https://docs.djangoproject.com/en/dev/ref/templates/api/#writing-your-own-context-processors
 			{% if logo_url != "" %}
-				<a href="{% url 'home' %}" class="navbar-brand">
+				<a href="{% url 'broker:start' %}" class="navbar-brand">
 					<img
 						src="{{ logo_url }}"
 						class="d-inline-block align-top"
 						width=105 height=75
 					>
-					<h1 class="color-elem-1 d-inline-block align-top site-title">{{ site_title }}</h1>
+					<h1 class="color-elem-1 d-inline-block align-top site-title">Broker</h1>
 				</a>
 			{% else %}
-				<a href="{% url 'home' %}" class="navbar-brand">
-					<h1 class="color-elem-1 d-inline-block align-top">{{ site_title }}</h1>
+				<a href="{% url 'broker:start' %}" class="navbar-brand">
+					<h1 class="color-elem-1 d-inline-block align-top">Broker</h1>
 				</a>
 			{% endif %}
-			{% endcomment %}
-
-
-
-			<a href="{% url 'broker:start' %}" class="navbar-brand">
-				<h1 class="color-elem-1 d-inline-block align-top">Broker</h1>
-			</a>
 
 			<button
 				class="navbar-toggler"
@@ -88,7 +85,8 @@
 
 		{% block content %}
 		{% endblock %}
-		<!-- Required jQuery, Popper.js, Bootstrap JS -->
+
+		{% comment %} Required jQuery, Popper.js, Bootstrap JS {% endcomment %}
 		<script
 			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -116,10 +114,10 @@
 		</style>
 		<script>
 
-			/*
+			{% comment %}
 			Kind of a workaround until we implement detail views for the broker app.
 			This simply switches to the Django admin, to edit a given model there.
-			*/
+			{% endcomment %}
 			function editInAdmin(modelType, modelId) {
 				href = "/admin/";
 				switch(modelType) {
