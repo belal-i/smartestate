@@ -70,7 +70,7 @@ class Listing(models.Model):
 
 class RealEstate(models.Model):
     address = models.OneToOneField('broker.Address', on_delete=models.CASCADE,
-        primary_key=True)
+        null=True)
     surroundings = models.TextField(max_length=1024, null=True, blank=True)
     def __str__(self):
         return self.address.__str__()
