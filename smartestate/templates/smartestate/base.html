@@ -111,7 +111,7 @@
 		<div class="container">
 			{% block content %}
 			<br><br>
-			<p>{{ cover_text }}</p>
+			<p>{{ cover_text|safe }}</p>
 			{% endblock %}
 		</div>
 
