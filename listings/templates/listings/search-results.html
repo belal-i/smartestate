@@ -6,11 +6,11 @@
 	{% for listing in search_results %}
 	<a href="{% url 'listings:detail' listing.id %}">
 	<div class="row shadow p-3 mb-5 bg-light rounded listing-entry">
-		<!--TODO:
+		{% comment %}
 	  		Change the widths of these columns?
 			There is a actually a lot you can do,
 			see https://getbootstrap.com/docs/4.4/layout/grid/
-		-->
+		{% endcomment %}
 		{% if listing.listing_type == 'rental' %}
 		<div class="col media">
 		<img src="{{ listing.image_set.all.0.image.url }}" width=400 height=300>
@@ -32,7 +32,9 @@
 		<div class="col">
 		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
 		<h3 class="color-elem-1">{{ listing }}</h3>
-		<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+		{% comment %}
+	  	TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+		{% endcomment %}
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
 		<div class="row">
 			<span class="col-3">For sale price:</span>
@@ -40,12 +42,16 @@
 		</div>
 		<div class="row">
 			<span class="col-3">Living space:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
 			<span class="col-9 color-elem-1">{{ listing.apartment.size_sq_m}} m<sup>2</sup></span>
 		</div>
 		<div class="row">
 			<span class="col-3">Number of rooms:</span>
-			<!-- TODO: This could be complicated, if a house is being listed directly, and not an apartment. -->
+			{% comment %}
+			TODO: This could be complicated, if a house is being listed directly, and not an apartment.
+			{% endcomment %}
 			<span class="col-9 color-elem-1">{{ listing.apartment.number_of_rooms}} rooms</span>
 		</div>
 		<p>{{ listing.long_description }}</p>
