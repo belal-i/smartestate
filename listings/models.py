@@ -6,20 +6,26 @@ from django.core.validators import (
 
 from datetime import date
 
+from broker.models import *
+
 # Create your models here.
 
 
 
-################
-# Real Estates #
-################
 
 class Listing(models.Model):
+
+    # TODO: See Feature #346
+    #       Either deprecate this, or implement support for this relation
+    #       in our views.
     house = models.ForeignKey('House', on_delete=models.CASCADE, 
         null=True, blank=True)
+
     apartment = models.ForeignKey('Apartment', on_delete=models.CASCADE, 
         null=True, blank=True)
-    contact = models.ForeignKey('Contact', on_delete=models.CASCADE, 
+
+    # TODO: See Feature #343. Make this ManyToMany?
+    contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
     LISTING_TYPE_CHOICES = (
         ('rental','RENTAL'),
@@ -27,7 +33,7 @@ class Listing(models.Model):
     )
     listing_type = models.CharField(max_length=8,
         choices=LISTING_TYPE_CHOICES, default='rental')
-    # TODO: Figure out how to handle this default in site-wide configuration.
+    # TODO: Set the default in Feature #303.
     currency = models.CharField(max_length=4, default='$')
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)
@@ -63,8 +69,8 @@ class Listing(models.Model):
         return self.short_description
 
 class RealEstate(models.Model):
-    address = models.OneToOneField('Address', on_delete=models.CASCADE,
-        primary_key=True)
+    address = models.OneToOneField('broker.Address', on_delete=models.CASCADE,
+        null=True)
     surroundings = models.TextField(max_length=1024, null=True, blank=True)
     def __str__(self):
         return self.address.__str__()
@@ -118,48 +124,3 @@ class Image(models.Model):
     def __str__(self):
         return self.image_name
 
-############
-# Contacts #
-############
-
-class Contact(models.Model):
-    first_name = models.CharField(max_length=20, null=True, blank=True)
-    last_name = models.CharField(max_length=32)
-    address = models.ManyToManyField('Address', blank=True)
-    phone = models.ManyToManyField('Phone', blank=True)
-    email = models.ManyToManyField('Email', blank=True)
-    company = models.ManyToManyField('Company', blank=True)
-    def __str__(self):
-        return self.first_name + " " + self.last_name
-
-
-class Address(models.Model):
-    street = models.CharField(max_length=32)
-    number = models.CharField(max_length=8, null=True, blank=True)
-    zip_code = models.CharField(max_length=16, null=True, blank=True)
-    city = models.CharField(max_length=32)
-    state = models.CharField(max_length=32, null=True, blank=True)
-    country = models.CharField(max_length=32, null=True, blank=True)
-    def __str__(self):
-        # TODO: Quick fix...
-        try:
-            return self.street + ", " + self.zip_code + " " + self.city
-        except TypeError:
-            return "-"
-
-
-class Phone(models.Model):
-    value = models.CharField(max_length=20)
-    def __str__(self):
-        return self.value
-
-class Email(models.Model):
-    value = models.EmailField(max_length=40)
-    def __str__(self):
-        return self.value
-
-class Company(models.Model):
-    name = models.CharField(max_length=64)
-    address = models.ManyToManyField('Address', blank=True)
-    def __str__(self):
-        return self.name

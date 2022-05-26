@@ -29,6 +29,7 @@ urlpatterns = [
     path('rental-listings/', listings_views.list_rental, name='rental_listings'),
     path('for-sale-listings/', listings_views.list_for_sale,
         name='for_sale_listings'),
+    path('broker/', include('broker.urls')),
     path('admin/', admin.site.urls),
     path('cookies/', include('cookie_consent.urls'))
 ]

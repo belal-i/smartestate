@@ -1,0 +1,41 @@
+{% extends "broker/list.html" %}
+
+{% block model_list %}
+	{% if seekings %}
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Type</th>
+				<th scope="col">Start Date</th>
+				<th scope="col">Max Price</th>
+				<th scope="col">Min Rooms</th>
+				<th scope="col">Tenant/Buyer Name</th>
+				<th scope="col">Tenant/Buyer Age</th>
+				<th scope="col">Number of Persons</th>
+				<th scope="col">Occupation</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for seeking in seekings %}
+			<tr onclick="editInAdmin('seeking', {{ seeking.id }});" class="broker-row">
+				<td>{{ seeking.id }}</td>
+				<td>{{ seeking.seeking_type }}</td>
+				<td>{{ seeking.starting_date }}</td>
+
+				{% if seeking.seeking_type == 'rental' %}
+					<td>{{ seeking.max_rent }}</td>
+				{% elif seeking.seeking_type == 'for_sale' %}
+					<td>{{ seeking.max_purchase_price }}</td>
+				{% endif %}
+				<td>{{ seeking.min_number_of_rooms }}</td>
+				<td>{{ seeking.contact.first_name }} {{ seeking.contact.last_name }}</td>
+				<td>{{ seeking.contact.get_age }}</td>
+				<td>{{ seeking.number_of_persons }}</td>
+				<td>{{ seeking.occupation }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	{% else %}
+		No seekings found!
+	{% endif %}
+{% endblock %}
