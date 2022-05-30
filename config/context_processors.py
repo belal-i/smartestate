@@ -9,3 +9,6 @@ def logo_url(request):
     except ValueError:
         logo_url   = ""
     return {'logo_url': logo_url}
+
+def theme(request):
+    return {'theme': Config.objects.get_or_create()[0].theme}
