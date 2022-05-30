@@ -13,7 +13,8 @@ class Config(models.Model):
         self.pk = self.id = 1
         return super().save(*args, **kwargs)
 
-    site_title = models.CharField(max_length=32, default='SmartEstate')
+    site_title = models.CharField(max_length=32, default='SmartEstate',
+        null=True, blank=True)
 
     cover_text = models.TextField(max_length=4096,
         default='Welcome to SmartEstate! SmartEstate lets real estate owners, brokers, managers, landlords, etc. manage their listings all from one conventient, cloud native web app. Please stay tuned, more info is coming soon.',
