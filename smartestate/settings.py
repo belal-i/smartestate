@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'config.context_processors.site_title',
                 'config.context_processors.logo_url',
+                'config.context_processors.theme',
                 'pages.context_processors.all_pages',
             ],
         },

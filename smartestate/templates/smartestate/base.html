@@ -15,7 +15,21 @@
 		>
 
 		{% load static %} 
-		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+		
+		{% comment %}
+		TODO: Figure out a better way to do this.
+		{% endcomment %}
+		{% if theme == 'base' %}
+			<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		{% elif theme == 'frankfurt' %}
+			<link rel="stylesheet" href="{% static 'css/frankfurt.css' %}">
+		{% elif theme == 'wiesbaden' %}
+			<link rel="stylesheet" href="{% static 'css/wiesbaden.css' %}">
+		{% elif theme == 'munich' %}
+			<link rel="stylesheet" href="{% static 'css/munich.css' %}">
+		{% endif %}
+
 		<title>{% block title %}{{site_title}}{% endblock %}</title>
 	</head>
 	<body class="bg-light">
@@ -26,13 +40,27 @@
 					<img
 						src="{{ logo_url }}"
 						class="d-inline-block align-top"
-						width=105 height=75
+						height=75
 					>
-					<h1 class="color-elem-1 d-inline-block align-top site-title">{{ site_title }}</h1>
+					{% comment %}
+					TODO: Figure out a better way to do this.
+					{% endcomment %}
+					{% if theme == 'munich' %}
+						<h1 class="d-inline-block align-top site-title">{{ site_title }}</h1>
+					{% else %}
+						<h1 class="color-elem-1 d-inline-block align-top site-title">{{ site_title }}</h1>
+					{% endif %}
 				</a>
 			{% else %}
 				<a href="{% url 'home' %}" class="navbar-brand">
-					<h1 class="color-elem-1 d-inline-block align-top">{{ site_title }}</h1>
+					{% comment %}
+					TODO: Figure out a better way to do this.
+					{% endcomment %}
+					{% if theme == 'munich' %}
+						<h1 class="d-inline-block align-top">{{ site_title }}</h1>
+					{% else %}
+						<h1 class="color-elem-1 d-inline-block align-top">{{ site_title }}</h1>
+					{% endif %}
 				</a>
 			{% endif %}
 			<button
