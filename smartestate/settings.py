@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # TODO: See Feature #314, 315.
-SECRET_KEY = 'django-insecure--nmneuq-s^zj%y0ydmb*w9926)p_oc6&0u=7%xx(t*h43j+j8c'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -33,6 +33,8 @@ if os.getenv('HOST_DOMAIN') is not None:
 else:
     CSRF_TRUSTED_ORIGINS = ['https://*.*']
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
