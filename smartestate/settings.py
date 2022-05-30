@@ -33,6 +33,8 @@ if os.getenv('HOST_DOMAIN') is not None:
 else:
     CSRF_TRUSTED_ORIGINS = ['https://*.*']
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
