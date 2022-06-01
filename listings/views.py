@@ -4,7 +4,7 @@ from django.db.models import Q
 
 from .models import *
 from config.models import Config
-from broker.utils import keyword_search, filter_search
+from broker.utils import keyword_search_listing
 # Create your views here.
 
 def list_rental(request):
@@ -36,7 +36,7 @@ def detail(request, listing_id):
 
 def search_results(request):
 
-    search_results = keyword_search(request.GET['search'])
+    search_results = keyword_search_listing(request.GET['search'])
 
     context = {
         'search_results': search_results,
