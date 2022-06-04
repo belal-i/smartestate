@@ -33,28 +33,32 @@ def filter_search_listing(params):
 
     Others are matched on a greater-than- or less-than-or-equal basis.
 
-    In some cases, whether it's less-than or greater-than, depends on the
-    general business logic of real estate brokerage. We might refine this
-    function to support lower and upper bounds for all those parameters.
-
     The function supports an input dictionary with the following keys:
     - listing_type
-    - rental_price
-    - security_deposit
-    - for_sale_price
-    - minimum_down_payment
+    - max_rental_price
+    - min_rental_price
+    - max_security_deposit
+    - min_security_deposit
+    - max_for_sale_price
+    - min_for_sale_price
+    - min_minimum_down_payment
+    - max_minimum_down_payment
     - earliest_date_available
     - latest_date_available
     - minimum_months
     - maximum_months
-    - number_of_people
+    - max_number_of_people
+    - min_number_of_people
     - pets_ok
     - is_primary
-    - number_of_rooms
-    - size_sq_m
+    - max_number_of_rooms
+    - min_number_of_rooms
+    - max_size_sq_m
+    - min_size_sq_m
     - has_internet
     - is_furnished
-    - date_of_construction
+    - max_date_of_construction
+    - min_date_of_construction
     """
 
     result = Listing.objects.all()
@@ -63,22 +67,42 @@ def filter_search_listing(params):
     except KeyError:
         pass
     try:
-        result = result.filter(rental_price__lte=params['rental_price'])
+        result = result.filter(rental_price__lte=params['max_rental_price'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(rental_price__gte=params['min_rental_price'])
     except KeyError:
         pass
     try:
         result = result.filter(
-            security_deposit__lte=params['security_deposit']
+            security_deposit__lte=params['max_security_deposit']
         )
     except KeyError:
         pass
     try:
-        result = result.filter(for_sale_price__lte=params['for_sale_price'])
+        result = result.filter(
+            security_deposit__gte=params['min_security_deposit']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(for_sale_price__lte=params['max_for_sale_price'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(for_sale_price__gte=params['min_for_sale_price'])
     except KeyError:
         pass
     try:
         result = result.filter(
-            minimum_down_payment__lte=params['minimum_down_payment']
+            minimum_down_payment__lte=params['max_minimum_down_payment']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            minimum_down_payment__gte=params['min_minimum_down_payment']
         )
     except KeyError:
         pass
@@ -100,7 +124,13 @@ def filter_search_listing(params):
         pass
     try:
         result = result.filter(
-            number_of_people__lte=params['number_of_people']
+            number_of_people__lte=params['max_number_of_people']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            number_of_people__gte=params['min_number_of_people']
         )
     except KeyError:
         pass
@@ -114,12 +144,22 @@ def filter_search_listing(params):
         pass
     try:
         result = result.filter(
-            apartment__number_of_rooms__gte=params['number_of_rooms']
+            apartment__number_of_rooms__gte=params['min_number_of_rooms']
         )
     except KeyError:
         pass
     try:
-        result = result.filter(apartment__size_sq_m__gte=params['size_sq_m'])
+        result = result.filter(
+            apartment__number_of_rooms__lte=params['max_number_of_rooms']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(apartment__size_sq_m__gte=params['min_size_sq_m'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(apartment__size_sq_m__lte=params['max_size_sq_m'])
     except KeyError:
         pass
     try:
@@ -133,7 +173,14 @@ def filter_search_listing(params):
     try:
         result = result.filter(
             apartment__house__date_of_construction__gte=params[
-                'date_of_construction']
+                'min_date_of_construction']
+            )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            apartment__house__date_of_construction__lte=params[
+                'max_date_of_construction']
             )
     except KeyError:
         pass
