@@ -86,11 +86,6 @@ class TestSearch(TestCase):
             is_primary=True,
             number_of_rooms=3,
             size_sq_m=50,
-
-            # TODO: Might not support these 2.
-            flooring="Hardwood",
-            furnishing="Fully furnished",
-
             has_internet=True,
             house=test_house
         )
@@ -122,11 +117,6 @@ class TestSearch(TestCase):
             "is_primary": True,
             "number_of_rooms": 2,
             "size_sq_m": 30,
-
-            # TODO: Might not support these 2.
-            "flooring": "Hardwood",
-            "furnishing": "Fully furnished",
-
             "has_internet": True,
             "date_of_construction": "1969-12-31"
         }
