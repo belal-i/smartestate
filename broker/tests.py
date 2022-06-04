@@ -87,6 +87,7 @@ class TestSearch(TestCase):
             number_of_rooms=3,
             size_sq_m=50,
             has_internet=True,
+            is_furnished=True,
             house=test_house
         )
         test_apartment.save()
@@ -118,6 +119,7 @@ class TestSearch(TestCase):
             "number_of_rooms": 2,
             "size_sq_m": 30,
             "has_internet": True,
+            "is_furnished": True,
             "date_of_construction": "1969-12-31"
         }
 
@@ -220,6 +222,17 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
 
         test_params.pop('has_internet')
+        test_search = filter_search_listing(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_listing.apartment.is_furnished = False
+        test_listing.apartment.save()
+        test_listing.save()
+        test_query_set = Listing.objects.filter(pk=1)
+        test_search = filter_search_listing(test_params)
+        self.assertEqual(test_search.count(), 0)
+
+        test_params.pop('is_furnished')
         test_search = filter_search_listing(test_params)
         self.assertQuerysetEqual(test_search, test_query_set)
 

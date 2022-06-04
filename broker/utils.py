@@ -53,6 +53,7 @@ def filter_search_listing(params):
     - number_of_rooms
     - size_sq_m
     - has_internet
+    - is_furnished
     - date_of_construction
     """
 
@@ -123,6 +124,10 @@ def filter_search_listing(params):
         pass
     try:
         result = result.filter(apartment__has_internet=params['has_internet'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(apartment__is_furnished=params['is_furnished'])
     except KeyError:
         pass
     try:
