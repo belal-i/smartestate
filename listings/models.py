@@ -97,6 +97,7 @@ class Apartment(models.Model):
         validators=[validate_comma_separated_integer_list])
     room_details = models.TextField(max_length=1024,
         null=True, blank=True)
+    is_furnished = models.BooleanField(default=False)
 
     # TODO: Turn these into drop down fields with predefined choirces,
     #       then you can implement support for them in
