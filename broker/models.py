@@ -89,7 +89,7 @@ class Seeking(models.Model):
         max_digits=10, decimal_places=2)
     min_number_of_rooms = models.IntegerField(null=True, blank=True, default=1,
         validators=[MinValueValidator(1), MaxValueValidator(100)])
-    min_size_qm = models.IntegerField(null=True, blank=True, default=20,
+    min_size_sq_m = models.IntegerField(null=True, blank=True, default=20,
         validators=[MinValueValidator(1), MaxValueValidator(500)])
     number_of_persons = models.IntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(12)])
