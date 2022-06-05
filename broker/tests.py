@@ -103,6 +103,7 @@ class TestSearch(TestCase):
             apartment=test_apartment,
             pk=1
         )
+        test_listing.save()
         test_params = {
             "listing_type": "rental",
             "max_rental_price": 1200,
