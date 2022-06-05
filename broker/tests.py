@@ -1,3 +1,4 @@
+from pprint import pprint
 from django.test import TestCase
 
 from .utils import *
@@ -251,4 +252,191 @@ class TestSearch(TestCase):
 
         test_params.pop('min_date_of_construction')
         test_search = filter_search_listing(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+
+    def test_filter_search_seeking(self):
+        # Make test Contact 30 years old.
+        test_dob = datetime.datetime.now() - datetime.timedelta(days=30*365)
+        #test_dob = test_dob.strftime("%Y-%M-%d") ???? ########
+        year = str(test_dob.year)
+        month = str(test_dob.month)
+        day = str(test_dob.day)
+        test_dob = year + "-" + month + "-" + day
+        ##############
+        test_contact = Contact(date_of_birth=test_dob)
+        test_contact.save()
+        test_seeking = Seeking(
+            seeking_type="rental",
+            max_rent=1000,
+            max_purchase_price=250000,
+            min_number_of_rooms=3,
+            min_size_sq_m=50,
+            number_of_persons=3,
+            starting_date="2022-07-01",
+            ending_date="2022-10-01",
+            number_of_months=3,
+            must_be_furnished=True,
+            is_smoker=True,
+            has_pets=True,
+            contact=test_contact,
+            pk=1
+        )
+        test_seeking.save()
+
+        test_params = {
+            "seeking_type": "rental",
+            "max_rent": 1200,
+            "min_rent": 500,
+            # "max_purchase_price":
+            # "min_purchase_price":
+            "min_number_of_rooms": 2,
+            "max_number_of_rooms": 4,
+            "min_size_sq_m": 40,
+            "max_size_sq_m": 60,
+            "min_number_of_persons": 2,
+            "max_number_of_persons": 4,
+            "min_starting_date": "2022-06-01",
+            "max_starting_date": "2022-08-01",
+            "min_ending_date": "2022-09-01",
+            "max_ending_date": "2022-11-01",
+            "min_number_of_months": 2,
+            "max_number_of_months": 4,
+            "must_be_furnished": True,
+            "is_smoker": True,
+            "has_pets": True,
+            "min_age": 29,
+            "max_age": 31,
+        }
+
+        test_query_set = Seeking.objects.filter(pk=1)
+
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_query_set, test_search) 
+        test_params['max_rent'] = 800
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+
+        test_params.pop('max_rent')
+        test_params['min_rent'] = 1200
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+
+        test_params.pop('min_rent')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_query_set, test_search)
+
+        test_params['seeking_type'] = "for_sale"
+        test_params['max_purchase_price'] = 300000
+        test_params['min_purchase_price'] = 200000
+        test_seeking.seeking_type = "for_sale"
+        test_seeking.save()
+        test_query_set = Seeking.objects.filter(pk=1)
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_query_set, test_search) 
+
+        test_params['max_purchase_price'] = 200000
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+
+        test_params.pop('max_purchase_price')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_purchase_price'] = 300000
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+
+        test_params.pop('min_purchase_price')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_number_of_rooms'] = 4
+        test_params['max_number_of_rooms'] = 2
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_number_of_rooms')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_number_of_rooms')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_size_sq_m'] = 60
+        test_params['max_size_sq_m'] = 40
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_size_sq_m')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_size_sq_m')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_number_of_persons'] = 4
+        test_params['max_number_of_persons'] = 2
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_number_of_persons')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_number_of_persons')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_starting_date'] = "2022-08-01"
+        test_params['max_starting_date'] = "2022-06-01"
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_starting_date')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_starting_date')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_ending_date'] = "2022-11-01"
+        test_params['max_ending_date'] = "2022-09-01"
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_ending_date')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_ending_date')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_number_of_months'] = 4
+        test_params['max_number_of_months'] = 2
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_number_of_months')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_number_of_months')
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['must_be_furnished'] = False
+        test_params['is_smoker'] = False
+        test_params['has_pets'] = False
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_seeking.must_be_furnished = False
+        test_seeking.is_smoker = False
+        test_seeking.has_pets = False
+        test_seeking.save()
+        test_query_set = Seeking.objects.filter(pk=1)
+        test_search = filter_search_seeking(test_params)
+        self.assertQuerysetEqual(test_search, test_query_set)
+
+        test_params['min_age'] = 31
+        test_params['max_age'] = 29
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('min_age')
+        test_search = filter_search_seeking(test_params)
+        self.assertEqual(test_search.count(), 0)
+        test_params.pop('max_age')
+        test_search = filter_search_seeking(test_params)
         self.assertQuerysetEqual(test_search, test_query_set)

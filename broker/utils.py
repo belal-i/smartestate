@@ -1,3 +1,5 @@
+import datetime
+
 from django.db.models import Q
 from listings.models import *
 from .models import *
@@ -189,6 +191,168 @@ def filter_search_listing(params):
 
 
 def filter_search_seeking(params):
-    pass
+    """
+    This function takes a dictionary of search parameters, and searches for 
+    all seekings in the database that meet the requirements.
+
+    Some parameters are matched exactly, that is, they need to be equal, in
+    order for the filter to return them.
+
+    Others are matched on a greater-than- or less-than-or-equal basis.
+
+    The function supports an input dictionary with the following keys:
+    - seeking_type
+    - max_rent
+    - min_rent
+    - max_purchase_price
+    - min_purchase_price
+    - min_number_of_rooms
+    - max_number_of_rooms
+    - min_size_sq_m
+    - max_size_sq_m
+    - min_number_of_persons
+    - max_number_of_persons
+    - min_starting_date
+    - max_starting_date
+    - min_ending_date
+    - max_ending_date
+    - min_number_of_months
+    - max_number_of_months
+    - must_be_furnished
+    - is_smoker
+    - has_pets
+    - min_age (derived from seeking.contact.date_of_birth)
+    - max_age (derived from seeking.contact.date_of_birth)
+    """
+
+    result = Seeking.objects.all()
+    try:
+        result = result.filter(seeking_type=params['seeking_type'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(max_rent__lte=params['max_rent'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(max_rent__gte=params['min_rent'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            max_purchase_price__lte=params['max_purchase_price']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            max_purchase_price__gte=params['min_purchase_price']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            min_number_of_rooms__gte=params['min_number_of_rooms']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            min_number_of_rooms__lte=params['max_number_of_rooms']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            min_size_sq_m__gte=params['min_size_sq_m']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            min_size_sq_m__lte=params['max_size_sq_m']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            number_of_persons__gte=params['min_number_of_persons']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            number_of_persons__lte=params['max_number_of_persons']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            starting_date__gte=params['min_starting_date']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            starting_date__lte=params['max_starting_date']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            ending_date__gte=params['min_ending_date']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            ending_date__lte=params['max_ending_date']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            number_of_months__gte=params['min_number_of_months']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(
+            number_of_months__lte=params['max_number_of_months']
+        )
+    except KeyError:
+        pass
+    try:
+        result = result.filter(must_be_furnished=params['must_be_furnished'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(is_smoker=params['is_smoker'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(has_pets=params['has_pets'])
+    except KeyError:
+        pass
+    try:
+        today = datetime.date.today()
+        max_y_of_birth = today.year - params['min_age']
+        max_dob = str(max_y_of_birth) + "-" + str(today.month) + "-" + \
+            str(today.day)
+        result = result.filter(contact__date_of_birth__lte=max_dob)
+    except KeyError:
+        pass
+    try:
+        today = datetime.date.today()
+        min_y_of_birth = today.year - params['max_age']
+        min_dob = str(min_y_of_birth) + "-" + str(today.month) + "-" + \
+            str(today.day)
+        result = result.filter(contact__date_of_birth__gte=min_dob)
+    except KeyError:
+        pass
+
+    return result
+
+
 def filter_search_matching(params):
     pass
