@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from listings.models import *
 from broker.models import *
+from broker.utils import *
 
 from rest_framework import viewsets, permissions
 
@@ -12,12 +13,12 @@ from .serializers import *
 
 def listings(request):
     if request.method == 'GET':
-        listings = Listing.objects.all()
+        listings = filter_search_listing(request.GET)
         serializer = ListingSerializer(listings, many=True)
         return JsonResponse(serializer.data, safe=False)
 def seekings(request):
     if request.method == 'GET':
-        seekings = Seeking.objects.all()
+        seekings = filter_search_seeking(request.GET)
         serializer = SeekingSerializer(seekings, many=True)
         return JsonResponse(serializer.data, safe=False)
 def matchings(request):
