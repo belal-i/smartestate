@@ -101,6 +101,7 @@ class Seeking(models.Model):
     number_of_months = models.IntegerField(null=True, blank=True)
 
     must_be_furnished = models.BooleanField(default=False)
+    must_have_internet = models.BooleanField(default=False)
     occupation = models.CharField(null=True, blank=True, max_length=64,
         help_text="Type of job that this tenant/buyer has")
     employer = models.ForeignKey(Company, on_delete=models.CASCADE,
