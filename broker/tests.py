@@ -277,6 +277,7 @@ class TestSearch(TestCase):
             ending_date="2022-10-01",
             number_of_months=3,
             must_be_furnished=True,
+            must_have_internet=True,
             is_smoker=True,
             has_pets=True,
             contact=test_contact,
@@ -303,6 +304,7 @@ class TestSearch(TestCase):
             "min_number_of_months": 2,
             "max_number_of_months": 4,
             "must_be_furnished": True,
+            "must_have_internet": True,
             "is_smoker": True,
             "has_pets": True,
             "min_age": 29,
@@ -418,11 +420,13 @@ class TestSearch(TestCase):
         self.assertQuerysetEqual(test_search, test_query_set)
 
         test_params['must_be_furnished'] = False
+        test_params['must_have_internet'] = False
         test_params['is_smoker'] = False
         test_params['has_pets'] = False
         test_search = filter_search_seeking(test_params)
         self.assertEqual(test_search.count(), 0)
         test_seeking.must_be_furnished = False
+        test_seeking.must_have_internet = False
         test_seeking.is_smoker = False
         test_seeking.has_pets = False
         test_seeking.save()

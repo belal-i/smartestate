@@ -219,6 +219,7 @@ def filter_search_seeking(params):
     - min_number_of_months
     - max_number_of_months
     - must_be_furnished
+    - must_have_internet
     - is_smoker
     - has_pets
     - min_age (derived from seeking.contact.date_of_birth)
@@ -324,6 +325,10 @@ def filter_search_seeking(params):
         pass
     try:
         result = result.filter(must_be_furnished=params['must_be_furnished'])
+    except KeyError:
+        pass
+    try:
+        result = result.filter(must_have_internet=params['must_have_internet'])
     except KeyError:
         pass
     try:
