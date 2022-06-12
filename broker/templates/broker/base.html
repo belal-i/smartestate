@@ -111,6 +111,12 @@
 			.broker-row:hover {
 				cursor: pointer;
 			}
+			.for-sale-form-fields {
+				display: none;
+			}
+			.hidden-form {
+				display: none;
+			}
 		</style>
 		<script>
 
@@ -136,6 +142,19 @@
 				href += modelId + "/change/";
 				window.location = href;
 			}
+			$(".form-toggle-field").change(function() {
+				model_type = $(this).val();
+				if(model_type == "rental") {
+					$(".rental-form-fields").css({"display": "table-row"});
+					$(".for-sale-form-fields").css({"display": "none"});
+				} else if(model_type == "for_sale") {
+					$(".rental-form-fields").css({"display": "none"});
+					$(".for-sale-form-fields").css({"display": "table-row"});
+				}
+			});
+			$(".form-toggle-button").click(function() {
+				$(".search-form").toggleClass("hidden-form");
+			});
 		</script>
 	</body>
 </html>

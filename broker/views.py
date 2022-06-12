@@ -5,6 +5,7 @@ from django.db.models import Q
 
 from listings.models import *
 from .models import *
+from .forms import ListingSearchForm, SeekingSearchForm
 
 # Create your views here.
 
@@ -34,13 +35,19 @@ def listings(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % ('/admin/', request.path))
     listings = Listing.objects.all()
-    return render(request, 'broker/listings.html', {'listings': listings})
+    listing_form = ListingSearchForm()
+    return render(request, 'broker/listings.html',
+        {'listings': listings, 'form': listing_form}
+    )
 
 def seekings(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % ('/admin/', request.path))
     seekings = Seeking.objects.all()
-    return render(request, 'broker/seekings.html', {'seekings': seekings})
+    seekings_form = SeekingSearchForm()
+    return render(request, 'broker/seekings.html',
+        {'seekings': seekings, 'form': seekings_form}
+    )
 
 def matchings(request):
     if not request.user.is_authenticated:
