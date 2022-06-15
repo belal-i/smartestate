@@ -14,7 +14,7 @@
 				<th scope="col">Rooms</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="listings-table-body">
 		{% for listing in listings %}
 			<tr onclick="editInAdmin('listing', {{ listing.id }});" class="broker-row">
 				<td>{{ listing.id }}</td>

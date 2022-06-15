@@ -21,7 +21,11 @@ class Contact(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     def get_age(self):
         try:
-            return date.today().year - self.date_of_birth.year
+            age = date.today().year - self.date_of_birth.year
+            m = date.today().month - self.date_of_birth.month
+            if m < 0 or (m == 0 and date.today().day < self.date_of_birth.day):
+                age -= 1
+            return age
         except AttributeError:
             return "unknown"
 
@@ -89,7 +93,7 @@ class Seeking(models.Model):
         max_digits=10, decimal_places=2)
     min_number_of_rooms = models.IntegerField(null=True, blank=True, default=1,
         validators=[MinValueValidator(1), MaxValueValidator(100)])
-    min_size_qm = models.IntegerField(null=True, blank=True, default=20,
+    min_size_sq_m = models.IntegerField(null=True, blank=True, default=20,
         validators=[MinValueValidator(1), MaxValueValidator(500)])
     number_of_persons = models.IntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(12)])
@@ -101,6 +105,7 @@ class Seeking(models.Model):
     number_of_months = models.IntegerField(null=True, blank=True)
 
     must_be_furnished = models.BooleanField(default=False)
+    must_have_internet = models.BooleanField(default=False)
     occupation = models.CharField(null=True, blank=True, max_length=64,
         help_text="Type of job that this tenant/buyer has")
     employer = models.ForeignKey(Company, on_delete=models.CASCADE,
