@@ -15,7 +15,7 @@
 				<th scope="col">Occupation</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="seekings-table-body">
 		{% for seeking in seekings %}
 			<tr onclick="editInAdmin('seeking', {{ seeking.id }});" class="broker-row">
 				<td>{{ seeking.id }}</td>
