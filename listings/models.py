@@ -99,7 +99,8 @@ class Apartment(models.Model):
         null=True, blank=True)
     is_furnished = models.BooleanField(default=False)
 
-    # TODO: Turn these into drop down fields with predefined choirces,
+    # TODO: See Feature #369.
+    #       Turn these into drop down fields with predefined choirces,
     #       then you can implement support for them in
     #       broker.utils.filter_search_listing.
     flooring = models.CharField(max_length=128, null=True, blank=True)
