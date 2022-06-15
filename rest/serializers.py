@@ -96,6 +96,7 @@ class ListingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Listing
         fields = [
+            'id',
             'listing_type',
             'rental_price',
             'security_deposit',
@@ -120,6 +121,7 @@ class SeekingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Seeking
         fields = [
+            'id',
             'seeking_type',
             'max_rent',
             'max_purchase_price',
@@ -145,6 +147,7 @@ class MatchingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Matching
         fields = [
+            'id',
             'status',
             'note',
             'listing',
