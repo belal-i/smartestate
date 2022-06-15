@@ -21,7 +21,11 @@ class Contact(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     def get_age(self):
         try:
-            return date.today().year - self.date_of_birth.year
+            age = date.today().year - self.date_of_birth.year
+            m = date.today().month - self.date_of_birth.month
+            if m < 0 or (m == 0 and date.today().day < self.date_of_birth.day):
+                age -= 1
+            return age
         except AttributeError:
             return "unknown"
 
