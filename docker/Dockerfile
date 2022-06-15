@@ -32,6 +32,7 @@ RUN pip install --no-cache-dir amqp \
     && pip install pyyaml \
     && pip install Pillow \
     && pip install django-cookie-consent \
+    && pip install djangorestframework \
     #&& pip install kombu \
     #&& pip install prompt-toolkit \
     #&& pip install psycopg2 \
