@@ -1,6 +1,7 @@
 from django.urls import include, path
 from . import views
 
+app_name = "rest"
 urlpatterns = [
     # path('', include(router.urls)),
     path('listings/', views.listings, name='listings'),
