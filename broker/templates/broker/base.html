@@ -112,7 +112,7 @@
 			.broker-row:hover {
 				cursor: pointer;
 			}
-			.for-sale-form-fields {
+			.hidden-form-fields {
 				display: none;
 			}
 			.hidden-form {
@@ -196,14 +196,8 @@
 				return age;
 			}
 			$(".form-toggle-field").change(function() {
-				model_type = $(this).val();
-				if(model_type == "rental") {
-					$(".rental-form-fields").css({"display": "table-row"});
-					$(".for-sale-form-fields").css({"display": "none"});
-				} else if(model_type == "for_sale") {
-					$(".rental-form-fields").css({"display": "none"});
-					$(".for-sale-form-fields").css({"display": "table-row"});
-				}
+				$(".rental-form-fields").toggleClass("hidden-form-fields");
+				$(".for-sale-form-fields").toggleClass("hidden-form-fields");
 			});
 			$(".form-toggle-button").click(function() {
 				$(".search-form").toggleClass("hidden-form");
