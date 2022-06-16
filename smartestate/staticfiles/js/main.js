@@ -351,3 +351,18 @@ $("#toggle-day-night").click(function() {
 	mode *= -1;
 	Cookies.set("mode", mode, {sameSite: "strict"});
 });
+
+$(".form-toggle-field").change(function() {
+	var model_type = $(this).val();
+	if(model_type == "rental") {
+		$(".rental-form-fields").removeClass("hidden-form-fields");
+		$(".for-sale-form-fields").addClass("hidden-form-fields");
+	} else if(model_type == "for_sale") {
+		$(".rental-form-fields").addClass("hidden-form-fields");
+		$(".for-sale-form-fields").removeClass("hidden-form-fields");
+	} else {
+		$(".rental-form-fields").removeClass("hidden-form-fields");
+		$(".for-sale-form-fields").addClass("hidden-form-fields");
+	}
+
+});

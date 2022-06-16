@@ -54,3 +54,10 @@ p, span {
 .navbar-brand, .nav-link {
 	color: #eee !important;
 }
+
+/*
+ * TODO: See Feature #379. Make this DRY.
+ * */
+.hidden-form-fields {
+	display: none;
+}
