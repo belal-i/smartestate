@@ -5,7 +5,7 @@
 		TODO: See Feature #303.
 		{% endcomment %}
 		<h3 class="border-bottom mb-5">Search our listings!</h3>
-		<form action="" method="get">
+		<form action="{% url 'listings:search_results' %}" method="get">
 			<div class="form-group form-row">
 				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
 					{{ listing_search_form.listing_type.label }}
