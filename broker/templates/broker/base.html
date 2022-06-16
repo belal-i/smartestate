@@ -194,7 +194,7 @@
 				return age;
 			}
 			function toggleRentalOrForSale() {
-				model_type = $(this).val();
+				model_type = $(".form-toggle-field:first").val();
 				if(model_type == "rental") {
 					$(".rental-form-fields").css({"display": "table-row"});
 					$(".for-sale-form-fields").css({"display": "none"});
@@ -248,6 +248,7 @@
 				});
 			}
 			$("#listings-search :input").change(submitListingsSearch);
+			$("#listings-search-submit").click(submitListingsSearch);
 			function submitSeekingsSearch() {
 				$.ajax({
 					url : "{% url 'rest:seekings' %}",
@@ -284,6 +285,18 @@
 				});
 			}
 			$("#seekings-search :input").change(submitSeekingsSearch);
+			$("#seekings-search-submit").click(submitSeekingsSearch);
+			function resetSearchForm() {
+				$(".search-form:first").trigger("reset");
+				toggleRentalOrForSale();
+				try {
+					submitListingsSearch();
+				} catch {}
+				try {
+					submitSeekingsSearch();
+				} catch {}
+			}
+			$(".form-reset-button").click(resetSearchForm);
 		</script>
 	</body>
 </html>
