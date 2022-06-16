@@ -112,9 +112,6 @@
 			.broker-row:hover {
 				cursor: pointer;
 			}
-			.for-sale-form-fields {
-				display: none;
-			}
 			.hidden-form {
 				display: none;
 			}
@@ -196,7 +193,7 @@
 				}
 				return age;
 			}
-			$(".form-toggle-field").change(function() {
+			function toggleRentalOrForSale() {
 				model_type = $(this).val();
 				if(model_type == "rental") {
 					$(".rental-form-fields").css({"display": "table-row"});
@@ -204,12 +201,16 @@
 				} else if(model_type == "for_sale") {
 					$(".rental-form-fields").css({"display": "none"});
 					$(".for-sale-form-fields").css({"display": "table-row"});
+				} else {
+					$(".rental-form-fields").css({"display": "table-row"});
+					$(".for-sale-form-fields").css({"display": "table-row"});
 				}
-			});
+			}
+			$(".form-toggle-field").change(toggleRentalOrForSale);
 			$(".form-toggle-button").click(function() {
 				$(".search-form").toggleClass("hidden-form");
 			});
-			$("#listings-search :input").change(function() {
+			function submitListingsSearch() {
 				$.ajax({
 					url : "{% url 'rest:listings' %}",
 					type : 'GET',
@@ -245,9 +246,10 @@
 						alert("Request: "+JSON.stringify(request));
 					}
 				});
-			});
-			$("#seekings-search :input").change(function() {
-				var request = $.ajax({
+			}
+			$("#listings-search :input").change(submitListingsSearch);
+			function submitSeekingsSearch() {
+				$.ajax({
 					url : "{% url 'rest:seekings' %}",
 					type : 'GET',
 					data : prepareDataForRest($("#seekings-search").serializeArray()),
@@ -280,7 +282,8 @@
 						alert("Request: "+JSON.stringify(request));
 					}
 				});
-			});
+			}
+			$("#seekings-search :input").change(submitSeekingsSearch);
 		</script>
 	</body>
 </html>
