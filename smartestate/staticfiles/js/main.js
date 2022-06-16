@@ -291,12 +291,15 @@ export default api;
 
 
 ////////////////////////
+/*
+ * TODO: See Feature 378. Refactor this day/night mode toggle to be simpler.
+ * */
 $(document).ready(function() {
 	if(Cookies.get("mode") == -1) {
 		$(".navbar").toggleClass("navbar-dark");
 		$(".navbar").toggleClass("bg-dark");
 		$(".nav-item").toggleClass("text-dark");
-		$(".listing-entry").toggleClass("bg-dark");
+		$(".row").toggleClass("bg-dark");
 		$(".detail-images").toggleClass("bg-dark");
 		$(".detail-short").toggleClass("bg-dark");
 		$(".detail-long").toggleClass("bg-dark");
@@ -324,7 +327,7 @@ $("#toggle-day-night").click(function() {
 	$(".navbar").toggleClass("navbar-dark");
 	$(".navbar").toggleClass("bg-dark");
 	$(".nav-item").toggleClass("text-dark");
-	$(".listing-entry").toggleClass("bg-dark");
+	$(".row").toggleClass("bg-dark");
 	$(".detail-images").toggleClass("bg-dark");
 	$(".detail-short").toggleClass("bg-dark");
 	$(".detail-long").toggleClass("bg-dark");
