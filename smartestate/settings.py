@@ -77,6 +77,8 @@ TEMPLATES = [
                 'config.context_processors.site_title',
                 'config.context_processors.logo_url',
                 'config.context_processors.theme',
+                'config.context_processors.show_filter_search_on_homepage',
+                'config.context_processors.show_filter_search_in_listview',
                 'pages.context_processors.all_pages',
             ],
         },
