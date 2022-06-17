@@ -1,5 +1,15 @@
 {% extends "listings/list.html" %}
 {% load humanize %}
+
+{% block filter_search_form %}
+{% if show_filter_search_on_homepage %}
+	<div class="container detail-text">
+		<br><br>
+		{% include "listings/filter-search-listview.html" %}
+	</div>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 {% if search_results %}
 	<br>
