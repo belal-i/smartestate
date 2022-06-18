@@ -9,6 +9,7 @@
 			<td>{{ form.listing_type }}</th>
 			<th>{{ form.is_primary.label_tag }}</th>
 			<td>{{ form.is_primary }}</th>
+			<td><input id="listings-search-submit" type="button" value="Search"></th>
 		</tr>
 		<tr class="rental-form-fields">
 			<th>{{ form.max_rental_price.label_tag }}</th>
@@ -20,7 +21,7 @@
 			<th>{{ form.min_security_deposit.label_tag }}</th>
 			<td>{{ form.min_security_deposit }}</th>
 		</tr>
-		<tr class="for-sale-form-fields hidden-form-fields">
+		<tr class="for-sale-form-fields">
 			<th>{{ form.max_for_sale_price.label_tag }}</th>
 			<td>{{ form.max_for_sale_price }}</th>
 			<th>{{ form.min_for_sale_price.label_tag }}</th>
@@ -64,13 +65,12 @@
 			<th>{{ form.max_date_of_construction.label_tag }}</th>
 			<td>{{ form.max_date_of_construction }}</th>
 			<th>{{ form.min_date_of_construction.label_tag }}</th>
-			<td colspan=3>{{ form.min_date_of_construction }}</th>
+			<td>{{ form.min_date_of_construction }}</th>
 			<th>{{ form.is_furnished.label_tag }}</th>
 			<td>{{ form.is_furnished }}</th>
+			<td><input type="button" value="Reset" class="form-reset-button"></th>
 		</tr>
-
 	</table>
-	<input type="submit" value="Submit">
 </form>
 
 {% endblock %}

@@ -6,8 +6,9 @@ class ListingSearchForm(forms.Form):
     # broker.utils.filter_search_listing
 
     listing_type = forms.ChoiceField(choices=[
+        ('', '--'),
         ('rental', 'Rental'),
-        ('for_sale', 'For sale')
+        ('for_sale', 'For sale'),
         ], label='Listing type',
         widget=forms.Select(attrs={'class': 'form-toggle-field'})
     )
@@ -82,8 +83,9 @@ class SeekingSearchForm(forms.Form):
     # broker.utils.filter_search_seeking
 
     seeking_type = forms.ChoiceField(choices=[
+        ('', '--'),
         ('rental', 'Rental'),
-        ('for_sale', 'For sale')
+        ('for_sale', 'For sale'),
         ], label='Seeking type',
         widget=forms.Select(attrs={'class': 'form-toggle-field'})
     )
