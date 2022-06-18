@@ -4,7 +4,6 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>SmartEstate -- Broker </title>
 
 		{% comment %} Bootstrap CSS {% endcomment %}
 		<link
@@ -13,6 +12,12 @@
 			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 			crossorigin="anonymous"
 		>
+
+		{% load static %}
+		
+		<link rel="stylesheet" href="{% static 'css/broker.css' %}">
+		<title>SmartEstate -- Broker </title>
+
 	</head>
 	<body>
 		{% block banner %}
@@ -103,200 +108,6 @@
 			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 			crossorigin="anonymous">
 		</script>
-
-		{% comment %}
-		For now, don't want to host this CSS and JavaScript on public facing frontend, therefore it's 
-		inline here in the hidden template.
-		{% endcomment %}
-		<style>
-			.broker-row:hover {
-				cursor: pointer;
-			}
-			.hidden-form {
-				display: none;
-			}
-		</style>
-		<script>
-
-			{% comment %}
-			Kind of a workaround until we implement detail views for the broker app.
-			This simply switches to the Django admin, to edit a given model there.
-			{% endcomment %}
-			function editInAdmin(modelType, modelId) {
-				href = "/admin/";
-				switch(modelType) {
-					case "listing":
-						href += "listings/listing/";
-						break;
-					case "seeking":
-						href += "broker/seeking/";
-						break;
-					case "matching":
-						href += "broker/matching/";
-						break;
-					default:
-						break;
-				}
-				href += modelId + "/change/";
-				window.location = href;
-			}
-			function prepareDataForRest(dataArray) {
-				n = dataArray.length;
-				returnObject = {};
-				for(i = 0; i < n; i++) {
-					field_name = dataArray[i].name;
-					field_value = dataArray[i].value;
-					switch(field_name) {
-						default:
-							if(field_value != "") {
-								returnObject[field_name] = field_value;
-							}
-							break;
-
-						{% comment %}
-						TODO: See Feature #368.
-						Rename some of these fields in the models, so that we can use
-						use the same name for both seekings and listings??
-						{% endcomment %}
-						case 'is_primary':
-						case 'pets_ok':
-						case 'has_pets':
-						case 'has_internet':
-						case 'must_have_internet':
-						case 'is_furnished':
-						case 'must_be_furnished':
-						case 'is_smoker':
-							returnObject[field_name] =
-								field_value == "on" ? 'True' : 'False';
-							break;
-					}
-				}
-				return returnObject;
-			}
-			function getNiceDate(dateString) {
-				dateObject = new Date(dateString);
-
-				{% comment %}
-				See Feature #303. Adjust date format based on language setting.
-				{% endcomment %}
-
-				monthString = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(dateObject);
-				return monthString + ' ' + String(dateObject.getDate()) + ', ' + String(dateObject.getFullYear());
-			}
-			function getAge(dateString) {
-				var today = new Date();
-				var birthDate = new Date(dateString);
-				var age = today.getFullYear() - birthDate.getFullYear();
-				var m = today.getMonth() - birthDate.getMonth();
-				if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-					age--;
-				}
-				return age;
-			}
-			function toggleRentalOrForSale() {
-				model_type = $(".form-toggle-field:first").val();
-				if(model_type == "rental") {
-					$(".rental-form-fields").css({"display": "table-row"});
-					$(".for-sale-form-fields").css({"display": "none"});
-				} else if(model_type == "for_sale") {
-					$(".rental-form-fields").css({"display": "none"});
-					$(".for-sale-form-fields").css({"display": "table-row"});
-				} else {
-					$(".rental-form-fields").css({"display": "table-row"});
-					$(".for-sale-form-fields").css({"display": "table-row"});
-				}
-			}
-			$(".form-toggle-field").change(toggleRentalOrForSale);
-			$(".form-toggle-button").click(function() {
-				$(".search-form").toggleClass("hidden-form");
-			});
-			function submitListingsSearch() {
-				$.ajax({
-					url : "{% url 'rest:listings' %}",
-					type : 'GET',
-					data : prepareDataForRest($("#listings-search").serializeArray()),
-					dataType:'json',
-					success : function(data) {
-						html = "";
-						n = data.length;
-						for(i = 0; i < n; i++) {
-							{% comment %} See templates/broker/list-listing.html {% endcomment %}
-							html += '<tr onclick="editInAdmin(\'listing\', '+data[i]['id']+');" class="broker-row">';
-							html += '<td>'+data[i]['id']+'</td>';
-							html += '<td>'+data[i]['listing_type']+'</td>';
-							html += '<td>' + getNiceDate(data[i]['date_available']) + '</td>';
-							if(data[i]['listing_type'] == 'rental') {
-								html += '<td>'+data[i]['rental_price']+'</td>';
-							} else if(data[i]['listing_type'] == 'for_sale') {
-								html += '<td>'+data[i]['for_sale_price']+'</td>';
-							}
-							html += '<td>'+data[i]['short_description']+'</td>';
-							html += '<td>' +
-								data[i]['apartment']['house']['real_estate']['address']['street'] + ', ' +
-								data[i]['apartment']['house']['real_estate']['address']['zip_code'] + ' ' +
-								data[i]['apartment']['house']['real_estate']['address']['city'] +
-								'</td>';
-							html += '<td>'+data[i]['apartment']['size_sq_m']+'m<sup>2</sup></td>';
-							html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
-							html += '</tr>';
-						}
-						$("#listings-table-body").html(html);
-					},
-					error : function(request,error) {
-						alert("Request: "+JSON.stringify(request));
-					}
-				});
-			}
-			$("#listings-search :input").change(submitListingsSearch);
-			$("#listings-search-submit").click(submitListingsSearch);
-			function submitSeekingsSearch() {
-				$.ajax({
-					url : "{% url 'rest:seekings' %}",
-					type : 'GET',
-					data : prepareDataForRest($("#seekings-search").serializeArray()),
-					dataType:'json',
-					success : function(data) {
-						html = "";
-						n = data.length;
-						for(i = 0; i < n; i++) {
-							{% comment %}See templates/broker/list-seeking.html{% endcomment %}
-							html += '<tr onclick="editInAdmin(\'seeking\', '+data[i]['id']+');" class="broker-row">';
-							html += '<td>'+data[i]['id']+'</td>';
-							html += '<td>'+data[i]['seeking_type']+'</td>';
-							html += '<td>' + getNiceDate(data[i]['starting_date']) + '</td>';
-							if(data[i]['seeking_type'] == 'rental') {
-								html += '<td>'+data[i]['max_rent']+'</td>';
-							} else if(data[i]['seeking_type'] == 'for_sale') {
-								html += '<td>'+data[i]['max_purchase_price']+'</td>';
-							}
-							html += '<td>'+data[i]['min_number_of_rooms']+'</td>';
-							html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
-								data[i]['contact']['last_name'] + '</td>';
-							html += '<td>' + String(getAge(data[i]['contact']['date_of_birth'])) + '</td>';
-							html += '<td>'+data[i]['number_of_persons']+'</td>';
-							html += '<td>'+data[i]['occupation']+'</td>';
-							html += '</tr>';
-						}
-						$("#seekings-table-body").html(html);
-					},
-					error : function(request,error) {
-						alert("Request: "+JSON.stringify(request));
-					}
-				});
-			}
-			$("#seekings-search :input").change(submitSeekingsSearch);
-			$("#seekings-search-submit").click(submitSeekingsSearch);
-			function resetSearchForm() {
-				$(".search-form:first").trigger("reset");
-				toggleRentalOrForSale();
-				try {
-					submitListingsSearch();
-				} catch {}
-				try {
-					submitSeekingsSearch();
-				} catch {}
-			}
-			$(".form-reset-button").click(resetSearchForm);
-		</script>
+		<script src="{% static 'js/broker.js' %}"></script>
 	</body>
 </html>
