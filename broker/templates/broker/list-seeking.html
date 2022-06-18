@@ -17,7 +17,7 @@
 		</thead>
 		<tbody id="seekings-table-body">
 		{% for seeking in seekings %}
-			<tr onclick="editInAdmin('seeking', {{ seeking.id }});" class="broker-row">
+			<tr onclick="toggleSuggestions('seeking', {{ seeking.id }});" class="broker-row">
 				<td>{{ seeking.id }}</td>
 				<td>{{ seeking.seeking_type }}</td>
 				<td>{{ seeking.starting_date }}</td>
@@ -32,6 +32,21 @@
 				<td>{{ seeking.contact.get_age }}</td>
 				<td>{{ seeking.number_of_persons }}</td>
 				<td>{{ seeking.occupation }}</td>
+			</tr>
+			<tr id="suggestions-row-seeking{{ seeking.id }}" class="suggestions-row">
+				<td>
+				<table>
+					<tr>
+						<td>Some Listing</td>
+					</tr>
+					<tr>
+						<td>Another Listing</td>
+					</tr>
+					<tr>
+						<td>And another Listing</td>
+					</tr>
+				</table>
+				</td>
 			</tr>
 		{% endfor %}
 		</tbody>

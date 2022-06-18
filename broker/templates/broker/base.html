@@ -115,6 +115,9 @@
 			.hidden-form {
 				display: none;
 			}
+			.suggestions-row {
+				display: none;
+			}
 		</style>
 		<script>
 
@@ -139,6 +142,16 @@
 				}
 				href += modelId + "/change/";
 				window.location = href;
+			}
+			function toggleSuggestions(rowType, id) {
+				if($("#suggestions-row-"+rowType+String(id)).css("display") == "none") {
+					$("#suggestions-row-"+rowType+String(id)).css("display", "table-row");
+				} else {
+					$("#suggestions-row-"+rowType+String(id)).css("display", "none");
+				}
+				/*
+				TODO: Do the Ajax stuff here.
+					*/
 			}
 			function prepareDataForRest(dataArray) {
 				n = dataArray.length;
