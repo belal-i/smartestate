@@ -173,3 +173,13 @@ function resetSearchForm() {
 	} catch {}
 }
 $(".form-reset-button").click(resetSearchForm);
+function toggleSuggestions(rowType, id) {
+	if($("#suggestions-row-"+rowType+String(id)).css("display") == "none") {
+		$("#suggestions-row-"+rowType+String(id)).css("display", "table-row");
+	} else {
+		$("#suggestions-row-"+rowType+String(id)).css("display", "none");
+	}
+	/*
+	TODO: Do the Ajax stuff here.
+		*/
+}
