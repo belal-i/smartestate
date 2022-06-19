@@ -46,3 +46,10 @@ p, span {
 	background-color: #e8912a !important;
 	color: #fff !important;
 }
+
+/*
+ * TODO: See Feature #379. Make this DRY.
+ * */
+.hidden-form-fields {
+	display: none;
+}

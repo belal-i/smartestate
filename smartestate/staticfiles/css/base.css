@@ -34,3 +34,10 @@ p, span {
 #toggle-day-night-icon:hover {
 	cursor: pointer;
 }
+
+/*
+ * TODO: See Feature #379. Make this DRY.
+ * */
+.hidden-form-fields {
+	display: none;
+}
