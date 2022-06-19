@@ -249,11 +249,21 @@ function toggleSuggestions(rowType, id, queryObject) {
 					} else if(data[i]['seeking_type'] == 'for_sale') {
 						html += '<td>'+data[i]['max_purchase_price']+'</td>';
 					}
+					// TODO: This fails if contact is null.
 					html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
 						data[i]['contact']['last_name'] + '</td>';
 					html += '<td>'+data[i]['number_of_persons']+'</td>';
 					html += '<td><select><option>Possible</option><option>Pending</option><option>Closed</option></select></td>';
 					html += '</tr>';
+				}
+				if(data.length > n) {
+					/*
+					 * TODO
+					 * This will just go to the list view for all Seekings.
+					 * But it should retain the search parameters of the Listing with which it matched.
+					 * See Feature #382
+					 * */
+					html += '<tr><td><a href="/broker/seekings/">See more Seekings</a></td></tr>';
 				}
 			} else if(rowType == "seeking") {
 				for(i = 0; i < n; i++) {
@@ -276,6 +286,15 @@ function toggleSuggestions(rowType, id, queryObject) {
 					html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
 					html += '<td><select><option>Possible</option><option>Pending</option><option>Closed</option></select></td>';
 					html += '</tr>';
+				}
+				if(data.length > n) {
+					/*
+					 * TODO
+					 * This will just go to the list view for all Listings.
+					 * But it should retain the search parameters of the Seeking with which it matched.
+					 * See Feature #382
+					 * */
+					html += '<tr><td><a href="/broker/listings/">See more Listings</a></td></tr>';
 				}
 			} else {
 				throw 'No rowType passed to toggleSuggestions!';
