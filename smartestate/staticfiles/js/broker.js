@@ -219,6 +219,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 					html += '<th>Max price</th>';
 					html += '<th>Tenant/Buyer name</th>';
 					html += '<th>Number of persons</th>';
+					html += '<th>Status</th>';
 					html += '</tr>';
 				} else if(rowType == "seeking") {
 					html += '<table>';
@@ -231,6 +232,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 					html += '<th>Address</th>';
 					html += '<th>Size</th>';
 					html += '<th>Rooms</th>';
+					html += '<th>Status</th>';
 					html += '</tr>';
 				} else {
 					throw 'No rowType passed to toggleSuggestions!';
@@ -250,6 +252,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 					html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
 						data[i]['contact']['last_name'] + '</td>';
 					html += '<td>'+data[i]['number_of_persons']+'</td>';
+					html += '<td><select><option>Possible</option><option>Pending</option><option>Closed</option></select></td>';
 					html += '</tr>';
 				}
 			} else if(rowType == "seeking") {
@@ -271,6 +274,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 						'</td>';
 					html += '<td>'+data[i]['apartment']['size_sq_m']+'m<sup>2</sup></td>';
 					html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
+					html += '<td><select><option>Possible</option><option>Pending</option><option>Closed</option></select></td>';
 					html += '</tr>';
 				}
 			} else {
