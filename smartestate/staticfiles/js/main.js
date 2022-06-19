@@ -291,12 +291,15 @@ export default api;
 
 
 ////////////////////////
+/*
+ * TODO: See Feature 378. Refactor this day/night mode toggle to be simpler.
+ * */
 $(document).ready(function() {
 	if(Cookies.get("mode") == -1) {
 		$(".navbar").toggleClass("navbar-dark");
 		$(".navbar").toggleClass("bg-dark");
 		$(".nav-item").toggleClass("text-dark");
-		$(".listing-entry").toggleClass("bg-dark");
+		$(".row").toggleClass("bg-dark");
 		$(".detail-images").toggleClass("bg-dark");
 		$(".detail-short").toggleClass("bg-dark");
 		$(".detail-long").toggleClass("bg-dark");
@@ -324,7 +327,7 @@ $("#toggle-day-night").click(function() {
 	$(".navbar").toggleClass("navbar-dark");
 	$(".navbar").toggleClass("bg-dark");
 	$(".nav-item").toggleClass("text-dark");
-	$(".listing-entry").toggleClass("bg-dark");
+	$(".row").toggleClass("bg-dark");
 	$(".detail-images").toggleClass("bg-dark");
 	$(".detail-short").toggleClass("bg-dark");
 	$(".detail-long").toggleClass("bg-dark");
@@ -347,4 +350,19 @@ $("#toggle-day-night").click(function() {
 	}
 	mode *= -1;
 	Cookies.set("mode", mode, {sameSite: "strict"});
+});
+
+$(".form-toggle-field").change(function() {
+	var model_type = $(this).val();
+	if(model_type == "rental") {
+		$(".rental-form-fields").removeClass("hidden-form-fields");
+		$(".for-sale-form-fields").addClass("hidden-form-fields");
+	} else if(model_type == "for_sale") {
+		$(".rental-form-fields").addClass("hidden-form-fields");
+		$(".for-sale-form-fields").removeClass("hidden-form-fields");
+	} else {
+		$(".rental-form-fields").removeClass("hidden-form-fields");
+		$(".for-sale-form-fields").addClass("hidden-form-fields");
+	}
+
 });

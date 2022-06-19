@@ -139,13 +139,13 @@
 		{% endif %}
 		{% endblock %}
 
+		{% block filter_search_form %}
+		{% endblock %}
 		{% comment %}
 		detail-text added for dark-mode support
 		{% endcomment %}
 		<div class="container detail-text">
 			{% block content %}
-			<br><br>
-			{{ cover_text|safe }}
 			{% endblock %}
 		</div>
 

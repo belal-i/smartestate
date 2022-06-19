@@ -14,3 +14,14 @@ def logo_url(request):
 
 def theme(request):
     return {'theme': Config.objects.get_or_create()[0].theme}
+
+def show_filter_search_on_homepage(request):
+    return {
+        'show_filter_search_on_homepage': \
+            Config.objects.get_or_create()[0].show_filter_search_on_homepage
+    }
+def show_filter_search_in_listview(request):
+    return {
+        'show_filter_search_in_listview': \
+            Config.objects.get_or_create()[0].show_filter_search_in_listview
+    }
