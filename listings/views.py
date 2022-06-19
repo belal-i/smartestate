@@ -94,6 +94,9 @@ def validate_search_params(input_dict):
         try:
             if return_dict[field] == "on":
                 return_dict[field] = True
+            else:
+                return_dict.pop(field)
+
         except KeyError:
             pass
         except ValueError:
