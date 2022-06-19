@@ -13,6 +13,7 @@
 				<th scope="col">Tenant/Buyer Age</th>
 				<th scope="col">Number of Persons</th>
 				<th scope="col">Occupation</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody id="seekings-table-body">
@@ -111,6 +112,7 @@
 				<td>{{ seeking.contact.get_age }}</td>
 				<td>{{ seeking.number_of_persons }}</td>
 				<td>{{ seeking.occupation }}</td>
+				<td><a href="#" onclick="editInAdmin('seeking', {{ seeking.id }})">Edit Seeking</a></td>
 			</tr>
 			<tr id="suggestions-row-seeking{{ seeking.id }}" class="suggestions-row">
 			</tr>

@@ -12,6 +12,7 @@
 				<th scope="col">Address</th>
 				<th scope="col">Size</th>
 				<th scope="col">Rooms</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody id="listings-table-body">
@@ -103,6 +104,7 @@
 				<td>{{ listing.apartment.house.real_estate.address }}</td>
 				<td>{{ listing.apartment.size_sq_m }}m<sup>2</sup></td>
 				<td>{{ listing.apartment.number_of_rooms }}</td>
+				<td><a href="#" onclick="editInAdmin('listing', {{ listing.id }})">Edit Listing</a></td>
 			</tr>
 			<tr id="suggestions-row-listing{{ listing.id }}" class="suggestions-row">
 			</tr>
