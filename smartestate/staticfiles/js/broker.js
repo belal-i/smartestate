@@ -16,7 +16,7 @@ function editInAdmin(modelType, modelId) {
 	href += modelId + "/change/";
 	window.location = href;
 }
-function prepareDataForRest(dataArray) {
+function prepareFormDataForRest(dataArray) {
 	n = dataArray.length;
 	returnObject = {};
 	for(i = 0; i < n; i++) {
@@ -90,7 +90,7 @@ function submitListingsSearch() {
 	$.ajax({
 		url : "/rest/listings/",
 		type : 'GET',
-		data : prepareDataForRest($("#listings-search").serializeArray()),
+		data : prepareFormDataForRest($("#listings-search").serializeArray()),
 		dataType:'json',
 		success : function(data) {
 			html = "";
@@ -129,7 +129,7 @@ function submitSeekingsSearch() {
 	$.ajax({
 		url : "/rest/seekings/",
 		type : 'GET',
-		data : prepareDataForRest($("#seekings-search").serializeArray()),
+		data : prepareFormDataForRest($("#seekings-search").serializeArray()),
 		dataType:'json',
 		success : function(data) {
 			html = "";
