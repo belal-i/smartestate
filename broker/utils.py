@@ -64,7 +64,12 @@ def filter_search_listing(params):
     - min_date_of_construction
     """
 
+    for key, val in params.items():
+        if str(val) == '':
+            params.pop(key)
+
     result = Listing.objects.all()
+
     try:
         result = result.filter(listing_type=params['listing_type'])
     except (KeyError, ValidationError):
@@ -227,7 +232,12 @@ def filter_search_seeking(params):
     - max_age (derived from seeking.contact.date_of_birth)
     """
 
+    for key, val in params.items():
+        if str(val) == '':
+            params.pop(key)
+
     result = Seeking.objects.all()
+
     try:
         result = result.filter(seeking_type=params['seeking_type'])
     except (KeyError, ValidationError):
