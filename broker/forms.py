@@ -13,9 +13,9 @@ class ListingSearchForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-toggle-field'}),
         required=False
     )
-    max_rental_price = forms.IntegerField(label='Maximum rental price',
+    max_rental_price = forms.IntegerField(label='Maximum rent',
         required=False)
-    min_rental_price = forms.IntegerField(label='Minimum rental price',
+    min_rental_price = forms.IntegerField(label='Minimum rent',
         required=False)
     max_security_deposit = forms.IntegerField(label='Maximum security deposit',
         required=False)
@@ -42,11 +42,11 @@ class ListingSearchForm(forms.Form):
         required=False
     )
     minimum_months = forms.IntegerField(
-        label='Minimum number of months available',
+        label='Minimum number of months',
         required=False
     )
     maximum_months = forms.IntegerField(
-        label='Maximum number of months available',
+        label='Maximum number of months',
         required=False
     )
     min_number_of_people = forms.IntegerField(
@@ -74,11 +74,11 @@ class ListingSearchForm(forms.Form):
         required=False
     )
     min_size_sq_m = forms.IntegerField(
-        label='Minimum size in square meters',
+        label='Minimum size (sq. m)',
         required=False
     )
     max_size_sq_m = forms.IntegerField(
-        label='Maximum size in square meters',
+        label='Maximum size (sq. m)',
         required=False
     )
     has_internet = forms.BooleanField(
@@ -111,16 +111,16 @@ class SeekingSearchForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-toggle-field'}),
         required=False
     )
-    max_rent = forms.IntegerField(label='Maximum acceptable rent',
+    max_rent = forms.IntegerField(label='Maximum rent',
         required=False)
-    min_rent = forms.IntegerField(label='Minimum acceptable rent',
+    min_rent = forms.IntegerField(label='Minimum rent',
         required=False)
     max_purchase_price = forms.IntegerField(
-        label='Maximum acceptable purchase price',
+        label='Maximum purchase price',
         required=False
     )
     min_purchase_price = forms.IntegerField(
-        label='Minimum acceptable purchase price',
+        label='Minimum purchase price',
         required=False
     )
     min_number_of_rooms = forms.IntegerField(
@@ -132,11 +132,11 @@ class SeekingSearchForm(forms.Form):
         required=False
     )
     min_size_sq_m = forms.IntegerField(
-        label='Minimum size in square meters',
+        label='Minimum size (sq. m)',
         required=False
     )
     max_size_sq_m = forms.IntegerField(
-        label='Minimum size in square meters',
+        label='Maximum size (sq. m)',
         required=False
     )
     min_number_of_persons = forms.IntegerField(
@@ -148,19 +148,19 @@ class SeekingSearchForm(forms.Form):
         required=False
     )
     min_starting_date = forms.DateField(
-        label='Earliest possible starting date',
+        label='Earliest starting date',
         required=False
     )
     max_starting_date = forms.DateField(
-        label='Latest possible starting date',
+        label='Latest starting date',
         required=False
     )
     min_ending_date = forms.DateField(
-        label='Earliest possible ending date',
+        label='Earliest ending date',
         required=False
     )
     max_ending_date = forms.DateField(
-        label='Latest possible ending date',
+        label='Latest ending date',
         required=False
     )
     min_number_of_months = forms.IntegerField(
