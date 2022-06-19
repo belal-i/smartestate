@@ -1,0 +1,133 @@
+{% load widget_tweaks %}
+<div class="row bg-light shadow">
+	<div class="col pt-3">
+	{% comment %}
+	See broker.utils. The following fields are available, but we only
+	use some of them here.
+		    - listing_type
+		    - max_rental_price
+		    - min_rental_price
+		    - max_security_deposit
+		    - min_security_deposit
+		    - max_for_sale_price
+		    - min_for_sale_price
+		    - min_minimum_down_payment
+		    - max_minimum_down_payment
+		    - earliest_date_available
+		    - latest_date_available
+		    - minimum_months
+		    - maximum_months
+		    - max_number_of_people
+		    - min_number_of_people
+		    - pets_ok
+		    - is_primary
+		    - max_number_of_rooms
+		    - min_number_of_rooms
+		    - max_size_sq_m
+		    - min_size_sq_m
+		    - has_internet
+		    - is_furnished
+		    - max_date_of_construction
+		    - min_date_of_construction
+	{% endcomment %}
+		{% comment %}
+		TODO: See Feature #303.
+		{% endcomment %}
+		{% block form_title %}
+		<h3 class="border-bottom mb-5">Search results</h3>
+		{% endblock %}
+		<form action="{% url 'listings:search_results' %}" method="get">
+			{% block listings_type_toggle %}
+			<div class="form-group form-row">
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+					{{ listing_search_form.listing_type.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.listing_type class+="form-control" %}
+				</div>
+			</div>
+			{% endblock %}
+			<div class="form-group form-row">
+
+				{% block listings_type_price %}
+				<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+					{{ listing_search_form.max_rental_price.label }}
+				</label>
+				<div class="col-sm-2 rental-form-fields">
+					{% render_field listing_search_form.max_rental_price class+="form-control" %}
+				</div>
+				<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+					{{ listing_search_form.max_for_sale_price.label }}
+				</label>
+				<div class="col-sm-2 for-sale-form-fields hidden-form-fields">
+					{% render_field listing_search_form.max_for_sale_price class+="form-control" %}
+				</div>
+				{% endblock %}
+
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+					{{ listing_search_form.min_number_of_people.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.min_number_of_people class+="form-control" %}
+				</div>
+			</div>
+			<div class="form-group form-row">
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+					{{ listing_search_form.min_number_of_rooms.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.min_number_of_rooms class+="form-control" %}
+				</div>
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+					{{ listing_search_form.min_size_sq_m.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.min_size_sq_m class+="form-control" %}
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+					{{ listing_search_form.earliest_date_available.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.earliest_date_available class+="form-control" %}
+				</div>
+				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+					{{ listing_search_form.minimum_months.label }}
+				</label>
+				<div class="col-sm-2">
+					{% render_field listing_search_form.minimum_months class+="form-control" %}
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+					{{ listing_search_form.is_furnished.label }}
+				</label>
+				<div class="col-sm-3">
+					{% render_field listing_search_form.is_furnished class+="form-control" %}
+				</div>
+				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+					{{ listing_search_form.pets_ok.label }}
+				</label>
+				<div class="col-sm-3">
+					{% render_field listing_search_form.pets_ok class+="form-control" %}
+				</div>
+				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+					{{ listing_search_form.has_internet.label }}
+				</label>
+				<div class="col-sm-3">
+					{% render_field listing_search_form.has_internet class+="form-control" %}
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-2 col-form-label" for="submit-filter-search">
+				</label>
+				<div class="col-sm-7">
+					<input type="submit" value="Search" id="submit-filter-search" class="form-control">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

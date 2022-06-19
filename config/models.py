@@ -34,5 +34,8 @@ class Config(models.Model):
     logo_image = models.ImageField(upload_to='uploads/config/',
         blank=True, null=True)
 
+    show_filter_search_on_homepage = models.BooleanField(default=True)
+    show_filter_search_in_listview = models.BooleanField(default=True)
+
     def __str__(self):
         return "Site configuration"
