@@ -1,6 +1,7 @@
 import datetime
 
 from django.db.models import Q
+from django.core.exceptions import ValidationError
 from listings.models import *
 from .models import *
 
@@ -66,125 +67,125 @@ def filter_search_listing(params):
     result = Listing.objects.all()
     try:
         result = result.filter(listing_type=params['listing_type'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(rental_price__lte=params['max_rental_price'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(rental_price__gte=params['min_rental_price'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             security_deposit__lte=params['max_security_deposit']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             security_deposit__gte=params['min_security_deposit']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(for_sale_price__lte=params['max_for_sale_price'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(for_sale_price__gte=params['min_for_sale_price'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             minimum_down_payment__lte=params['max_minimum_down_payment']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             minimum_down_payment__gte=params['min_minimum_down_payment']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(date_available__gte=params['earliest_date_available'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(date_available__lte=params['latest_date_available'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(minimum_months__gte=params['minimum_months'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(maximum_months__lte=params['maximum_months'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_people__lte=params['max_number_of_people']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_people__gte=params['min_number_of_people']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(pets_ok=params['pets_ok'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(apartment__is_primary=params['is_primary'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             apartment__number_of_rooms__gte=params['min_number_of_rooms']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             apartment__number_of_rooms__lte=params['max_number_of_rooms']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(apartment__size_sq_m__gte=params['min_size_sq_m'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(apartment__size_sq_m__lte=params['max_size_sq_m'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(apartment__has_internet=params['has_internet'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(apartment__is_furnished=params['is_furnished'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             apartment__house__date_of_construction__gte=params[
                 'min_date_of_construction']
             )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             apartment__house__date_of_construction__lte=params[
                 'max_date_of_construction']
             )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
 
     return result
@@ -229,115 +230,115 @@ def filter_search_seeking(params):
     result = Seeking.objects.all()
     try:
         result = result.filter(seeking_type=params['seeking_type'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(max_rent__lte=params['max_rent'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(max_rent__gte=params['min_rent'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             max_purchase_price__lte=params['max_purchase_price']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             max_purchase_price__gte=params['min_purchase_price']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             min_number_of_rooms__gte=params['min_number_of_rooms']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             min_number_of_rooms__lte=params['max_number_of_rooms']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             min_size_sq_m__gte=params['min_size_sq_m']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             min_size_sq_m__lte=params['max_size_sq_m']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_persons__gte=params['min_number_of_persons']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_persons__lte=params['max_number_of_persons']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             starting_date__gte=params['min_starting_date']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             starting_date__lte=params['max_starting_date']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             ending_date__gte=params['min_ending_date']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             ending_date__lte=params['max_ending_date']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_months__gte=params['min_number_of_months']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(
             number_of_months__lte=params['max_number_of_months']
         )
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(must_be_furnished=params['must_be_furnished'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(must_have_internet=params['must_have_internet'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(is_smoker=params['is_smoker'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         result = result.filter(has_pets=params['has_pets'])
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         today = datetime.date.today()
@@ -345,7 +346,7 @@ def filter_search_seeking(params):
         max_dob = str(max_y_of_birth) + "-" + str(today.month) + "-" + \
             str(today.day)
         result = result.filter(contact__date_of_birth__lte=max_dob)
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
     try:
         today = datetime.date.today()
@@ -353,7 +354,7 @@ def filter_search_seeking(params):
         min_dob = str(min_y_of_birth) + "-" + str(today.month) + "-" + \
             str(today.day)
         result = result.filter(contact__date_of_birth__gte=min_dob)
-    except KeyError:
+    except (KeyError, ValidationError):
         pass
 
     return result
