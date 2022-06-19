@@ -173,13 +173,117 @@ function resetSearchForm() {
 	} catch {}
 }
 $(".form-reset-button").click(resetSearchForm);
-function toggleSuggestions(rowType, id) {
+
+
+function toggleSuggestions(rowType, id, queryObject) {
 	if($("#suggestions-row-"+rowType+String(id)).css("display") == "none") {
 		$("#suggestions-row-"+rowType+String(id)).css("display", "table-row");
 	} else {
 		$("#suggestions-row-"+rowType+String(id)).css("display", "none");
 	}
-	/*
-	TODO: Do the Ajax stuff here.
-		*/
+	var restUrl;
+	if(rowType == "listing") {
+		restUrl = "/rest/seekings/";
+	} else if(rowType == "seeking") {
+		restUrl = "/rest/listings/";
+	} else {
+		throw 'No rowType passed to toggleSuggestions!';
+	}
+	$.ajax({
+		url : restUrl,
+		type : 'GET',
+		data : queryObject,
+		dataType:'json',
+		success : function(data) {
+			html = '<td colspan=8>';
+			n = data.length;
+			n = n > 4 ? 4 : n;
+			if(n == 0) {
+				if(rowType == "listing") {
+					html += '<h4>No matching Seekings found!</h4>';
+					html += '<a href="/broker/listings/">See all Seekings</a>';
+				}
+				else if(rowType == "seeking") {
+					html += '<h4>No matching Listings found!</h4>';
+					html += '<a href="/broker/seekings/">See all Listings</a>';
+				} else {
+					throw 'No rowType passed to toggleSuggestions!';
+				}
+			} else {
+				if(rowType == "listing") {
+					html += '<table>';
+					html += '<tr>';
+					html += '<th>ID</th>';
+					html += '<th>Type</th>';
+					html += '<th>Start date</th>';
+					html += '<th>Max price</th>';
+					html += '<th>Tenant/Buyer name</th>';
+					html += '<th>Number of persons</th>';
+					html += '</tr>';
+				} else if(rowType == "seeking") {
+					html += '<table>';
+					html += '<tr>';
+					html += '<th>ID</th>';
+					html += '<th>Type</th>';
+					html += '<th>Available on</th>';
+					html += '<th>Price</th>';
+					html += '<th>Description</th>';
+					html += '<th>Address</th>';
+					html += '<th>Size</th>';
+					html += '<th>Rooms</th>';
+					html += '</tr>';
+				} else {
+					throw 'No rowType passed to toggleSuggestions!';
+				}
+			}
+			if(rowType == "listing") {
+				for(i = 0; i < n; i++) {
+					html += '<tr>';
+					html += '<td>'+data[i]['id']+'</td>';
+					html += '<td>'+data[i]['seeking_type']+'</td>';
+					html += '<td>' + getNiceDate(data[i]['starting_date']) + '</td>';
+					if(data[i]['seeking_type'] == 'rental') {
+						html += '<td>'+data[i]['max_rent']+'</td>';
+					} else if(data[i]['seeking_type'] == 'for_sale') {
+						html += '<td>'+data[i]['max_purchase_price']+'</td>';
+					}
+					html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
+						data[i]['contact']['last_name'] + '</td>';
+					html += '<td>'+data[i]['number_of_persons']+'</td>';
+					html += '</tr>';
+				}
+			} else if(rowType == "seeking") {
+				for(i = 0; i < n; i++) {
+					html += '<tr>';
+					html += '<td>'+data[i]['id']+'</td>';
+					html += '<td>'+data[i]['listing_type']+'</td>';
+					html += '<td>' + getNiceDate(data[i]['date_available']) + '</td>';
+					if(data[i]['listing_type'] == 'rental') {
+						html += '<td>'+data[i]['rental_price']+'</td>';
+					} else if(data[i]['listing_type'] == 'for_sale') {
+						html += '<td>'+data[i]['for_sale_price']+'</td>';
+					}
+					html += '<td>'+data[i]['short_description']+'</td>';
+					html += '<td>' +
+						data[i]['apartment']['house']['real_estate']['address']['street'] + ', ' +
+						data[i]['apartment']['house']['real_estate']['address']['zip_code'] + ' ' +
+						data[i]['apartment']['house']['real_estate']['address']['city'] +
+						'</td>';
+					html += '<td>'+data[i]['apartment']['size_sq_m']+'m<sup>2</sup></td>';
+					html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
+					html += '</tr>';
+				}
+			} else {
+				throw 'No rowType passed to toggleSuggestions!';
+			}
+			if(n > 0) {
+				html += '</table>';
+			}
+			html += '</td>';
+			$("#suggestions-row-"+rowType+String(id)).html(html);
+		},
+		error : function(request,error) {
+			alert("Request: "+JSON.stringify(request));
+		}
+	});
 }

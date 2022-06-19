@@ -58,9 +58,12 @@ class Listing(models.Model):
     maximum_months = models.PositiveIntegerField(default=60,
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(128)])
+
+    # TODO: See Feature #383.
     number_of_people = models.PositiveIntegerField(default=1,
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(20)])
+
     limitations = models.CharField(max_length=256, null=True, blank=True,
         default='', help_text='Limiting factors to qualify for approval \
             (no smoking, must be full-time employee, etc.)')

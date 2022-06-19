@@ -17,7 +17,86 @@
 		</thead>
 		<tbody id="seekings-table-body">
 		{% for seeking in seekings %}
-			<tr onclick="toggleSuggestions('seeking', {{ seeking.id }});" class="broker-row">
+			<tr onclick="toggleSuggestions(
+				{% comment %}
+				This function will trigger an Ajax call, which sends a request to the Rest API.
+				Here we build the JS-Object that the client will send to the Rest Server at /rest/listings/.
+				The endpoint there will call broker.utils.filter_search_listing, which supports these fields:
+					- listing_type
+					- max_rental_price
+					- min_rental_price
+					- max_security_deposit
+					- min_security_deposit
+					- max_for_sale_price
+					- min_for_sale_price
+					- min_minimum_down_payment
+					- max_minimum_down_payment
+					- earliest_date_available
+					- latest_date_available
+					- minimum_months
+					- maximum_months
+					- max_number_of_people
+					- min_number_of_people
+					- pets_ok
+					- is_primary
+					- max_number_of_rooms
+					- min_number_of_rooms
+					- max_size_sq_m
+					- min_size_sq_m
+					- has_internet
+					- is_furnished
+					- max_date_of_construction
+					- min_date_of_construction
+				{% endcomment %}
+				'seeking',
+				{{ seeking.id }},
+				{
+			    		'listing_type': '{{ seeking.seeking_type }}',
+
+			    		{% if seeking.seeking_type == 'rental' %}
+			    			'max_rental_price': '{{ seeking.max_rent }}',
+			    		{% elif seeking.seeking_type == 'for_sale' %}
+			    			'max_for_sale_price': '{{ seeking.max_purchase_price }}',
+			    		{% endif %}
+
+			    		{% comment %}
+			    		// Not going to do security deposit for now.
+					// max_security_deposit
+			    		{% endcomment %}
+
+			    		{% comment %}
+			    		// Not going to do minimum down payment for now.
+					// max_minimum_down_payment
+			    		{% endcomment %}
+
+			    		{% comment %}
+			    		TODO: Figure out the business logic around starting and ending dates later.
+					earliest_date_available
+					latest_date_available
+					minimum_months
+					maximum_months
+			    		{% endcomment %}
+
+
+			    		{% comment %}
+					TODO: See Feature #383
+			    		{% endcomment %}
+			    		'min_number_of_people': '{{ seeking.number_of_persons }}',
+
+			    		'min_number_of_rooms': '{{ seeking.min_number_of_rooms }}',
+					'min_size_sq_m': '{{ seeking.min_size_sq_m }}',
+			    		{% if seeking.has_pets %}
+						'pets_ok': 'True',
+			    		{% endif %}
+			    		{% if seeking.must_have_internet %}
+						'has_internet': 'True',
+			    		{% endif %}
+			    		{% if seeking.must_be_furnished %}
+						'is_furnished': 'True',
+			    		{% endif %}
+				}
+				);" class="broker-row"
+			>
 				<td>{{ seeking.id }}</td>
 				<td>{{ seeking.seeking_type }}</td>
 				<td>{{ seeking.starting_date }}</td>
@@ -34,19 +113,6 @@
 				<td>{{ seeking.occupation }}</td>
 			</tr>
 			<tr id="suggestions-row-seeking{{ seeking.id }}" class="suggestions-row">
-				<td>
-				<table>
-					<tr>
-						<td>Some Listing</td>
-					</tr>
-					<tr>
-						<td>Another Listing</td>
-					</tr>
-					<tr>
-						<td>And another Listing</td>
-					</tr>
-				</table>
-				</td>
 			</tr>
 		{% endfor %}
 		</tbody>
