@@ -92,7 +92,8 @@ def validate_search_params(input_dict):
             pass
     for field in bool_fields:
         try:
-            return_dict[field] = bool(return_dict[field])
+            if return_dict[field] == "on":
+                return_dict[field] = True
         except KeyError:
             pass
         except ValueError:
