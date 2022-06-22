@@ -36,7 +36,7 @@ def detail(request, listing_id):
 
 def search_results(request):
 
-    if request.GET.get('search', '') != '':
+    if 'search' in request.GET:
         search_results = keyword_search_listing(request.GET['search'])
     else:
         search_results = filter_search_listing(
