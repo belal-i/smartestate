@@ -64,6 +64,10 @@ def filter_search_listing(params):
     - min_date_of_construction
     """
 
+    # TODO: This causes Bug #390!
+    #       Doing an empty keyword search (click on the 'Search' button in the
+    #       top right) will throw RuntimeError (dictionary changed size during
+    #       iteration).
     for key, val in params.items():
         if str(val) == '':
             params.pop(key)
@@ -232,6 +236,10 @@ def filter_search_seeking(params):
     - max_age (derived from seeking.contact.date_of_birth)
     """
 
+    # TODO: This causes Bug #390!
+    #       Doing an empty keyword search (click on the 'Search' button in the
+    #       top right) will throw RuntimeError (dictionary changed size during
+    #       iteration).
     for key, val in params.items():
         if str(val) == '':
             params.pop(key)
