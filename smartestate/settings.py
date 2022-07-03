@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'listings.apps.ListingsConfig',
     'broker.apps.BrokerConfig',
     'pages.apps.PagesConfig',
+    'rest.apps.RestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,6 +141,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'rest.utils.se_exception_handler',
+}
 
 
 
