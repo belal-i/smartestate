@@ -26,7 +26,7 @@ def keyword_search_seeking(keyword):
         Q(notes__icontains = keyword)
     )
 
-def filter_search_listing(params):
+def filter_search_listing(params_query_dict):
     """
     This function takes a dictionary of search parameters, and searches for 
     all listings in the database that meet the requirements.
@@ -64,13 +64,18 @@ def filter_search_listing(params):
     - min_date_of_construction
     """
 
+    params = params_query_dict.copy()
+
     # TODO: This causes Bug #390!
     #       Doing an empty keyword search (click on the 'Search' button in the
     #       top right) will throw RuntimeError (dictionary changed size during
     #       iteration).
+    empty_params = []
     for key, val in params.items():
         if str(val) == '':
-            params.pop(key)
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
 
     result = Listing.objects.all()
 
@@ -200,7 +205,7 @@ def filter_search_listing(params):
     return result
 
 
-def filter_search_seeking(params):
+def filter_search_seeking(params_query_dict):
     """
     This function takes a dictionary of search parameters, and searches for 
     all seekings in the database that meet the requirements.
@@ -236,13 +241,17 @@ def filter_search_seeking(params):
     - max_age (derived from seeking.contact.date_of_birth)
     """
 
+    params = params_query_dict.copy()
     # TODO: This causes Bug #390!
     #       Doing an empty keyword search (click on the 'Search' button in the
     #       top right) will throw RuntimeError (dictionary changed size during
     #       iteration).
+    empty_params = []
     for key, val in params.items():
         if str(val) == '':
-            params.pop(key)
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
 
     result = Seeking.objects.all()
 
