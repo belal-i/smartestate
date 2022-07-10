@@ -98,22 +98,66 @@ function submitListingsSearch() {
 			for(i = 0; i < n; i++) {
 				// See templates/broker/list-listing.html
 				html += '<tr onclick="editInAdmin(\'listing\', '+data[i]['id']+');" class="broker-row">';
-				html += '<td>'+data[i]['id']+'</td>';
-				html += '<td>'+data[i]['listing_type']+'</td>';
-				html += '<td>' + getNiceDate(data[i]['date_available']) + '</td>';
-				if(data[i]['listing_type'] == 'rental') {
-					html += '<td>'+data[i]['rental_price']+'</td>';
-				} else if(data[i]['listing_type'] == 'for_sale') {
-					html += '<td>'+data[i]['for_sale_price']+'</td>';
+				try {
+					html += '<td>'+data[i]['id']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
 				}
-				html += '<td>'+data[i]['short_description']+'</td>';
-				html += '<td>' +
-					data[i]['apartment']['house']['real_estate']['address']['street'] + ', ' +
-					data[i]['apartment']['house']['real_estate']['address']['zip_code'] + ' ' +
-					data[i]['apartment']['house']['real_estate']['address']['city'] +
-					'</td>';
-				html += '<td>'+data[i]['apartment']['size_sq_m']+'m<sup>2</sup></td>';
-				html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
+
+				try {
+					html += '<td>'+data[i]['listing_type']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>' + getNiceDate(data[i]['date_available']) + '</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				if(data[i]['listing_type'] == 'rental') {
+					try {
+						html += '<td>'+data[i]['rental_price']+'</td>';
+					} catch(TypeError) {
+						html += '<td></td>';
+					}
+				} else if(data[i]['listing_type'] == 'for_sale') {
+					try {
+						html += '<td>'+data[i]['for_sale_price']+'</td>';
+					} catch(TypeError) {
+						html += '<td></td>';
+					}
+				}
+
+				try {
+					html += '<td>'+data[i]['short_description']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>' +
+						data[i]['apartment']['house']['real_estate']['address']['street'] + ', ' +
+						data[i]['apartment']['house']['real_estate']['address']['zip_code'] + ' ' +
+						data[i]['apartment']['house']['real_estate']['address']['city'] +
+						'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>'+data[i]['apartment']['size_sq_m']+'m<sup>2</sup></td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>'+data[i]['apartment']['number_of_rooms']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
 				html += '</tr>';
 			}
 			$("#listings-table-body").html(html);
@@ -137,20 +181,68 @@ function submitSeekingsSearch() {
 			for(i = 0; i < n; i++) {
 				// See templates/broker/list-seeking.html
 				html += '<tr onclick="editInAdmin(\'seeking\', '+data[i]['id']+');" class="broker-row">';
-				html += '<td>'+data[i]['id']+'</td>';
-				html += '<td>'+data[i]['seeking_type']+'</td>';
-				html += '<td>' + getNiceDate(data[i]['starting_date']) + '</td>';
-				if(data[i]['seeking_type'] == 'rental') {
-					html += '<td>'+data[i]['max_rent']+'</td>';
-				} else if(data[i]['seeking_type'] == 'for_sale') {
-					html += '<td>'+data[i]['max_purchase_price']+'</td>';
+				try {
+					html += '<td>'+data[i]['id']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
 				}
-				html += '<td>'+data[i]['min_number_of_rooms']+'</td>';
-				html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
-					data[i]['contact']['last_name'] + '</td>';
-				html += '<td>' + String(getAge(data[i]['contact']['date_of_birth'])) + '</td>';
-				html += '<td>'+data[i]['number_of_persons']+'</td>';
-				html += '<td>'+data[i]['occupation']+'</td>';
+
+				try {
+					html += '<td>'+data[i]['seeking_type']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>' + getNiceDate(data[i]['starting_date']) + '</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				if(data[i]['seeking_type'] == 'rental') {
+					try {
+						html += '<td>'+data[i]['max_rent']+'</td>';
+					} catch(TypeError) {
+						html += '<td></td>';
+					}
+				} else if(data[i]['seeking_type'] == 'for_sale') {
+					try {
+						html += '<td>'+data[i]['max_purchase_price']+'</td>';
+					} catch(TypeError) {
+						html += '<td></td>';
+					}
+				}
+				try {
+					html += '<td>'+data[i]['min_number_of_rooms']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>' + data[i]['contact']['first_name'] + ' ' + 
+						data[i]['contact']['last_name'] + '</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>' + String(getAge(data[i]['contact']['date_of_birth'])) + '</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>'+data[i]['number_of_persons']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
+				try {
+					html += '<td>'+data[i]['occupation']+'</td>';
+				} catch(TypeError) {
+					html += '<td></td>';
+				}
+
 				html += '</tr>';
 			}
 			$("#seekings-table-body").html(html);
