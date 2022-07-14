@@ -444,3 +444,80 @@ class TestSearch(TestCase):
         test_params.pop('max_age')
         test_search = filter_search_seeking(test_params)
         self.assertQuerysetEqual(test_search, test_query_set)
+
+    def test_filter_search_matching(self):
+
+        test_seeking = Seeking(
+            seeking_type="rental",
+            max_rent=1000,
+            max_purchase_price=250000,
+            min_number_of_rooms=3,
+            min_size_sq_m=50,
+            number_of_persons=3,
+            starting_date="2022-07-01",
+            ending_date="2022-10-01",
+            number_of_months=3,
+            must_be_furnished=True,
+            must_have_internet=True,
+            is_smoker=True,
+            has_pets=True,
+            # contact=test_contact,
+            pk=2
+        )
+        test_seeking.save()
+
+
+        test_real_estate = RealEstate()
+        test_real_estate.save()
+        test_house = House(date_of_construction="1970-01-01",
+            real_estate=test_real_estate)
+        test_house.save()
+        test_apartment = Apartment(
+            is_primary=True,
+            number_of_rooms=3,
+            size_sq_m=50,
+            has_internet=True,
+            is_furnished=True,
+            house=test_house
+        )
+        test_apartment.save()
+        test_listing = Listing(
+            listing_type="rental",
+            rental_price=1000,
+            security_deposit=3000,
+            date_available="2022-06-04",
+            minimum_months=6,
+            maximum_months=24,
+            number_of_people=3,
+            pets_ok=True,
+            apartment=test_apartment,
+            pk=3
+        )
+        test_listing.save()
+
+        test_matching = Matching(
+            listing=test_listing,
+            seeking=test_seeking,
+            pk=1
+        )
+        test_matching.save()
+
+        test_params = {
+            "listing_id": 3,
+            "seeking_id": 2,
+        }
+        test_query_set = Matching.objects.filter(pk=1)
+        test_search_result = filter_search_matching(test_params)
+        self.assertQuerysetEqual(test_query_set, test_search_result)
+
+        test_params.pop("listing_id")
+        test_search_result = filter_search_matching(test_params)
+        self.assertQuerysetEqual(test_query_set, test_search_result)
+
+        test_params = {
+            "listing_id": 2,
+            "seeking_id": 2,
+        }
+
+        test_search_result = filter_search_matching(test_params)
+        self.assertEqual(test_search_result.count(), 0)

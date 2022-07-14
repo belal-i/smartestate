@@ -387,5 +387,40 @@ def filter_search_seeking(params_query_dict):
     return result
 
 
-def filter_search_matching(params):
-    pass
+def filter_search_matching(params_query_dict):
+    """
+    This function takes a dictionary of search parameters, and searches for 
+    all matchings in the database that meet the requirements.
+
+    Unlinke the previous 2 functions, this function merely supports the 
+    parameters:
+
+    - listing_id
+    - seeking_id
+    """
+
+    params = params_query_dict.copy()
+    # TODO: This causes Bug #390! (This is probably solved now)
+    #       Doing an empty keyword search (click on the 'Search' button in the
+    #       top right) will throw RuntimeError (dictionary changed size during
+    #       iteration).
+    empty_params = []
+    for key, val in params.items():
+        if str(val) == '':
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
+
+    result = Matching.objects.all()
+
+    try:
+        result = result.filter(listing__pk = params['listing_id'])
+    except (KeyError, ValidationError):
+        pass
+
+    try:
+        result = result.filter(seeking__pk = params['seeking_id'])
+    except (KeyError, ValidationError):
+        pass
+
+    return result
