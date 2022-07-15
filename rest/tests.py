@@ -40,7 +40,7 @@ class RestSearch(TestCase):
         response = client.post('/rest/matchings/', {'listing_id': '20', 'seeking_id': '30'})
         content = json.loads(response.content.decode('utf8'))
 
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
         user.delete()
 

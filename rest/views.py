@@ -66,27 +66,23 @@ def matchings(request):
         """
         listing_id = request.data.get('listing_id', '1')
         seeking_id = request.data.get('seeking_id', '1')
-        # TODO: Refactor this like in the PATCH method below.
-        error_occurred = False
         try:
             listing = Listing.objects.get(pk=listing_id)
             seeking = Seeking.objects.get(pk=seeking_id)
         except ObjectDoesNotExist:
-            error_occurred = True
             error_response = {
-                'status': 'Bad request',
+                'status': 'Not found',
                 'message': 'Either the specified seeking or listing does not exist.',
             }
-
-        if error_occurred:
             return JsonResponse(error_response,
-                status=status.HTTP_400_BAD_REQUEST)
-        else:
-            matching = Matching(listing=listing, seeking=seeking)
-            matching.save()
+                status=status.HTTP_404_NOT_FOUND)
 
-            serializer = MatchingSerializer(matching)
-            return JsonResponse(serializer.data)
+        matching = Matching(listing=listing, seeking=seeking)
+        matching.save()
+
+        serializer = MatchingSerializer(matching)
+        return JsonResponse(serializer.data)
+
     elif request.method == 'PATCH':
 
         matching_id = request.data.get('id')
