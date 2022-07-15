@@ -19,7 +19,7 @@ from broker.models import *
 
 
 class RestSearch(TestCase):
-    def test_post_matchings(self):
+    def test_post_matching(self):
         listing = Listing(pk=2)
         seeking = Seeking(pk=3)
         listing.save()
@@ -41,5 +41,52 @@ class RestSearch(TestCase):
         content = json.loads(response.content.decode('utf8'))
 
         self.assertEqual(response.status_code, 400)
+
+        user.delete()
+
+    def test_patch_matching(self):
+        listing = Listing(pk=2)
+        seeking = Seeking(pk=3)
+        listing.save()
+        seeking.save()
+        matching = Matching(
+            listing=listing,
+            seeking=seeking,
+            pk=4,
+            status="possible",
+            note="some note"
+        )
+        matching.save()
+
+        user = User.objects.create_user('testuser')
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        request_data = {
+            "id": 4,
+            "status": "pending",
+            "note": "some other note"
+        }
+        response = client.patch('/rest/matchings/', request_data)
+        content = json.loads(response.content.decode('utf8'))
+
+
+        self.assertEqual(content["status"], "pending")
+        self.assertEqual(content["note"], "some other note")
+
+        test_matching = Matching.objects.get(pk=4)
+        self.assertEqual(test_matching.status, "pending")
+        self.assertEqual(test_matching.note, "some other note")
+
+        request_data = {
+            "id": 44,
+            "status": "pending",
+            "note": "some other note"
+        }
+        response = client.patch('/rest/matchings/', request_data)
+        content = json.loads(response.content.decode('utf8'))
+        self.assertEqual(response.status_code, 404)
+
 
         user.delete()

@@ -51,12 +51,12 @@ def seekings(request):
         return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PATCH'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated])
 def matchings(request):
     if request.method == 'GET':
-        matchings = Matching.objects.all()
+        matchings = filter_search_matching(request.GET)
         serializer = MatchingSerializer(matchings, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
@@ -66,6 +66,7 @@ def matchings(request):
         """
         listing_id = request.data.get('listing_id', '1')
         seeking_id = request.data.get('seeking_id', '1')
+        # TODO: Refactor this like in the PATCH method below.
         error_occurred = False
         try:
             listing = Listing.objects.get(pk=listing_id)
@@ -86,3 +87,45 @@ def matchings(request):
 
             serializer = MatchingSerializer(matching)
             return JsonResponse(serializer.data)
+    elif request.method == 'PATCH':
+
+        matching_id = request.data.get('id')
+
+        try:
+            matching = Matching.objects.get(pk=matching_id)
+        except ObjectDoesNotExist:
+            error_response = {
+                "status": "Not found",
+                "message": "The specified matching does not exist.",
+            }
+            return JsonResponse(error_response,
+                status=status.HTTP_404_NOT_FOUND)
+
+        """
+        See Feature #399: At the moment, we only really care about the status,
+        but we would probably also want to change the listing_id and
+        seeking_id via PATCH request soon.
+        """
+        try:
+            matching.status = request.data.get('status')
+        except:
+            error_response = {
+                "status": "Bad request",
+                "message": "Could not set the matching's status.",
+            }
+            return JsonResponse(error_response,
+                status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            matching.note = request.data.get('note')
+        except:
+            error_response = {
+                "status": "Bad request",
+                "message": "Could not set the matching's note.",
+            }
+            return JsonResponse(error_response,
+                status=status.HTTP_400_BAD_REQUEST)
+
+        matching.save()
+        serializer = MatchingSerializer(matching)
+        return JsonResponse(serializer.data)
