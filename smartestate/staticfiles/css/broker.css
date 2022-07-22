@@ -7,7 +7,7 @@
 .suggestions-row {
 	display: none;
 }
-/* TODO */
+/* TODO: See Feature #403. */
 .ajax-response {
 	display: none;
 }
