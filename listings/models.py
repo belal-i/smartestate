@@ -49,8 +49,8 @@ class Listing(models.Model):
         default='A beautiful new vacancy',
         help_text='A short description of your listing')
     long_description = models.TextField(max_length=1024, default='',
-         null=True, blank=True,
-         help_text='A detailed description of your listing')
+        null=True, blank=True,
+        help_text='A detailed description of your listing')
     date_available = models.DateField(default=date.today)
     minimum_months = models.PositiveIntegerField(default=3,
         null=True, blank=True,
