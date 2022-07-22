@@ -77,6 +77,7 @@ def matchings(request):
             return JsonResponse(error_response,
                 status=status.HTTP_404_NOT_FOUND)
 
+        # TODO: See Feature #401. When posting a new matching, also set the status.
         matching = Matching(listing=listing, seeking=seeking)
         matching.save()
 

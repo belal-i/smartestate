@@ -7,3 +7,7 @@
 .suggestions-row {
 	display: none;
 }
+/* TODO */
+.ajax-response {
+	display: none;
+}
