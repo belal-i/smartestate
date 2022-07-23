@@ -60,23 +60,18 @@
 			    			'max_for_sale_price': '{{ seeking.max_purchase_price }}',
 			    		{% endif %}
 
-			    		{% comment %}
-			    		// Not going to do security deposit for now.
-					// max_security_deposit
-			    		{% endcomment %}
 
 			    		{% comment %}
-			    		// Not going to do minimum down payment for now.
-					// max_minimum_down_payment
-			    		{% endcomment %}
+					Here, we are interested in all listings that are available on or before
+					the date on which the seeker wants to start living in the place.
 
-			    		{% comment %}
-			    		TODO: Figure out the business logic around starting and ending dates later.
-					earliest_date_available
-					latest_date_available
-					minimum_months
-					maximum_months
+					That means listing.date_available should be lte seeking.starting_date.
+
+					Also, we won't filter by seeking.number_of_months, because it is unclear from
+					that field, whether the seeker wants the apartment for at least that many months,
+					or up to that many months.
 			    		{% endcomment %}
+					'latest_date_available': '{{ seeking.starting_date|date:"Y-m-d" }}',
 
 
 			    		{% comment %}

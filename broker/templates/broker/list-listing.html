@@ -62,17 +62,28 @@
 			    		See Feature #368
 			    		See Feature #383
 			    		{% endcomment %}
-			    		'max_number_of_persons': ' {{ listing.number_of_people }}',
+					'max_number_of_persons': '{{ listing.number_of_people }}',
 
 			    		{% comment %}
-			    		// TODO: Figure out the business logic around starting and ending date
-					// min_starting_date
-					// max_starting_date
-					// min_ending_date
-					// max_ending_date
-					// min_number_of_months
-					// max_number_of_months
+					We're interested here in all seekings where the seeking's start date
+					is after the date on which the listing becomes available.
 			    		{% endcomment %}
+					'min_starting_date': '{{ listing.date_available|date:"Y-m-d" }}',
+
+
+
+					{% comment %}
+					TODO: See Feature #408. To avoid unnecessary 'false negatives',
+					      new listings should not get default values for these two fields,
+					      as users would be likely to neglect them in the first place.
+					{% endcomment %}
+					{% if listing.minimum_months %}
+						'min_number_of_months': '{{ listing.minimum_months }}',
+					{% endif %}
+					{% if listing.maximum_months %}
+						'max_number_of_months': '{{ listing.maximum_months }}',
+					{% endif %}
+
 
 			    		{% if listing.apartment.is_furnished is False %}
 			    			'must_be_furnished': 'False',
