@@ -651,7 +651,7 @@ function patchMatching(matchingId, matchingStatus) {
 		success : function(response) {
 			alert("Successfully updated matching!");
 			/*
-			 * TODO
+			// TODO: See Feature #403.
 			$("#patch-matching-response-"+matchingId).css({"display": "inline"});
 			$("#patch-matching-response-"+matchingId).html("Successfully updated matching!");
 			 * */
@@ -659,7 +659,7 @@ function patchMatching(matchingId, matchingStatus) {
 		error : function(response) {
 			alert("Failed to update matching!");
 			/*
-			 * TODO
+			// TODO: See Feature #403.
 			$("#patch-matching-response-"+matchingId).css({"display": "inline"});
 			$("#patch-matching-response-"+matchingId).html(JSON.stringify(response));
 			 * */
