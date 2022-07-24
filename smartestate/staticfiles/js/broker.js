@@ -347,11 +347,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 						success : function(matchingData) {
 							if(matchingData.length > 0) {
 								/*
-								 * TODO: It is possible for there to be more than one matching with the
-								 *       specified listing_id and seeking_id. This is tolerable, but not ideal.
-								 *       In the future, we should do something in the backend that enforces some
-								 *       way for there to be always no more than exactly 1 matching for any given
-								 *       seeking and listing.
+								 ' TODO: See Feature #413.
 								 * */
 								currentMatching = matchingData[0];
 							}
@@ -470,11 +466,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 						success : function(matchingData) {
 							if(matchingData.length > 0) {
 								/*
-								 * TODO: It is possible for there to be more than one matching with the
-								 *       specified listing_id and seeking_id. This is tolerable, but not ideal.
-								 *       In the future, we should do something in the backend that enforces some
-								 *       way for there to be always no more than exactly 1 matching for any given
-								 *       seeking and listing.
+								 ' TODO: See Feature #413.
 								 * */
 								currentMatching = matchingData[0];
 							}
