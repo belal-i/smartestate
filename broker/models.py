@@ -95,6 +95,9 @@ class Seeking(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(100)])
     min_size_sq_m = models.IntegerField(null=True, blank=True, default=20,
         validators=[MinValueValidator(1), MaxValueValidator(500)])
+
+    # TODO: See Feature #383
+    # TODO: See Feature #368
     number_of_persons = models.IntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(12)])
 

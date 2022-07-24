@@ -49,8 +49,8 @@ class Listing(models.Model):
         default='A beautiful new vacancy',
         help_text='A short description of your listing')
     long_description = models.TextField(max_length=1024, default='',
-         null=True, blank=True,
-         help_text='A detailed description of your listing')
+        null=True, blank=True,
+        help_text='A detailed description of your listing')
     date_available = models.DateField(default=date.today)
     minimum_months = models.PositiveIntegerField(default=3,
         null=True, blank=True,
@@ -58,9 +58,12 @@ class Listing(models.Model):
     maximum_months = models.PositiveIntegerField(default=60,
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(128)])
+
+    # TODO: See Feature #383.
     number_of_people = models.PositiveIntegerField(default=1,
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(20)])
+
     limitations = models.CharField(max_length=256, null=True, blank=True,
         default='', help_text='Limiting factors to qualify for approval \
             (no smoking, must be full-time employee, etc.)')

@@ -26,7 +26,7 @@ def keyword_search_seeking(keyword):
         Q(notes__icontains = keyword)
     )
 
-def filter_search_listing(params):
+def filter_search_listing(params_query_dict):
     """
     This function takes a dictionary of search parameters, and searches for 
     all listings in the database that meet the requirements.
@@ -64,7 +64,17 @@ def filter_search_listing(params):
     - min_date_of_construction
     """
 
+    params = params_query_dict.copy()
+
+    empty_params = []
+    for key, val in params.items():
+        if str(val) == '':
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
+
     result = Listing.objects.all()
+
     try:
         result = result.filter(listing_type=params['listing_type'])
     except (KeyError, ValidationError):
@@ -191,7 +201,7 @@ def filter_search_listing(params):
     return result
 
 
-def filter_search_seeking(params):
+def filter_search_seeking(params_query_dict):
     """
     This function takes a dictionary of search parameters, and searches for 
     all seekings in the database that meet the requirements.
@@ -227,7 +237,17 @@ def filter_search_seeking(params):
     - max_age (derived from seeking.contact.date_of_birth)
     """
 
+    params = params_query_dict.copy()
+
+    empty_params = []
+    for key, val in params.items():
+        if str(val) == '':
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
+
     result = Seeking.objects.all()
+
     try:
         result = result.filter(seeking_type=params['seeking_type'])
     except (KeyError, ValidationError):
@@ -360,5 +380,37 @@ def filter_search_seeking(params):
     return result
 
 
-def filter_search_matching(params):
-    pass
+def filter_search_matching(params_query_dict):
+    """
+    This function takes a dictionary of search parameters, and searches for 
+    all matchings in the database that meet the requirements.
+
+    Unlinke the previous 2 functions, this function merely supports the 
+    parameters:
+
+    - listing_id
+    - seeking_id
+    """
+
+    params = params_query_dict.copy()
+
+    empty_params = []
+    for key, val in params.items():
+        if str(val) == '':
+            empty_params.append(key)
+    for param in empty_params:
+        params.pop(param)
+
+    result = Matching.objects.all()
+
+    try:
+        result = result.filter(listing__pk = params['listing_id'])
+    except (KeyError, ValidationError):
+        pass
+
+    try:
+        result = result.filter(seeking__pk = params['seeking_id'])
+    except (KeyError, ValidationError):
+        pass
+
+    return result

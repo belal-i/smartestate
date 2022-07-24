@@ -13,11 +13,86 @@
 				<th scope="col">Tenant/Buyer Age</th>
 				<th scope="col">Number of Persons</th>
 				<th scope="col">Occupation</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody id="seekings-table-body">
 		{% for seeking in seekings %}
-			<tr onclick="editInAdmin('seeking', {{ seeking.id }});" class="broker-row">
+			<tr onclick="toggleSuggestions(
+				{% comment %}
+				This function will trigger an Ajax call, which sends a request to the Rest API.
+				Here we build the JS-Object that the client will send to the Rest Server at /rest/listings/.
+				The endpoint there will call broker.utils.filter_search_listing, which supports these fields:
+					- listing_type
+					- max_rental_price
+					- min_rental_price
+					- max_security_deposit
+					- min_security_deposit
+					- max_for_sale_price
+					- min_for_sale_price
+					- min_minimum_down_payment
+					- max_minimum_down_payment
+					- earliest_date_available
+					- latest_date_available
+					- minimum_months
+					- maximum_months
+					- max_number_of_people
+					- min_number_of_people
+					- pets_ok
+					- is_primary
+					- max_number_of_rooms
+					- min_number_of_rooms
+					- max_size_sq_m
+					- min_size_sq_m
+					- has_internet
+					- is_furnished
+					- max_date_of_construction
+					- min_date_of_construction
+				{% endcomment %}
+				'seeking',
+				{{ seeking.id }},
+				{
+			    		'listing_type': '{{ seeking.seeking_type }}',
+
+			    		{% if seeking.seeking_type == 'rental' %}
+			    			'max_rental_price': '{{ seeking.max_rent }}',
+			    		{% elif seeking.seeking_type == 'for_sale' %}
+			    			'max_for_sale_price': '{{ seeking.max_purchase_price }}',
+			    		{% endif %}
+
+
+			    		{% comment %}
+					Here, we are interested in all listings that are available on or before
+					the date on which the seeker wants to start living in the place.
+
+					That means listing.date_available should be lte seeking.starting_date.
+
+					Also, we won't filter by seeking.number_of_months, because it is unclear from
+					that field, whether the seeker wants the apartment for at least that many months,
+					or up to that many months.
+			    		{% endcomment %}
+					'latest_date_available': '{{ seeking.starting_date|date:"Y-m-d" }}',
+
+
+			    		{% comment %}
+					TODO: See Feature #383
+			    		{% endcomment %}
+			    		'min_number_of_people': '{{ seeking.number_of_persons }}',
+
+			    		'min_number_of_rooms': '{{ seeking.min_number_of_rooms }}',
+					'min_size_sq_m': '{{ seeking.min_size_sq_m }}',
+			    		{% if seeking.has_pets %}
+						'pets_ok': 'True',
+			    		{% endif %}
+			    		{% if seeking.must_have_internet %}
+						'has_internet': 'True',
+			    		{% endif %}
+			    		{% if seeking.must_be_furnished %}
+						'is_furnished': 'True',
+			    		{% endif %}
+				}
+				);" class="broker-row"
+			>
 				<td>{{ seeking.id }}</td>
 				<td>{{ seeking.seeking_type }}</td>
 				<td>{{ seeking.starting_date }}</td>
@@ -32,6 +107,9 @@
 				<td>{{ seeking.contact.get_age }}</td>
 				<td>{{ seeking.number_of_persons }}</td>
 				<td>{{ seeking.occupation }}</td>
+				<td><a href="#" onclick="editInAdmin('seeking', {{ seeking.id }})">Edit Seeking</a></td>
+			</tr>
+			<tr id="suggestions-row-seeking{{ seeking.id }}" class="suggestions-row">
 			</tr>
 		{% endfor %}
 		</tbody>
