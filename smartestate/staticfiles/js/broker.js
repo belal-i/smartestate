@@ -437,6 +437,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 							'document.getElementById(\'matching-' + currentMatching['id'] +
 								'-status\').value)">';
 
+						// TODO: See Feature #403.
 						html += '<span class="ajax-reponse" id="patch-matching-reponse-'+currentMatching['id']+
 							'"></span>';
 					}
