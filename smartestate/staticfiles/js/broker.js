@@ -413,7 +413,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 						 * */
 						html += '<span>New matching</span>';
 						html += '<input type="button" value="Create new matching" ' +
-							'onclick="postMatching('+id+', '+suggestionsData[i]['id']+')">'
+							'onclick="postMatching('+id+', '+suggestionsData[i]['id']+')">';
 						// TODO: See Feature #403.
 						html += '<span class="ajax-reponse" ' +
 							'id="post-matching-reponse-'+id+'-'+suggestionsData[i]['id']+'"></span>';
