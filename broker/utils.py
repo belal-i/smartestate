@@ -66,10 +66,6 @@ def filter_search_listing(params_query_dict):
 
     params = params_query_dict.copy()
 
-    # TODO: This causes Bug #390!
-    #       Doing an empty keyword search (click on the 'Search' button in the
-    #       top right) will throw RuntimeError (dictionary changed size during
-    #       iteration).
     empty_params = []
     for key, val in params.items():
         if str(val) == '':
@@ -242,10 +238,7 @@ def filter_search_seeking(params_query_dict):
     """
 
     params = params_query_dict.copy()
-    # TODO: This causes Bug #390!
-    #       Doing an empty keyword search (click on the 'Search' button in the
-    #       top right) will throw RuntimeError (dictionary changed size during
-    #       iteration).
+
     empty_params = []
     for key, val in params.items():
         if str(val) == '':
@@ -400,10 +393,7 @@ def filter_search_matching(params_query_dict):
     """
 
     params = params_query_dict.copy()
-    # TODO: This causes Bug #390! (This is probably solved now)
-    #       Doing an empty keyword search (click on the 'Search' button in the
-    #       top right) will throw RuntimeError (dictionary changed size during
-    #       iteration).
+
     empty_params = []
     for key, val in params.items():
         if str(val) == '':
