@@ -549,6 +549,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 						html += '<span>New matching</span>';
 						html += '<input type="button" value="Create new matching" ' +
 							'onclick="postMatching('+suggestionsData[i]['id']+', '+id+')">'
+						// TODO: See Feature #403.
 						html += '<span class="ajax-reponse" ' +
 							'id="post-matching-reponse-'+suggestionsData[i]['id']+'-'+id+'"></span>';
 					} else {
@@ -571,6 +572,7 @@ function toggleSuggestions(rowType, id, queryObject) {
 							'document.getElementById(\'matching-' + currentMatching['id'] +
 								'-status\').value)">';
 
+						// TODO: See Feature #403.
 						html += '<span class="ajax-reponse" id="patch-matching-reponse-'+currentMatching['id']+
 							'"></span>';
 					}
