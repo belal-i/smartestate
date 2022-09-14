@@ -130,6 +130,7 @@ class Matching(models.Model):
         null=True, blank=True)
     seeking = models.ForeignKey('Seeking', on_delete=models.CASCADE,
         null=True, blank=True)
+    # TODO: Figure out how to translate these choices.
     STATUS_CHOICES = (
         ('possible','POSSIBLE'),
         ('pending','PENDING'),
