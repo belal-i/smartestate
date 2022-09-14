@@ -27,6 +27,7 @@ class Listing(models.Model):
     # TODO: See Feature #343. Make this ManyToMany?
     contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
+    # TODO: Figure out how to translate these choices.
     LISTING_TYPE_CHOICES = (
         ('rental','RENTAL'),
         ('for_sale','FOR_SALE'),

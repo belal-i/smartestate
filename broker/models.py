@@ -74,6 +74,7 @@ class Company(models.Model):
         return self.name
 
 class Seeking(models.Model):
+    # TODO: Figure out how to translate these choices.
     SEEKING_TYPE_CHOICES = (
         ('rental','RENTAL'),
         ('for_sale','FOR_SALE'),
