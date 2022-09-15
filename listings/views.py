@@ -1,13 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.db.models import Q
+from django.utils import translation
 
-from .models import *
+from smartestate.settings import *
+from smartestate.functions import tuple_list_has_key
 from config.models import Config
 from broker.utils import keyword_search_listing, filter_search_listing
+from .models import *
 # Create your views here.
 
 def list_rental(request):
+    language = request.GET.get('language')
+    if language is not None and tuple_list_has_key(LANGUAGES, language):
+        translation.activate(language)
 
     rental_listings = Listing.objects.filter(listing_type='rental')
     context = {
@@ -16,6 +22,9 @@ def list_rental(request):
     return render(request, 'listings/list-rental.html', context)
 
 def list_for_sale(request):
+    language = request.GET.get('language')
+    if language is not None and tuple_list_has_key(LANGUAGES, language):
+        translation.activate(language)
 
     for_sale_listings = Listing.objects.filter(listing_type='for_sale')
     context = {
@@ -24,9 +33,15 @@ def list_for_sale(request):
     return render(request, 'listings/list-for-sale.html', context)
 
 def list_redirect(request):
+    language = request.GET.get('language')
+    if language is not None and tuple_list_has_key(LANGUAGES, language):
+        translation.activate(language)
     return redirect('/')
 
 def detail(request, listing_id):
+    language = request.GET.get('language')
+    if language is not None and tuple_list_has_key(LANGUAGES, language):
+        translation.activate(language)
 
     listing = get_object_or_404(Listing, pk=listing_id)
     context = {
@@ -35,6 +50,9 @@ def detail(request, listing_id):
     return render(request, 'listings/detail.html', context)
 
 def search_results(request):
+    language = request.GET.get('language')
+    if language is not None and tuple_list_has_key(LANGUAGES, language):
+        translation.activate(language)
 
     if request.GET.get('search', '') != '':
         search_results = keyword_search_listing(request.GET['search'])
