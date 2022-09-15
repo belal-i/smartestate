@@ -41,3 +41,10 @@ p, span {
 .hidden-form-fields {
 	display: none;
 }
+
+.language-flag {
+	margin: 4px;
+}
+.language-flag:hover {
+	cursor: pointer;
+}

@@ -366,3 +366,15 @@ $(".form-toggle-field").change(function() {
 	}
 
 });
+
+$(".language-flag").click(function() {
+	var id = $(this).attr('id');
+	var language = id.split('-')[2];
+	var url = document.URL;
+	if (url.indexOf('?') > -1)
+		url += '&';
+	else
+		url += '?';
+	url += 'language=' + language;
+	window.location.replace(url);
+});
