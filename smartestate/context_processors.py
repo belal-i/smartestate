@@ -1,3 +1,4 @@
+from django.utils import translation
 from .settings import LANGUAGES
 
 def languages(request):
