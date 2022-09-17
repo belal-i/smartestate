@@ -88,6 +88,7 @@ TEMPLATES = [
                 'pages.context_processors.all_pages',
                 'broker.context_processors.listing_search_form',
                 'smartestate.context_processors.languages',
+                'smartestate.context_processors.current_language',
             ],
         },
     },

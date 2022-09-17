@@ -2,10 +2,10 @@ from django.utils import translation
 from .settings import LANGUAGES
 
 def languages(request):
-    """
-    languages = []
-    for lang in LANGUAGES:
-        languages.append(lang[0])
-    return {'languages': languages}
-    """
     return {'languages': LANGUAGES}
+
+def current_language(request):
+    current_language = translation.get_language()
+    if current_language == "en-us":
+        current_language = "en"
+    return {'current_language': current_language}
