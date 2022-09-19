@@ -34,14 +34,42 @@
 		TODO: See Feature #303.
 		{% endcomment %}
 		{% block form_title %}
-		<h3 class="border-bottom mb-5">Search results</h3>
+		{% if current_language == "de" %}
+			<h3 class="border-bottom mb-5">Suchergebnisse</h3>
+		{% elif current_language == "fr" %}
+			<h3 class="border-bottom mb-5">Résultats de recherche</h3>
+		{% elif current_language == "es" %}
+			<h3 class="border-bottom mb-5">Resultados de la búsqueda</h3>
+		{% elif current_language == "it" %}
+			<h3 class="border-bottom mb-5">Risultati di ricerca</h3>
+		{% else %}
+			<h3 class="border-bottom mb-5">Search results</h3>
+		{% endif %}
 		{% endblock %}
 		<form action="{% url 'listings:search_results' %}" method="get">
 			{% block listings_type_toggle %}
 			<div class="form-group form-row">
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
-					{{ listing_search_form.listing_type.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+						{{ listing_search_form.listing_type.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+						{{ listing_search_form.listing_type.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+						{{ listing_search_form.listing_type.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+						{{ listing_search_form.listing_type.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">
+						{{ listing_search_form.listing_type.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.listing_type class+="form-control" %}
 				</div>
@@ -50,23 +78,78 @@
 			<div class="form-group form-row">
 
 				{% block listings_type_price %}
-				<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
-					{{ listing_search_form.max_rental_price.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+						{{ listing_search_form.max_rental_price.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+						{{ listing_search_form.max_rental_price.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+						{{ listing_search_form.max_rental_price.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+						{{ listing_search_form.max_rental_price.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label rental-form-fields" for="{{ listing_search_form.max_rental_price.auto_id }}">
+						{{ listing_search_form.max_rental_price.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2 rental-form-fields">
 					{% render_field listing_search_form.max_rental_price class+="form-control" %}
 				</div>
-				<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
-					{{ listing_search_form.max_for_sale_price.label }}
-				</label>
+
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+						{{ listing_search_form.max_for_sale_price.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+						{{ listing_search_form.max_for_sale_price.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+						{{ listing_search_form.max_for_sale_price.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+						{{ listing_search_form.max_for_sale_price.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label for-sale-form-fields hidden-form-fields" for="{{ listing_search_form.max_for_sale_price.auto_id }}">
+						{{ listing_search_form.max_for_sale_price.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2 for-sale-form-fields hidden-form-fields">
 					{% render_field listing_search_form.max_for_sale_price class+="form-control" %}
 				</div>
 				{% endblock %}
 
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
-					{{ listing_search_form.min_number_of_people.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+						{{ listing_search_form.min_number_of_people.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+						{{ listing_search_form.min_number_of_people.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+						{{ listing_search_form.min_number_of_people.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+						{{ listing_search_form.min_number_of_people.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_people.auto_id }}">
+						{{ listing_search_form.min_number_of_people.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.min_number_of_people class+="form-control" %}
 				</div>
@@ -74,49 +157,183 @@
 			<div class="form-group form-row">
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
-					{{ listing_search_form.min_number_of_rooms.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+						{{ listing_search_form.min_number_of_rooms.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+						{{ listing_search_form.min_number_of_rooms.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+						{{ listing_search_form.min_number_of_rooms.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+						{{ listing_search_form.min_number_of_rooms.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_number_of_rooms.auto_id }}">
+						{{ listing_search_form.min_number_of_rooms.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.min_number_of_rooms class+="form-control" %}
 				</div>
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
-					{{ listing_search_form.min_size_sq_m.label }}
-				</label>
+
+
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+						{{ listing_search_form.min_size_sq_m.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+						{{ listing_search_form.min_size_sq_m.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+						{{ listing_search_form.min_size_sq_m.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+						{{ listing_search_form.min_size_sq_m.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.min_size_sq_m.auto_id }}">
+						{{ listing_search_form.min_size_sq_m.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.min_size_sq_m class+="form-control" %}
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
-					{{ listing_search_form.earliest_date_available.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+						{{ listing_search_form.earliest_date_available.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+						{{ listing_search_form.earliest_date_available.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+						{{ listing_search_form.earliest_date_available.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+						{{ listing_search_form.earliest_date_available.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.earliest_date_available.auto_id }}">
+						{{ listing_search_form.earliest_date_available.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.earliest_date_available class+="form-control" %}
 				</div>
-				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
-					{{ listing_search_form.minimum_months.label }}
-				</label>
+
+
+				{% if current_language == "de" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+						{{ listing_search_form.minimum_months.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+						{{ listing_search_form.minimum_months.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+						{{ listing_search_form.minimum_months.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+						{{ listing_search_form.minimum_months.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-2 col-form-label" for="{{ listing_search_form.minimum_months.auto_id }}">
+						{{ listing_search_form.minimum_months.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-2">
 					{% render_field listing_search_form.minimum_months class+="form-control" %}
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
-					{{ listing_search_form.is_furnished.label }}
-				</label>
+				{% if current_language == "de" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+						{{ listing_search_form.is_furnished.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+						{{ listing_search_form.is_furnished.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+						{{ listing_search_form.is_furnished.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+						{{ listing_search_form.is_furnished.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.is_furnished.auto_id }}">
+						{{ listing_search_form.is_furnished.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-3">
 					{% render_field listing_search_form.is_furnished class+="form-control" %}
 				</div>
-				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
-					{{ listing_search_form.pets_ok.label }}
-				</label>
+
+
+				{% if current_language == "de" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+						{{ listing_search_form.pets_ok.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+						{{ listing_search_form.pets_ok.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+						{{ listing_search_form.pets_ok.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+						{{ listing_search_form.pets_ok.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.pets_ok.auto_id }}">
+						{{ listing_search_form.pets_ok.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-3">
 					{% render_field listing_search_form.pets_ok class+="form-control" %}
 				</div>
-				<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
-					{{ listing_search_form.has_internet.label }}
-				</label>
+
+
+				{% if current_language == "de" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+						{{ listing_search_form.has_internet.label.de }}
+					</label>
+				{% elif current_language == "fr" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+						{{ listing_search_form.has_internet.label.fr }}
+					</label>
+				{% elif current_language == "es" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+						{{ listing_search_form.has_internet.label.es }}
+					</label>
+				{% elif current_language == "it" %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+						{{ listing_search_form.has_internet.label.it }}
+					</label>
+				{% else %}
+					<label class="col-sm-1 col-form-label" for="{{ listing_search_form.has_internet.auto_id }}">
+						{{ listing_search_form.has_internet.label.en }}
+					</label>
+				{% endif %}
 				<div class="col-sm-3">
 					{% render_field listing_search_form.has_internet class+="form-control" %}
 				</div>
@@ -125,7 +342,17 @@
 				<label class="col-sm-2 col-form-label" for="submit-filter-search">
 				</label>
 				<div class="col-sm-7">
+				{% if current_language == "de" %}
+					<input type="submit" value="Suchen" id="submit-filter-search" class="form-control">
+				{% elif current_language == "fr" %}
+					<input type="submit" value="Chercher" id="submit-filter-search" class="form-control">
+				{% elif current_language == "es" %}
+					<input type="submit" value="Buscar" id="submit-filter-search" class="form-control">
+				{% elif current_language == "it" %}
+					<input type="submit" value="Cercare" id="submit-filter-search" class="form-control">
+				{% else %}
 					<input type="submit" value="Search" id="submit-filter-search" class="form-control">
+				{% endif %}
 				</div>
 			</div>
 		</form>

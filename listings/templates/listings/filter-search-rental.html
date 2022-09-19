@@ -5,16 +5,44 @@
 TODO: See Feature #303.
 {% endcomment %}
 {% block form_title %}
-<h3 class="border-bottom mb-5">Rental listings</h3>
+{% if current_language == "de" %}
+	<h3 class="border-bottom mb-5">Vermietangebote</h3>
+{% elif current_language == "fr" %}
+	<h3 class="border-bottom mb-5">Offres de location</h3>
+{% elif current_language == "es" %}
+	<h3 class="border-bottom mb-5">Ofertas de alquiler</h3>
+{% elif current_language == "it" %}
+	<h3 class="border-bottom mb-5">Offerte di noleggio</h3>
+{% else %}
+	<h3 class="border-bottom mb-5">Rental listings</h3>
+{% endif %}
 {% endblock %}
 
 {% block listings_type_toggle %}
 {% endblock %}
 
 {% block listings_type_price %}
-<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
-	{{ listing_search_form.max_rental_price.label }}
-</label>
+{% if current_language == "de" %}
+	<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
+		{{ listing_search_form.max_rental_price.label.de }}
+	</label>
+{% elif current_language == "fr" %}
+	<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
+		{{ listing_search_form.max_rental_price.label.fr }}
+	</label>
+{% elif current_language == "es" %}
+	<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
+		{{ listing_search_form.max_rental_price.label.es }}
+	</label>
+{% elif current_language == "it" %}
+	<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
+		{{ listing_search_form.max_rental_price.label.it }}
+	</label>
+{% else %}
+	<label class="col-sm-2 col-form-label" for="{{ listing_search_form.max_rental_price.auto_id }}">
+		{{ listing_search_form.max_rental_price.label.en }}
+	</label>
+{% endif %}
 <div class="col-sm-2">
 	{% render_field listing_search_form.max_rental_price class+="form-control" %}
 </div>

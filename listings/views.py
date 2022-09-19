@@ -50,6 +50,7 @@ def detail(request, listing_id):
     return render(request, 'listings/detail.html', context)
 
 def search_results(request):
+    # TODO: It seems we sometimes lose the language here?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
