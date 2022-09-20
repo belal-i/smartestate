@@ -9,9 +9,18 @@ from .models import Page
 # Create your views here.
 
 def single_page(request, page_name):
+    # TODO: How to make it so that this does not need to be
+    #       in every view?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
+        request.session['language'] = language
+    else:
+        try:
+            translation.activate(request.session['language'])
+        except KeyError:
+            translation.activate(translation.get_language())
+
     # TODO: Maybe deal with this a little more gracefully, also,
     #       see Feature #340.
     try:

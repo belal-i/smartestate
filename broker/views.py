@@ -13,9 +13,19 @@ from .forms import ListingSearchForm, SeekingSearchForm
 # Create your views here.
 
 def start(request):
+    # TODO: How to make it so that this does not need to be
+    #       in every view?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
+        request.session['language'] = language
+    else:
+        try:
+            translation.activate(request.session['language'])
+        except KeyError:
+            translation.activate(translation.get_language())
+
+
     if not request.user.is_authenticated:
                                        # Instead of /admin/, maybe do something like
                                        # settings.LOGIN_URL, but right now it does
@@ -38,9 +48,18 @@ def start(request):
     return render(request, 'broker/start.html', context)
 
 def listings(request):
+    # TODO: How to make it so that this does not need to be
+    #       in every view?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
+        request.session['language'] = language
+    else:
+        try:
+            translation.activate(request.session['language'])
+        except KeyError:
+            translation.activate(translation.get_language())
+
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % ('/admin/', request.path))
     listings = Listing.objects.all()
@@ -50,9 +69,18 @@ def listings(request):
     )
 
 def seekings(request):
+    # TODO: How to make it so that this does not need to be
+    #       in every view?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
+        request.session['language'] = language
+    else:
+        try:
+            translation.activate(request.session['language'])
+        except KeyError:
+            translation.activate(translation.get_language())
+
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % ('/admin/', request.path))
     seekings = Seeking.objects.all()
@@ -62,9 +90,18 @@ def seekings(request):
     )
 
 def matchings(request):
+    # TODO: How to make it so that this does not need to be
+    #       in every view?
     language = request.GET.get('language')
     if language is not None and tuple_list_has_key(LANGUAGES, language):
         translation.activate(language)
+        request.session['language'] = language
+    else:
+        try:
+            translation.activate(request.session['language'])
+        except KeyError:
+            translation.activate(translation.get_language())
+
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % ('/admin/', request.path))
     matchings = Matching.objects.all()
