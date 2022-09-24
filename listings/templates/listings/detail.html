@@ -1,5 +1,6 @@
 {% extends "smartestate/base.html" %}
 
+{% load i18n %}
 {% load humanize %}
 
 {% block title %}
@@ -76,112 +77,115 @@ Details
 <div class="shadow p-3 mb-5 bg-light rounded detail-long">
 {% if listing.listing_type == 'rental' %}
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Available on</div>
-		<div class="col-9 detail-text">{{ listing.date_available }} for {{ listing.minimum_months }}-{{ listing.maximum_months }} months</div>
+		<div class="col-3 detail-text">{% translate "Available on" %}</div>
+		<div class="col-9 detail-text">{{ listing.date_available }} {% translate "for" %} {{ listing.minimum_months }}-{{ listing.maximum_months }} {% translate "months" %}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Monthly rent</div>
+		<div class="col-3 detail-text">{% translate "Monthly rent" %}</div>
 		<div class="col-9 detail-text"><p>{{ listing.rental_price|intcomma }}</p><p>{{ listing.info_about_rental_price }}</p></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Security deposit</div>
+		<div class="col-3 detail-text">{% translate "Security deposit" %}</div>
 		<div class="col-9 detail-text">{{ listing.security_deposit|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Size</div>
+		<div class="col-3 detail-text">{% translate "Size" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Listing type</div>
+		{% comment %}
+		TODO: See Defect #455: This translates very awkwardly into French, Spanish and Italian.
+		{% endcomment %}
+		<div class="col-3 detail-text">{% translate "Listing type" %}</div>
 
 		{% comment %}
 		See Feature #285. Don't use apartment.is_primary,
 			but maybe something like apartment_type.
 		{% endcomment %}
 		{% if listing.apartment.is_primary %}
-			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room house</div>
+			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }}{% translate " room house" %}</div>
 
 		{% else %}
-			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }} room apartment</div>
+			<div class="col-9 detail-text">{{ listing.apartment.number_of_rooms }}{% translate " room apartment" %}</div>
 		{% endif %}
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Address</div>
+		<div class="col-3 detail-text">{% translate "Address" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.address }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Requirements</div>
+		<div class="col-3 detail-text">{% translate "Requirements" %}</div>
 		<div class="col-9 detail-text">{{ listing.limitations }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Story</div>
+		<div class="col-3 detail-text">{% translate "Story" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.story }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Year of construction</div>
+		<div class="col-3 detail-text">{% translate "Year of construction" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.house.date_of_construction }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Rooms</div>
+		<div class="col-3 detail-text">{% translate "Rooms" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.room_details }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Flooring</div>
+		<div class="col-3 detail-text">{% translate "Flooring" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.flooring }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Furnishing</div>
+		<div class="col-3 detail-text">{% translate "Furnishing" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.furnishing }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Kitchen</div>
+		<div class="col-3 detail-text">{% translate "Kitchen" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.kitchen_info }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Technical equipment</div>
+		<div class="col-3 detail-text">{% translate "Technical equipment" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.technical_equipment }}</div>
 	</div>
 	{% if listing.apartment.has_internet %}
 		<div class="row border-bottom p-3">
-			<div class="col-3 detail-text">Internet</div>
+			<div class="col-3 detail-text">{% translate "Internet" %}</div>
 			<div class="col-9 detail-text">{{ listing.apartment.internet_info }}</div>
 		</div>
 	{% endif %}
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Specials</div>
+		<div class="col-3 detail-text">{% translate "Specials" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.specials }}</div>
 	</div>
 	<div class="row p-3">
-		<div class="col-3 detail-text">Surroundings</div>
+		<div class="col-3 detail-text">{% translate "Surroundings" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.surroundings }}</div>
 	</div>
 {% elif listing.listing_type == 'for_sale' %}
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Size</div>
+		<div class="col-3 detail-text">{% translate "Size" %}</div>
 		<div class="col-9 detail-text">{{listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Rooms</div>
-		<div class="col-9 detail-text">{{listing.apartment.number_of_rooms }} rooms</div>
+		<div class="col-3 detail-text">{% translate "Nr. of Rooms" %}</div>
+		<div class="col-9 detail-text">{{listing.apartment.number_of_rooms }} {% translate "rooms" %}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">For sale price</div>
+		<div class="col-3 detail-text">{% translate "For sale price" %}</div>
 		<div class="col-9 detail-text">{{ listing.for_sale_price|intcomma }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Location</div>
+		<div class="col-3 detail-text">{% translate "Location" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Year of construction</div>
+		<div class="col-3 detail-text">{% translate "Year of construction" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.house.date_of_construction }}</div>
 	</div>
 	<div class="row border-bottom p-3">
-		<div class="col-3 detail-text">Flooring</div>
+		<div class="col-3 detail-text">{% translate "Flooring" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.flooring }}</div>
 	</div>
 	<div class="row p-3">
-		<div class="col-3 detail-text">Technical details</div>
+		<div class="col-3 detail-text">{% translate "Technical details" %}</div>
 		<div class="col-9 detail-text">{{ listing.apartment.technical_equipment }}</div>
 	</div>
 {% else %}
@@ -190,9 +194,9 @@ Details
 </div>
 <div class="shadow p-3 mb-5 bg-light rounded back-to-listings">
 {% if listing.listing_type == 'rental' %}
-	<a href="{% url 'rental_listings' %}">Back to listings</a>
+	<a href="{% url 'rental_listings' %}">{% translate "Back to listings" %}</a>
 {% elif listing.listing_type == 'for_sale' %}
-	<a href="{% url 'for_sale_listings' %}">Back to listings</a>
+	<a href="{% url 'for_sale_listings' %}">{% translate "Back to listings" %}</a>
 {% endif %}
 </div>
 <br>

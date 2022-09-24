@@ -1,5 +1,6 @@
-<!doctype html>
+{% load i18n %}
 {% load cookie_consent_tags %}
+<!doctype html>
 <html lang="en">
 	<head>
 
@@ -85,14 +86,14 @@
 							data-toggle="dropdown"
 							role="button"
 							aria-haspopup="true"
-							aria-expanded="false">Listings</a>
+							aria-expanded="false">{% translate "Listings" %}</a>
 						<div class="dropdown-menu">
 							<a
 								href="{% url 'rental_listings' %}"
-								class="dropdown-item">Rental Listings</a>
+								class="dropdown-item">{% translate "Rental Listings" %}</a>
 							<a
 								href="{% url 'for_sale_listings' %}"
-								class="dropdown-item">For Sale Listings</a>
+								class="dropdown-item">{% translate "For Sale Listings" %}</a>
 						</div>
 					</li>
 					{% if all_pages %}
@@ -109,17 +110,24 @@
 						{% endfor %}
 					{% endif %}
 				</ul>
+				{% for language in languages %}
+					{% if language.0 != current_language %}
+						<img src="/media/assets/language-flags/{{ language.0 }}.png" class="language-flag"
+							id="language-flag-{{ language.0 }}">
+					{% endif %}
+				{% endfor %}
+				
 				<form class="form-inline" action="{% url 'listings:search_results' %}" method="get">
 					<input
 						class="form-control mr-sm-2"
 						type="search"
 						name="search"
-						placeholder="Search"
-						aria-label="Search">
+						placeholder="{% translate "Search" %}"
+						aria-label="{% translate "Search" %}">
 					<button
 						class="btn btn-outline-success my-2 my-sm-0"
 						type="submit">
-						Search
+						{% translate "Search" %}
 					</button>
 				</form>
 				<a class="mx-2 my-sm-1" id="toggle-day-night">
@@ -134,7 +142,7 @@
 		</nav>
 		{% if user.is_authenticated %}
 		<span style="position: fixed;" class="sticky-top">
-		Logged in - <a href="{% url 'broker:start' %}">Use Brokerage</a> - <a href="/admin">Use Admin</a>
+		{% translate "Logged in" %} - <a href="{% url 'broker:start' %}">{% translate "Use Brokerage" %}</a> - <a href="/admin">{% translate "Use Admin" %}</a>
 		</span>
 		{% endif %}
 		{% endblock %}

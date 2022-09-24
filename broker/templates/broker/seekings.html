@@ -1,12 +1,13 @@
 {% extends "broker/base.html" %}
+{% load i18n %}
 {% block search_filter %}
-<input type="button" class="form-toggle-button" value="Hide/Show search form">
+<input type="button" class="form-toggle-button" value="{% translate "Hide/Show search form" %}">
 <form action="#" method="get" class="search-form" id="seekings-search">
 	<table class="table-sm table-bordered">
 		<tr>
 			<th>{{ form.seeking_type.label_tag }}</th>
 			<td>{{ form.seeking_type }}</th>
-			<td><input type="button" value="Search" id="seekings-search-submit"></th>
+			<td><input type="button" value="{% translate "Search" %}" id="seekings-search-submit"></th>
 		</tr>
 		<tr class="rental-form-fields">
 			<th>{{ form.max_rent.label_tag }}</th>
@@ -67,7 +68,7 @@
 			<td>{{ form.max_age }}</th>
 		</tr>
 		<tr>
-			<td><input type="button" value="Reset" class="form-reset-button"></th>
+			<td><input type="button" value="{% translate "Reset" %}" class="form-reset-button"></th>
 		</tr>
 	</table>
 </form>
@@ -75,8 +76,8 @@
 
 
 {% block content %}
-<h3>Seekings</h3>
-<a href="/admin/broker/seeking/add">Add a Seeking</a>
+<h3>{% translate "Seekings" %}</h3>
+<a href="/admin/broker/seeking/add">{% translate "Add a Seeking" %}</a>
 {% include "broker/list-seeking.html" %}
-<a href="/admin/broker/seeking/add">Add a Seeking</a>
+<a href="/admin/broker/seeking/add">{% translate "Add a Seeking" %}</a>
 {% endblock %}

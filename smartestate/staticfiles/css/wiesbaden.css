@@ -53,3 +53,12 @@ p, span {
 .hidden-form-fields {
 	display: none;
 }
+/*
+ * TODO: See Feature #379. Make this DRY.
+ * */
+.language-flag {
+	margin: 4px;
+}
+.language-flag:hover {
+	cursor: pointer;
+}

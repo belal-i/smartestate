@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+{% load i18n %}
 <div class="row bg-light shadow">
 	<div class="col pt-3">
 	{% comment %}
@@ -30,11 +31,8 @@
 		    - max_date_of_construction
 		    - min_date_of_construction
 	{% endcomment %}
-		{% comment %}
-		TODO: See Feature #303.
-		{% endcomment %}
 		{% block form_title %}
-		<h3 class="border-bottom mb-5">Search results</h3>
+		<h3 class="border-bottom mb-5">{% translate "Search results" %}</h3>
 		{% endblock %}
 		<form action="{% url 'listings:search_results' %}" method="get">
 			{% block listings_type_toggle %}
@@ -125,7 +123,7 @@
 				<label class="col-sm-2 col-form-label" for="submit-filter-search">
 				</label>
 				<div class="col-sm-7">
-					<input type="submit" value="Search" id="submit-filter-search" class="form-control">
+					<input type="submit" value="{% translate "Search" %}" id="submit-filter-search" class="form-control">
 				</div>
 			</div>
 		</form>

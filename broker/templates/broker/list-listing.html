@@ -1,17 +1,18 @@
 {% extends "broker/list.html" %}
+{% load i18n %}
 
 {% block model_list %}
 	{% if listings %}
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
-				<th scope="col">Type</th>
-				<th scope="col">Available On</th>
-				<th scope="col">Price</th>
-				<th scope="col">Description</th>
-				<th scope="col">Address</th>
-				<th scope="col">Size</th>
-				<th scope="col">Rooms</th>
+				<th scope="col">{% translate "Type" %}</th>
+				<th scope="col">{% translate "Available On" %}</th>
+				<th scope="col">{% translate "Price" %}</th>
+				<th scope="col">{% translate "Description" %}</th>
+				<th scope="col">{% translate "Address" %}</th>
+				<th scope="col">{% translate "Size" %}</th>
+				<th scope="col">{% translate "Nr. of Rooms" %}</th>
 				<th scope="col"></th>
 			</tr>
 		</thead>
@@ -112,13 +113,13 @@
 				<td>{{ listing.apartment.house.real_estate.address }}</td>
 				<td>{{ listing.apartment.size_sq_m }}m<sup>2</sup></td>
 				<td>{{ listing.apartment.number_of_rooms }}</td>
-				<td><a href="#" onclick="editInAdmin('listing', {{ listing.id }})">Edit Listing</a></td>
+				<td><a href="#" onclick="editInAdmin('listing', {{ listing.id }})">{% translate "Edit Listing" %}</a></td>
 			</tr>
 			<tr id="suggestions-row-listing{{ listing.id }}" class="suggestions-row">
 			</tr>
 		{% endfor %}
 		</tbody>
 	{% else %}
-		No listings found!
+		{% translate "No listings found!" %}
 	{% endif %}
 {% endblock %}

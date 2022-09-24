@@ -1,18 +1,19 @@
 {% extends "broker/list.html" %}
+{% load i18n %}
 
 {% block model_list %}
 	{% if seekings %}
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
-				<th scope="col">Type</th>
-				<th scope="col">Start Date</th>
-				<th scope="col">Max Price</th>
-				<th scope="col">Min Rooms</th>
-				<th scope="col">Tenant/Buyer Name</th>
-				<th scope="col">Tenant/Buyer Age</th>
-				<th scope="col">Number of Persons</th>
-				<th scope="col">Occupation</th>
+				<th scope="col">{% translate "Type" %}</th>
+				<th scope="col">{% translate "Start Date" %}</th>
+				<th scope="col">{% translate "Max Price" %}</th>
+				<th scope="col">{% translate "Min Rooms" %}</th>
+				<th scope="col">{% translate "Tenant/Buyer Name" %}</th>
+				<th scope="col">{% translate "Tenant/Buyer Age" %}</th>
+				<th scope="col">{% translate "Number of Persons" %}</th>
+				<th scope="col">{% translate "Occupation" %}</th>
 				<th scope="col"></th>
 			</tr>
 		</thead>
@@ -114,6 +115,6 @@
 		{% endfor %}
 		</tbody>
 	{% else %}
-		No seekings found!
+		{% translate "No seekings found!" %}
 	{% endif %}
 {% endblock %}

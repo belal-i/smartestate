@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'rest.apps.RestConfig',
     'django.contrib.admin',
+    # If you want to use the admin integration, modeltranslation must be put
+    # before django.contrib.admin (only applies when using Django 1.7
+    # or above).
+    'modeltranslation',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -90,6 +94,8 @@ TEMPLATES = [
                 'config.context_processors.show_filter_search_in_listview',
                 'pages.context_processors.all_pages',
                 'broker.context_processors.listing_search_form',
+                'smartestate.context_processors.languages',
+                'smartestate.context_processors.current_language',
             ],
         },
     },
@@ -158,6 +164,18 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# The gettext lambda function is not a feature of modeltranslation, but rather
+# required for Django to be able to (statically) translate the verbose names
+# of the languages using the standard i18n solution.
+gettext = lambda s: s
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('de', gettext('German')),
+    ('fr', gettext('French')),
+    ('es', gettext('Spanish')),
+    ('it', gettext('Italian')),
+)
 
 
 # Static files (CSS, JavaScript, Images)
