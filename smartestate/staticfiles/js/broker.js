@@ -51,11 +51,6 @@ function prepareFormDataForRest(dataArray) {
 }
 function getNiceDate(dateString) {
 	dateObject = new Date(dateString);
-
-	/*
-	See Feature #303. Adjust date format based on language setting.
-	 * */
-
 	monthString = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(dateObject);
 	return monthString + ' ' + String(dateObject.getDate()) + ', ' + String(dateObject.getFullYear());
 }

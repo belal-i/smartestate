@@ -2,9 +2,6 @@
 {% load i18n %}
 <div class="row bg-light">
 	<div class="shadow pt-3 col-sm-12 col-md-8 col-lg-6">
-		{% comment %}
-		TODO: See Feature #303.
-		{% endcomment %}
 		<h3 class="border-bottom mb-5">{% translate "Search our listings" %}</h3>
 		<form action="{% url 'listings:search_results' %}" method="get">
 			<div class="form-group form-row">

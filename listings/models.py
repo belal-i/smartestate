@@ -34,7 +34,6 @@ class Listing(models.Model):
     )
     listing_type = models.CharField(max_length=8,
         choices=LISTING_TYPE_CHOICES, default='rental')
-    # TODO: Set the default in Feature #303.
     currency = models.CharField(max_length=4, default='$')
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)
