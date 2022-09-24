@@ -27,13 +27,13 @@ class Listing(models.Model):
     # TODO: See Feature #343. Make this ManyToMany?
     contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
+    # TODO: Figure out how to translate these choices.
     LISTING_TYPE_CHOICES = (
         ('rental','RENTAL'),
         ('for_sale','FOR_SALE'),
     )
     listing_type = models.CharField(max_length=8,
         choices=LISTING_TYPE_CHOICES, default='rental')
-    # TODO: Set the default in Feature #303.
     currency = models.CharField(max_length=4, default='$')
     rental_price = models.DecimalField(max_digits=7, decimal_places=2,
         null=True, blank=True)

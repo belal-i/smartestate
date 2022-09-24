@@ -74,6 +74,7 @@ class Company(models.Model):
         return self.name
 
 class Seeking(models.Model):
+    # TODO: Figure out how to translate these choices.
     SEEKING_TYPE_CHOICES = (
         ('rental','RENTAL'),
         ('for_sale','FOR_SALE'),
@@ -129,6 +130,7 @@ class Matching(models.Model):
         null=True, blank=True)
     seeking = models.ForeignKey('Seeking', on_delete=models.CASCADE,
         null=True, blank=True)
+    # TODO: Figure out how to translate these choices.
     STATUS_CHOICES = (
         ('possible','POSSIBLE'),
         ('pending','PENDING'),
