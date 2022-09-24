@@ -1,3 +1,4 @@
+{% load i18n %}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -67,18 +68,18 @@
 					</li>
 					<li class="nav-item
 						{% if request.path == '/broker/matchings/' %} active {% endif %}">
-						<a href="{% url 'broker:matchings' %}" class="nav-link">Matchings</a>
+						<a href="{% url 'broker:matchings' %}" class="nav-link">{% translate "Matchings" %}</a>
 					</li>
 					<li class="nav-item
 						{% if request.path == '/broker/listings/' %} active {% endif %}">
-						<a href="{% url 'broker:listings' %}" class="nav-link">Listings</a>
+						<a href="{% url 'broker:listings' %}" class="nav-link">{% translate "Listings" %}</a>
 					</li>
 					<li class="nav-item
 						{% if request.path == '/broker/seekings/' %} active {% endif %}">
-						<a href="{% url 'broker:seekings' %}" class="nav-link">Seekings</a>
+						<a href="{% url 'broker:seekings' %}" class="nav-link">{% translate "Seekings" %}</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'home' %}" class="nav-link">View Site</a>
+						<a href="{% url 'home' %}" class="nav-link">{% translate "View Site" %}</a>
 					</li>
 				</ul>
 			</div>

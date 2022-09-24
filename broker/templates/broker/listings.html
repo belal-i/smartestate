@@ -1,77 +1,75 @@
 {% extends "broker/base.html" %}
+{% load i18n %}
 
 {% block search_filter %}
-<input type="button" class="form-toggle-button" value="Hide/Show search form">
+<input type="button" class="form-toggle-button" value="{% translate "Hide/Show search form" %}">
 <form action="#" method="get" class="search-form" id="listings-search">
 	<table class="table-sm table-bordered">
-		{% comment %}
-		TODO: Translate these.
-		{% endcomment %}
 		<tr>
-			<th>{{ form.listing_type.label.en }}</th>
+			<th>{{ form.listing_type.label_tag }}</th>
 			<td>{{ form.listing_type }}</th>
-			<th>{{ form.is_primary.label.en }}</th>
+			<th>{{ form.is_primary.label_tag }}</th>
 			<td>{{ form.is_primary }}</th>
-			<td><input id="listings-search-submit" type="button" value="Search"></th>
+			<td><input id="listings-search-submit" type="button" value="{% translate "Search" %}"></th>
 		</tr>
 		<tr class="rental-form-fields">
-			<th>{{ form.max_rental_price.label.en }}</th>
+			<th>{{ form.max_rental_price.label_tag }}</th>
 			<td>{{ form.max_rental_price }}</th>
-			<th>{{ form.min_rental_price.label.en }}</th>
+			<th>{{ form.min_rental_price.label_tag }}</th>
 			<td>{{ form.min_rental_price }}</th>
-			<th>{{ form.max_security_deposit.label.en }}</th>
+			<th>{{ form.max_security_deposit.label_tag }}</th>
 			<td>{{ form.max_security_deposit }}</th>
-			<th>{{ form.min_security_deposit.label.en }}</th>
+			<th>{{ form.min_security_deposit.label_tag }}</th>
 			<td>{{ form.min_security_deposit }}</th>
 		</tr>
 		<tr class="for-sale-form-fields">
-			<th>{{ form.max_for_sale_price.label.en }}</th>
+			<th>{{ form.max_for_sale_price.label_tag }}</th>
 			<td>{{ form.max_for_sale_price }}</th>
-			<th>{{ form.min_for_sale_price.label.en }}</th>
+			<th>{{ form.min_for_sale_price.label_tag }}</th>
 			<td>{{ form.min_for_sale_price }}</th>
-			<th>{{ form.max_minimum_down_payment.label.en }}</th>
+			<th>{{ form.max_minimum_down_payment.label_tag }}</th>
 			<td>{{ form.max_minimum_down_payment }}</th>
-			<th>{{ form.min_minimum_down_payment.label.en }}</th>
+			<th>{{ form.min_minimum_down_payment.label_tag }}</th>
 			<td>{{ form.min_minimum_down_payment }}</th>
 		</tr>
 		<tr>
-			<th>{{ form.earliest_date_available.label.en }}</th>
+			<th>{{ form.earliest_date_available.label_tag }}</th>
 			<td>{{ form.earliest_date_available }}</th>
-			<th>{{ form.latest_date_available.label.en }}</th>
+			<th>{{ form.latest_date_available.label_tag }}</th>
 			<td>{{ form.latest_date_available }}</th>
-			<th>{{ form.minimum_months.label.en }}</th>
+			<th>{{ form.minimum_months.label_tag }}</th>
 			<td>{{ form.minimum_months }}</th>
-			<th>{{ form.maximum_months.label.en }}</th>
+			<th>{{ form.maximum_months.label_tag }}</th>
 			<td>{{ form.maximum_months }}</th>
 		</tr>
 		<tr>
-			<th>{{ form.min_number_of_rooms.label.en }}</th>
+			<th>{{ form.min_number_of_rooms.label_tag }}</th>
 			<td>{{ form.min_number_of_rooms }}</th>
-			<th>{{ form.max_number_of_rooms.label.en }}</th>
+			<th>{{ form.max_number_of_rooms.label_tag }}</th>
 			<td>{{ form.max_number_of_rooms }}</th>
-			<th>{{ form.min_size_sq_m.label.en }}</th>
+			<th>{{ form.min_size_sq_m.label_tag }}</th>
 			<td>{{ form.min_size_sq_m }}</th>
-			<th>{{ form.max_size_sq_m.label.en }}</th>
+			<th>{{ form.max_size_sq_m.label_tag }}</th>
 			<td>{{ form.max_size_sq_m }}</th>
 		</tr>
 		<tr>
-			<th>{{ form.min_number_of_people.label.en }}</th>
+			<th>{{ form.min_number_of_people.label_tag }}</th>
 			<td>{{ form.min_number_of_people }}</th>
-			<th>{{ form.max_number_of_people.label.en }}</th>
+			<th>{{ form.max_number_of_people.label_tag }}</th>
 			<td>{{ form.max_number_of_people }}</th>
-			<th>{{ form.pets_ok.label.en }}</th>
+			<th>{{ form.pets_ok.label_tag }}</th>
 			<td>{{ form.pets_ok }}</th>
-			<th>{{ form.has_internet.label.en }}</th>
+			<th>{{ form.has_internet.label_tag }}</th>
 			<td>{{ form.has_internet }}</th>
 		</tr>
 		<tr>
-			<th>{{ form.max_date_of_construction.label.en }}</th>
+			<th>{{ form.max_date_of_construction.label_tag }}</th>
 			<td>{{ form.max_date_of_construction }}</th>
-			<th>{{ form.min_date_of_construction.label.en }}</th>
+			<th>{{ form.min_date_of_construction.label_tag }}</th>
 			<td>{{ form.min_date_of_construction }}</th>
-			<th>{{ form.is_furnished.label.en }}</th>
+			<th>{{ form.is_furnished.label_tag }}</th>
 			<td>{{ form.is_furnished }}</th>
-			<td><input type="button" value="Reset" class="form-reset-button"></th>
+			<td><input type="button" value="{% translate "Reset" %}" class="form-reset-button"></th>
 		</tr>
 	</table>
 </form>
@@ -79,8 +77,8 @@
 {% endblock %}
 
 {% block content %}
-<h3>Listings</h3>
-<a href="/admin/listings/listing/add">Add a Listing</a>
+<h3>{% translate "Listings" %}</h3>
+<a href="/admin/listings/listing/add">{% translate "Add a Listing" %}</a>
 {% include "broker/list-listing.html" %}
-<a href="/admin/listings/listing/add">Add a Listing</a>
+<a href="/admin/listings/listing/add">{% translate "Add a Listing" %}</a>
 {% endblock %}

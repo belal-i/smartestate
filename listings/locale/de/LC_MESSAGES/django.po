@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-24 17:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/listings/detail.html:80
+msgid "Available on"
+msgstr "Verfügbar am"
+
+#: templates/listings/detail.html:81 templates/listings/list-rental.html:33
+#: templates/listings/list-rental.html:39
+#: templates/listings/search-results.html:34
+#: templates/listings/search-results.html:40
+msgid "for"
+msgstr "für"
+
+#: templates/listings/detail.html:81 templates/listings/list-rental.html:33
+#: templates/listings/search-results.html:34
+msgid "months"
+msgstr "Monate"
+
+#: templates/listings/detail.html:84
+msgid "Monthly rent"
+msgstr "Miete pro Monat"
+
+#: templates/listings/detail.html:92
+msgid "Security deposit"
+msgstr "Kaution"
+
+#: templates/listings/detail.html:96 templates/listings/detail.html:166
+msgid "Size"
+msgstr "Größe"
+
+#: templates/listings/detail.html:100
+msgid "Listing type"
+msgstr "Angebotstyp"
+
+#: templates/listings/detail.html:108
+msgid " room house"
+msgstr "-Zimmer Haus"
+
+#: templates/listings/detail.html:111
+msgid " room apartment"
+msgstr "-Zimmer Wohnung"
+
+#: templates/listings/detail.html:115
+msgid "Address"
+msgstr "Adresse"
+
+#: templates/listings/detail.html:119
+msgid "Requirements"
+msgstr "Anforderungen"
+
+#: templates/listings/detail.html:123
+msgid "Story"
+msgstr "Stockwerk"
+
+#: templates/listings/detail.html:127 templates/listings/detail.html:182
+msgid "Year of construction"
+msgstr "Baujahr"
+
+#: templates/listings/detail.html:131
+msgid "Rooms"
+msgstr "Räume"
+
+#: templates/listings/detail.html:135 templates/listings/detail.html:186
+msgid "Flooring"
+msgstr "Bodenbeleg"
+
+#: templates/listings/detail.html:139
+msgid "Furnishing"
+msgstr "Möblierung"
+
+#: templates/listings/detail.html:143
+msgid "Kitchen"
+msgstr "Küche"
+
+#: templates/listings/detail.html:147
+msgid "Technical equipment"
+msgstr "Technische Ausstattung"
+
+#: templates/listings/detail.html:152
+msgid "Internet"
+msgstr "Internet"
+
+#: templates/listings/detail.html:157
+msgid "Specials"
+msgstr "Specials"
+
+#: templates/listings/detail.html:161
+msgid "Surroundings"
+msgstr "Umgebung"
+
+#: templates/listings/detail.html:170
+msgid "Nr. of Rooms"
+msgstr "Anzahl Zimmer"
+
+#: templates/listings/detail.html:171 templates/listings/list-for-sale.html:51
+#: templates/listings/list-rental.html:39
+#: templates/listings/search-results.html:40
+#: templates/listings/search-results.html:78
+msgid "rooms"
+msgstr "Räume"
+
+#: templates/listings/detail.html:174 templates/listings/search-results.html:57
+msgid "For sale price"
+msgstr "Kaufpreis"
+
+#: templates/listings/detail.html:178
+msgid "Location"
+msgstr "Standort"
+
+#: templates/listings/detail.html:190
+msgid "Technical details"
+msgstr "Technische Details"
+
+#: templates/listings/detail.html:199 templates/listings/detail.html:201
+msgid "Back to listings"
+msgstr "Zurück zu Angeboten"
+
+#: templates/listings/filter-search-for-sale.html:9
+msgid "For sale listings"
+msgstr "Verkaufsangebote"
+
+#: templates/listings/filter-search-homepage.html:9
+msgid "Search our listings"
+msgstr "Angebote durchsuchen"
+
+#: templates/listings/filter-search-homepage.html:55
+#: templates/listings/filter-search-listview.html:131
+msgid "Search"
+msgstr "Suchen"
+
+#: templates/listings/filter-search-listview.html:40
+msgid "Search results"
+msgstr "Suchergebnisse"
+
+#: templates/listings/filter-search-rental.html:9
+msgid "Rental listings"
+msgstr "Vermietangebote"
+
+#: templates/listings/list-for-sale.html:46
+msgid "Number of rooms"
+msgstr "Anzahl Räume"
+
+#: templates/listings/list-for-sale.html:62
+msgid "We currently have no for sale listings available."
+msgstr "Wir haben aktuell keine Verkaufsangebote."
+
+#: templates/listings/list-rental.html:33
+#: templates/listings/search-results.html:34
+msgid "Starting"
+msgstr "Ab"
+
+#: templates/listings/list-rental.html:39
+#: templates/listings/search-results.html:40
+msgid "ca."
+msgstr "ca."
+
+#: templates/listings/list-rental.html:39
+#: templates/listings/search-results.html:40
+msgid "people"
+msgstr "Personen"
+
+#: templates/listings/list-rental.html:48
+msgid "We currently have no rental listings available."
+msgstr "Wir haben aktuell keine Vermietangebote."
+
+#: templates/listings/list.html:5
+msgid "Listings"
+msgstr "Angebote"
+
+#: templates/listings/list.html:12
+msgid "We currently have no listings available."
+msgstr "Wir haben aktuell keine Angebote."
+
+#: templates/listings/search-results.html:65
+msgid "Living space"
+msgstr "Wohnraum"
+
+#: templates/listings/search-results.html:90
+msgid "No search results were found."
+msgstr "Keine Ergebnisse gefunden."
