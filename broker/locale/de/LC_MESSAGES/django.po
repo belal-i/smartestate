@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-24 11:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:11 forms.py:109
+msgid "Rental"
+msgstr "Vermietangebote"
+
+#: forms.py:12 forms.py:110
+msgid "For sale"
+msgstr "Verkaufsangebote"
+
+#: forms.py:13
+msgid "Listing type"
+msgstr "Angebotstyp"
+
+#: forms.py:17 forms.py:115
+msgid "Maximum rent"
+msgstr "Maximale Miete"
+
+#: forms.py:19 forms.py:117
+msgid "Minimum rent"
+msgstr "Minimale Miete"
+
+#: forms.py:21
+msgid "Maximum security deposit"
+msgstr "Maximale Kaution"
+
+#: forms.py:23
+msgid "Minimum security deposit"
+msgstr "Minimale Kaution"
+
+#: forms.py:25
+msgid "Maximum for sale price"
+msgstr "Maximaler Kaufpreis"
+
+#: forms.py:27
+msgid "Minimum for sale price"
+msgstr "Minimaler Kaufpreis"
+
+#: forms.py:30
+msgid "Highest acceptable minimum down payment"
+msgstr "Maximale zulässige Anzahlung"
+
+#: forms.py:34
+msgid "Lowest acceptable minimum down payment"
+msgstr "Minimale zulässige Anzahlung"
+
+#: forms.py:38
+msgid "Earliest date available"
+msgstr "Frühestes Verfügbarkeitsdatum"
+
+#: forms.py:42
+msgid "Latest date available"
+msgstr "Spätestes Verfügbarkeitsdatum"
+
+#: forms.py:46 forms.py:168
+msgid "Minimum number of months"
+msgstr "Mindestmietzeit in Monaten"
+
+#: forms.py:50 forms.py:172
+msgid "Maximum number of months"
+msgstr "Höchstmietzeit in Monaten"
+
+#: forms.py:54
+msgid "Minimum number of people"
+msgstr "Mindestanzahl Personen"
+
+#: forms.py:58
+msgid "Maximum number of people"
+msgstr "Höchstanzahl Personen"
+
+#: forms.py:62
+msgid "Pets OK"
+msgstr "Haustiere OK"
+
+#: forms.py:66
+msgid "Apartment is the only / primary one in the house"
+msgstr "Wohnung ist die einzige im Haus"
+
+#: forms.py:70 forms.py:128
+msgid "Minimum number of rooms"
+msgstr "Mindestanzahl Räume"
+
+#: forms.py:74 forms.py:132
+msgid "Maximum number of rooms"
+msgstr "Höchstanzahl Räume"
+
+#: forms.py:78 forms.py:136
+msgid "Minimum size (sq. m)"
+msgstr "Minimale Größe (QM.)"
+
+#: forms.py:82 forms.py:140
+msgid "Maximum size (sq. m)"
+msgstr "Maximale Größe (QM.)"
+
+#: forms.py:86
+msgid "Internet is included"
+msgstr "Internet vorhanden"
+
+#: forms.py:90 forms.py:176
+msgid "Apartment must be furnished"
+msgstr "Wohnung muss möbliert sein"
+
+#: forms.py:94
+msgid "Earliest acceptable date of construction"
+msgstr "Frühestes zulässiges Baujahr"
+
+#: forms.py:98
+msgid "Latest acceptable date of construction"
+msgstr "Spätestes zulässiges Baujahr"
+
+#: forms.py:111
+msgid "Seeking type"
+msgstr "Gesuchstyp"
+
+#: forms.py:120
+msgid "Maximum purchase price"
+msgstr "Maximaler Kaufpreis"
+
+#: forms.py:124
+msgid "Minimum purchase price"
+msgstr "Minimaler Kaufpreis"
+
+#: forms.py:144
+msgid "Minimum number of persons"
+msgstr "Minimale Anzahl Personen"
+
+#: forms.py:148
+msgid "Maximum number of persons"
+msgstr "Maximale Anzahl Personen"
+
+#: forms.py:152
+msgid "Earliest starting date"
+msgstr "Frühestes Startdatum"
+
+#: forms.py:156
+msgid "Latest starting date"
+msgstr "Spätestes Startdatum"
+
+#: forms.py:160
+msgid "Earliest ending date"
+msgstr "Frühestes Enddatum"
+
+#: forms.py:164
+msgid "Latest ending date"
+msgstr "Spätestes Enddatum"
+
+#: forms.py:180
+msgid "Must have internet"
+msgstr "Wohnung muss Internet haben"
+
+#: forms.py:184
+msgid "Tenant is smoker"
+msgstr "Mieter ist Raucher"
+
+#: forms.py:188
+msgid "Tenant has pets"
+msgstr "Mieter hat Haustiere"
+
+#: forms.py:192
+msgid "Minimum age of tenant"
+msgstr "Mindestalter von Mieter"
+
+#: forms.py:196
+msgid "Maximum age of tenant"
+msgstr "Maximales Alter von Mieter"

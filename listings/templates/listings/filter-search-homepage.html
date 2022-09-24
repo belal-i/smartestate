@@ -1,10 +1,11 @@
 {% load widget_tweaks %}
+{% load i18n %}
 <div class="row bg-light">
 	<div class="shadow pt-3 col-sm-12 col-md-8 col-lg-6">
 		{% comment %}
 		TODO: See Feature #303.
 		{% endcomment %}
-		<h3 class="border-bottom mb-5">Search our listings!</h3>
+		<h3 class="border-bottom mb-5">{% translate "Search our listings" %}</h3>
 		<form action="{% url 'listings:search_results' %}" method="get">
 			<div class="form-group form-row">
 				<label class="col-sm-2 col-form-label" for="{{ listing_search_form.listing_type.auto_id }}">

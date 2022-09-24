@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+{% load i18n %}
 <div class="row bg-light shadow">
 	<div class="col pt-3">
 	{% comment %}
@@ -34,7 +35,7 @@
 		TODO: See Feature #303.
 		{% endcomment %}
 		{% block form_title %}
-		<h3 class="border-bottom mb-5">Search results</h3>
+		<h3 class="border-bottom mb-5">{% translate "Search results" %}</h3>
 		{% endblock %}
 		<form action="{% url 'listings:search_results' %}" method="get">
 			{% block listings_type_toggle %}
