@@ -1,4 +1,5 @@
 {% extends "broker/list.html" %}
+{% load i18n %}
 
 {% block model_list %}
 	{% if matchings %}
@@ -6,8 +7,8 @@
 			<tr>
 				<th scope="col">ID</th>
 				<th scope="col">Status</th>
-				<th scope="col">Listing</th>
-				<th scope="col">Seeking</th>
+				<th scope="col">{% translate "Listing" %}</th>
+				<th scope="col">{% translate "Seeking" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,6 +22,6 @@
 		{% endfor %}
 		</tbody>
 	{% else %}
-		No matchings found!
+		{% translate "No matchings found!" %}
 	{% endif %}
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 11:29+0200\n"
+"POT-Creation-Date: 2022-09-24 17:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,3 +181,141 @@ msgstr "Edad mínima del inquilino"
 #: forms.py:196
 msgid "Maximum age of tenant"
 msgstr "Edad máxima del inquilino"
+
+#: templates/broker/base.html:73 templates/broker/matchings.html:4
+#: templates/broker/start.html:4
+msgid "Matchings"
+msgstr ""
+
+#: templates/broker/base.html:77 templates/broker/listings.html:80
+#: templates/broker/start.html:11
+msgid "Listings"
+msgstr "Ofertas"
+
+#: templates/broker/base.html:81 templates/broker/seekings.html:79
+#: templates/broker/start.html:18
+msgid "Seekings"
+msgstr "Aplicaciones"
+
+#: templates/broker/base.html:84
+msgid "View Site"
+msgstr "Ver sitio"
+
+#: templates/broker/list-listing.html:9 templates/broker/list-seeking.html:9
+msgid "Type"
+msgstr "Tipo"
+
+#: templates/broker/list-listing.html:10
+msgid "Available On"
+msgstr "Disponible"
+
+#: templates/broker/list-listing.html:11
+msgid "Price"
+msgstr "Precio"
+
+#: templates/broker/list-listing.html:12
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/broker/list-listing.html:13
+msgid "Address"
+msgstr "Dirección"
+
+#: templates/broker/list-listing.html:14
+msgid "Size"
+msgstr "Talla"
+
+#: templates/broker/list-listing.html:15
+msgid "Nr. of Rooms"
+msgstr "No. de habitaciones"
+
+#: templates/broker/list-listing.html:121
+msgid "Edit Listing"
+msgstr "Editar oferta"
+
+#: templates/broker/list-listing.html:128
+msgid "No listings found!"
+msgstr "No se encontraron ofertas"
+
+#: templates/broker/list-matching.html:10
+msgid "Listing"
+msgstr "Oferta"
+
+#: templates/broker/list-matching.html:11
+msgid "Seeking"
+msgstr "Aplicacion"
+
+#: templates/broker/list-matching.html:25
+msgid "No matchings found!"
+msgstr "No se encontraron coincidencias"
+
+#: templates/broker/list-seeking.html:10
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#: templates/broker/list-seeking.html:11
+msgid "Max Price"
+msgstr "Precio máx"
+
+#: templates/broker/list-seeking.html:12
+msgid "Min Rooms"
+msgstr "Habitaciones mín"
+
+#: templates/broker/list-seeking.html:13
+msgid "Tenant/Buyer Name"
+msgstr "Nombre del comprador / inquilino"
+
+#: templates/broker/list-seeking.html:14
+msgid "Tenant/Buyer Age"
+msgstr "Edad del comprador / inquilino"
+
+#: templates/broker/list-seeking.html:15
+msgid "Number of Persons"
+msgstr "Número personas"
+
+#: templates/broker/list-seeking.html:16
+msgid "Occupation"
+msgstr "Ocupatión"
+
+#: templates/broker/list-seeking.html:121
+msgid "No seekings found!"
+msgstr "No se encontraron aplicaciones"
+
+#: templates/broker/listings.html:5 templates/broker/seekings.html:4
+msgid "Hide/Show search form"
+msgstr "Ocultar/Mostrar formulario de búsqueda"
+
+#: templates/broker/listings.html:13 templates/broker/seekings.html:10
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/broker/listings.html:72 templates/broker/seekings.html:71
+msgid "Reset"
+msgstr "Reiniciar"
+
+#: templates/broker/listings.html:81 templates/broker/listings.html:83
+#: templates/broker/start.html:15
+msgid "Add a Listing"
+msgstr "Añadir una oferta"
+
+#: templates/broker/matchings.html:5 templates/broker/matchings.html:7
+#: templates/broker/start.html:8
+msgid "Add a Matching"
+msgstr "Añadir una coincidencia"
+
+#: templates/broker/seekings.html:80 templates/broker/seekings.html:82
+#: templates/broker/start.html:22
+msgid "Add a Seeking"
+msgstr "Añadir una aplicacion"
+
+#: templates/broker/start.html:6
+msgid "See all Matchings"
+msgstr "Ver todas las coincidencias"
+
+#: templates/broker/start.html:13
+msgid "See all Listings"
+msgstr "Ver todas las ofertas"
+
+#: templates/broker/start.html:20
+msgid "See all Seekings"
+msgstr "Ver todas las aplicaciones"
