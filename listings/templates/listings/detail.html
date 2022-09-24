@@ -82,9 +82,6 @@ Details
 	</div>
 	<div class="row border-bottom p-3">
 		<div class="col-3 detail-text">{% translate "Monthly rent" %}</div>
-		{% comment %}
-		TODO: Check if number format behaves well in different languages
-		{% endcomment %}
 		<div class="col-9 detail-text"><p>{{ listing.rental_price|intcomma }}</p><p>{{ listing.info_about_rental_price }}</p></div>
 	</div>
 	<div class="row border-bottom p-3">

@@ -31,9 +31,6 @@
 		<p class="color-elem-2">{{ listing.apartment.house.real_estate.address.city }}</p>
 		<h3 class="color-elem-1">{{ listing }}</h3>
 		<p>{% translate "Starting" %} {{ listing.date_available }} {% translate "for" %} {{ listing.minimum_months }}-{{ listing.maximum_months}} {% translate "months" %}</p>
-		{% comment %}
-		TODO: Make sure the number format behaves well in different languages.
-		{% endcomment %}
 		<h3 class="color-elem-1">{{ listing.currency }}{{ listing.rental_price|intcomma }}</h3>
 		<p>{{ listing.apartment.number_of_rooms }} {% translate "rooms" %} | {% translate "ca." %} {{ listing.apartment.size_sq_m }} m<sup>2</sup> | {% translate "for" %} {{ listing.number_of_people }} {% translate "people" %}</p>
 		</div>
@@ -52,9 +49,6 @@
 		<p>{{ listing.apartment.house.real_estate.address.zip_code }} {{ listing.apartment.house.real_estate.address.city }}</p>
 		<div class="row">
 			<span class="col-3">{% translate "For sale price" %}:</span>
-			{% comment %}
-			TODO: Make sure the number format behaves well in different languages.
-			{% endcomment %}
 			<span class="col-9 color-elem-1">{{ listing.currency }}{{ listing.for_sale_price|intcomma }}</td>
 		</div>
 		<div class="row">
