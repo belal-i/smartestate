@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-24 11:30+0200\n"
+"POT-Creation-Date: 2022-09-24 12:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,11 @@ msgstr "Verkaufsangebote"
 #: templates/listings/filter-search-homepage.html:9
 msgid "Search our listings"
 msgstr "Angebote durchsuchen"
+
+#: templates/listings/filter-search-homepage.html:55
+#: templates/listings/filter-search-listview.html:131
+msgid "Search"
+msgstr "Suchen"
 
 #: templates/listings/filter-search-listview.html:40
 msgid "Search results"
