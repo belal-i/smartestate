@@ -3,7 +3,6 @@ from .models import *
 
 class ListingTranslationOptions(TranslationOptions):
     fields = (
-        'listing_type',
         'info_about_rental_price',
         'short_description',
         'long_description',

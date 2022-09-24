@@ -3,7 +3,6 @@ from .models import *
 
 class SeekingTranslationOptions(TranslationOptions):
     fields = (
-        'seeking_type',
         'occupation',
         'notes',
     )
