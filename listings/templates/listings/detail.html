@@ -93,6 +93,9 @@ Details
 		<div class="col-9 detail-text">{{ listing.apartment.size_sq_m }} m<sup>2</sup></div>
 	</div>
 	<div class="row border-bottom p-3">
+		{% comment %}
+		TODO: See Defect #455: This translates very awkwardly into French, Spanish and Italian.
+		{% endcomment %}
 		<div class="col-3 detail-text">{% translate "Listing type" %}</div>
 
 		{% comment %}
