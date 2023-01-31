@@ -27,6 +27,7 @@ RUN pip install --no-cache-dir amqp \
     #&& pip install django-celery-beat \
     # See https://stackoverflow.com/questions/67409452/gunicorn-importerror-cannot-import-name-already-handled-from-eventlet-wsgi
     && pip install eventlet==0.33.0 https://github.com/benoitc/gunicorn/archive/refs/heads/master.zip#egg=gunicorn==20.1.0 \
+    && pip install dnspython==2.2.1 \
     && pip install gunicorn \
     && pip install pymysql \
     && pip install pyyaml \
