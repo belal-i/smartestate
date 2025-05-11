@@ -14,8 +14,22 @@ Until the stable version 1.0 appears, things can and will break between releases
 
 ### Installing
 
-RTFS and good luck ;-)
+```python
+pip install -r requirements.txt
+```
 
 ### Usage
 
-RTFS and good luck ;-)
+#### Local
+
+Usual Django setup:
+
+* `python manage.py migrate`
+* `python manage.py createsuperuser`
+* `python manage.py runserver`
+
+Set up the cookie group in the Django admin, and make it optional for the cookie banner to appear.
+
+#### Production
+
+Good luck ;-)
