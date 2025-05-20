@@ -22,7 +22,9 @@ pip install -r requirements.txt
 
 #### Local
 
-Usual Django setup:
+`cp .env.example .env` and configure with appropriate values.
+
+Then, usual Django setup:
 
 * `python manage.py migrate`
 * `python manage.py createsuperuser`
