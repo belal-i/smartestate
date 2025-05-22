@@ -1,13 +1,12 @@
-from pprint import pprint
 from django.test import TestCase
 
 from .utils import *
 from listings.models import *
 from .models import *
 
-# Create your tests here.
 
 class TestSearch(TestCase):
+
     def test_keyword_search_listing(self):
         test_address = Address(street="hello", city="world", pk=1)
         test_real_estate = RealEstate(address=test_address, pk=1)
@@ -40,6 +39,7 @@ class TestSearch(TestCase):
         self.assertQuerysetEqual(test_query_set, test_search_4)
         self.assertQuerysetEqual(test_query_set, test_search_5)
         self.assertEqual(test_search_6.count(), 0)
+
 
     def test_keyword_search_seeking(self):
         test_address = Address(street="Hello", city="World", pk=1)
@@ -76,6 +76,7 @@ class TestSearch(TestCase):
         self.assertQuerysetEqual(test_query_set, test_search_6)
         self.assertQuerysetEqual(test_query_set, test_search_7)
         self.assertQuerysetEqual(test_query_set, test_search_8)
+
 
     def test_filter_search_listing(self):
         test_real_estate = RealEstate()
@@ -445,6 +446,7 @@ class TestSearch(TestCase):
         test_search = filter_search_seeking(test_params)
         self.assertQuerysetEqual(test_search, test_query_set)
 
+
     def test_filter_search_matching(self):
 
         test_seeking = Seeking(
@@ -465,7 +467,6 @@ class TestSearch(TestCase):
             pk=2
         )
         test_seeking.save()
-
 
         test_real_estate = RealEstate()
         test_real_estate.save()
