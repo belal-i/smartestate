@@ -14,6 +14,24 @@ Until the stable version 1.0 appears, things can and will break between releases
 
 ### Installing
 
+#### Install platform requirements
+
+These are required for the MySQL driver, see https://github.com/PyMySQL/mysqlclient
+
+##### Debian/Ubuntu
+
+```
+apt install  python3-dev default-libmysqlclient-dev  build-essential  pkg-config
+```
+
+##### Red Hat / CentOS
+
+```
+yum install python3-devel mysql-devel pkgconfig
+```
+
+#### Install Python app dependencies
+
 ```python
 pip install -r requirements.txt
 ```

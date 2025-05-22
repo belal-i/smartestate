@@ -120,8 +120,10 @@ WSGI_APPLICATION = 'smartestate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env('DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': env('DATABASE_USER', None),
+        'PASSWORD': env('DATABASE_PASSWORD', None),
     }
 }
 
