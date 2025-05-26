@@ -1,6 +1,7 @@
 from django.test import TestCase, RequestFactory
 
 from .views import validate_search_params
+from .functions import *
 
 
 class TestSearch(TestCase):
