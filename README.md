@@ -47,6 +47,8 @@ Then, usual Django setup:
 * `python manage.py migrate`
 * `python manage.py createsuperuser`
 * `python manage.py runserver`
+* Unit tests: `python manage.py test`
+
 
 Set up the cookie group in the Django admin, and make it optional for the cookie banner to appear.
 
