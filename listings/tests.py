@@ -1,15 +1,15 @@
-from pprint import pprint
 from django.test import TestCase, RequestFactory
 
 from .views import validate_search_params
+from .functions import *
 
-# Create your tests here.
 
 class TestSearch(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
         self.maxDiff = None
+
 
     def test_validate_search_params(self):
         """

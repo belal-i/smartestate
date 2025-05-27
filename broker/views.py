@@ -10,7 +10,6 @@ from listings.models import *
 from .models import *
 from .forms import ListingSearchForm, SeekingSearchForm
 
-# Create your views here.
 
 def start(request):
     # TODO: How to make it so that this does not need to be

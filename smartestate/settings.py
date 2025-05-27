@@ -10,8 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-
 from pathlib import Path
+from environs import env
+from environs.exceptions import EnvValidationError
+
+
+env.read_env()
+
+VERSION = '0.2.0-dev'
+COPYRIGHT_TEXT = """
+Powered by <a href="https://github.com/saint-hilaire/smartestate">SmartEstate v{}</a>
+(C) Brian St. Hilaire 2022 - 2025
+""".format(VERSION)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +31,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--nmneuq-s^zj%y0ydmb*w9926)p_oc6&0u=7%xx(t*h43j+j8c'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+try:
+    DEBUG = env.bool('DEBUG', False)
+except EnvValidationError:
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
 
 
 # Application definition
@@ -89,6 +102,8 @@ TEMPLATES = [
                 'broker.context_processors.listing_search_form',
                 'smartestate.context_processors.languages',
                 'smartestate.context_processors.current_language',
+                'smartestate.context_processors.smartestate_version',
+                'smartestate.context_processors.copyright_text',
             ],
         },
     },
@@ -113,8 +128,10 @@ WSGI_APPLICATION = 'smartestate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env('DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': env('DATABASE_USER', None),
+        'PASSWORD': env('DATABASE_PASSWORD', None),
     }
 }
 
@@ -146,9 +163,9 @@ REST_FRAMEWORK = {
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = env('LANGUAGE_CODE', 'en-us')
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = env('TIME_ZONE', 'UTC')
 
 USE_I18N = True
 

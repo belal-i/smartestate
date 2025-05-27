@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from listings.models import *
 from .models import *
 
+
 def keyword_search_listing(keyword):
     return Listing.objects.filter(
         Q(short_description__icontains = keyword) |
@@ -15,6 +16,8 @@ def keyword_search_listing(keyword):
         Q(apartment__house__real_estate__address__city__icontains =
             keyword)
     )
+
+
 def keyword_search_seeking(keyword):
     return Seeking.objects.filter(
         Q(contact__first_name__icontains = keyword) |
@@ -25,6 +28,7 @@ def keyword_search_seeking(keyword):
         Q(employer__name__icontains = keyword) |
         Q(notes__icontains = keyword)
     )
+
 
 def filter_search_listing(params_query_dict):
     """

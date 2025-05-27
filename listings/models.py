@@ -1,22 +1,17 @@
+from datetime import date
 from django.db import models
 from django.core.validators import (
     MinValueValidator, MaxValueValidator,
     validate_comma_separated_integer_list
 )
-
-from datetime import date
-
 from broker.models import *
+
 
 # Create your models here.
 
-
-
-
 class Listing(models.Model):
 
-    # TODO: See Feature #346
-    #       Either deprecate this, or implement support for this relation
+    # TODO: Either deprecate this, or implement support for this relation
     #       in our views.
     house = models.ForeignKey('House', on_delete=models.CASCADE, 
         null=True, blank=True)
@@ -24,7 +19,7 @@ class Listing(models.Model):
     apartment = models.ForeignKey('Apartment', on_delete=models.CASCADE, 
         null=True, blank=True)
 
-    # TODO: See Feature #343. Make this ManyToMany?
+    # TODO: Make this ManyToMany?
     contact = models.ForeignKey('broker.Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
     LISTING_TYPE_CHOICES = (
@@ -58,7 +53,7 @@ class Listing(models.Model):
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(128)])
 
-    # TODO: See Feature #383.
+    # TODO?
     number_of_people = models.PositiveIntegerField(default=1,
         null=True, blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(20)])
@@ -70,12 +65,14 @@ class Listing(models.Model):
     def __str__(self):
         return self.short_description
 
+
 class RealEstate(models.Model):
     address = models.OneToOneField('broker.Address', on_delete=models.CASCADE,
         null=True)
     surroundings = models.TextField(max_length=1024, null=True, blank=True)
     def __str__(self):
         return self.address.__str__()
+
 
 class House(models.Model):
     # Can we have several houses on one single property? I don't think so.
@@ -87,6 +84,7 @@ class House(models.Model):
     date_of_construction = models.DateField(null=True, blank=True)
     def __str__(self):
         return self.real_estate.__str__()
+
 
 class Apartment(models.Model):
     house = models.ForeignKey('House', on_delete=models.CASCADE)
@@ -101,8 +99,7 @@ class Apartment(models.Model):
         null=True, blank=True)
     is_furnished = models.BooleanField(default=False)
 
-    # TODO: See Feature #369.
-    #       Turn these into drop down fields with predefined choirces,
+    # TODO: Turn these into drop down fields with predefined choirces,
     #       then you can implement support for them in
     #       broker.utils.filter_search_listing.
     flooring = models.CharField(max_length=128, null=True, blank=True)
@@ -120,6 +117,7 @@ class Apartment(models.Model):
     def __str__(self):
         return self.house.__str__()
 
+
 class Image(models.Model):
     image = models.ImageField(upload_to='uploads/listings/', default='assets/house.jpg')
     image_name = models.CharField(max_length=32, default='untitled')
@@ -132,4 +130,3 @@ class Image(models.Model):
     listing = models.ManyToManyField('Listing')
     def __str__(self):
         return self.image_name
-
