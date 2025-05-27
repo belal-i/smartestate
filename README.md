@@ -30,6 +30,12 @@ apt install  python3-dev default-libmysqlclient-dev  build-essential  pkg-config
 yum install python3-devel mysql-devel pkgconfig
 ```
 
+##### Other distros / macOS / Windows
+
+See the [docs for mysqlclient](https://github.com/PyMySQL/mysqlclient), you probably have to
+install similar libraries. Otherwise, if you don't need MySQL (ie. using SQLite locally),
+you can comment out `mysqlclient` from _requirements.txt_ and it should work.
+
 #### Install Python app dependencies
 
 ```python
