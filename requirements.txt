@@ -1,9 +1,0 @@
-datetime
-Pillow
-Django>=4.1
-django-cookie-consent>=0.3.2
-djangorestframework
-django-widget-tweaks
-django-modeltranslation
-environs
-mysqlclient
