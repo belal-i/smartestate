@@ -17,6 +17,12 @@ from environs.exceptions import EnvValidationError
 
 env.read_env()
 
+VERSION = '0.2.0-dev'
+COPYRIGHT_TEXT = """
+Powered by <a href="https://github.com/saint-hilaire/smartestate">SmartEstate v{}</a>
+(C) Brian St. Hilaire 2022 - 2025
+""".format(VERSION)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -96,6 +102,8 @@ TEMPLATES = [
                 'broker.context_processors.listing_search_form',
                 'smartestate.context_processors.languages',
                 'smartestate.context_processors.current_language',
+                'smartestate.context_processors.smartestate_version',
+                'smartestate.context_processors.copyright_text',
             ],
         },
     },
