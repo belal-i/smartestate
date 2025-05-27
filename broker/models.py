@@ -9,8 +9,7 @@ from listings.models import *
 # Create your models here.
 
 class Contact(models.Model):
-    # TODO: See Feature #343. 
-    #       Give an optional is_primary field, to help deal with models that
+    # TODO: Give an optional is_primary field, to help deal with models that
     #       have more than one contact.
     first_name = models.CharField(max_length=20, null=True, blank=True)
     last_name = models.CharField(max_length=32)
@@ -62,16 +61,19 @@ class Phone(models.Model):
     def __str__(self):
         return self.value
 
+
 class Email(models.Model):
     value = models.EmailField(max_length=40)
     def __str__(self):
         return self.value
+
 
 class Company(models.Model):
     name = models.CharField(max_length=64)
     address = models.ManyToManyField('Address', blank=True)
     def __str__(self):
         return self.name
+
 
 class Seeking(models.Model):
     SEEKING_TYPE_CHOICES = (
@@ -81,8 +83,7 @@ class Seeking(models.Model):
     seeking_type = models.CharField(max_length=8,
         choices=SEEKING_TYPE_CHOICES, default='rental')
 
-    # TODO: See Feature #343.
-    #       You could make this many-to-many, and implement some kind of
+    # TODO: You could make this many-to-many, and implement some kind of
     #       parent-child inheritance into the Contact model.
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE, 
         null=True, blank=True)
@@ -96,13 +97,11 @@ class Seeking(models.Model):
     min_size_sq_m = models.IntegerField(null=True, blank=True, default=20,
         validators=[MinValueValidator(1), MaxValueValidator(500)])
 
-    # TODO: See Feature #383
-    # TODO: See Feature #368
+    # TODO?
     number_of_persons = models.IntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(12)])
 
-    # TODO: See Feature #344
-    #       Implement some automatic synchronization between these fields.
+    # TODO: Implement some automatic synchronization between these fields.
     starting_date = models.DateField(null=True, blank=True, default=date.today)
     ending_date = models.DateField(null=True, blank=True)
     number_of_months = models.IntegerField(null=True, blank=True)
@@ -124,6 +123,7 @@ class Seeking(models.Model):
         else:
             return "Anonymous seeking"
 
+
 class Matching(models.Model):
     listing = models.ForeignKey('listings.Listing', on_delete=models.CASCADE,
         null=True, blank=True)
@@ -139,4 +139,3 @@ class Matching(models.Model):
     note = models.TextField(max_length=256, null=True, blank=True)
     def __str__(self):
         return self.listing.__str__() + " -- " + self.seeking.__str__()
-

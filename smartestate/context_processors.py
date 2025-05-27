@@ -1,8 +1,18 @@
 from django.utils import translation
-from .settings import LANGUAGES
+from .settings import VERSION, COPYRIGHT_TEXT, LANGUAGES
+
+
+def smartestate_version(request):
+    return {'VERSION': VERSION}
+
+
+def copyright_text(request):
+    return {'COPYRIGHT_TEXT': COPYRIGHT_TEXT}
+
 
 def languages(request):
     return {'languages': LANGUAGES}
+
 
 def current_language(request):
     try:

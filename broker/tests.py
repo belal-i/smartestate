@@ -1,13 +1,12 @@
-from pprint import pprint
 from django.test import TestCase
 
 from .utils import *
 from listings.models import *
 from .models import *
 
-# Create your tests here.
 
 class TestSearch(TestCase):
+
     def test_keyword_search_listing(self):
         test_address = Address(street="hello", city="world", pk=1)
         test_real_estate = RealEstate(address=test_address, pk=1)
@@ -34,12 +33,13 @@ class TestSearch(TestCase):
         test_search_5 = keyword_search_listing("Bar")
         test_search_6 = keyword_search_listing("Boo")
 
-        self.assertQuerysetEqual(test_query_set, test_search_1)
-        self.assertQuerysetEqual(test_query_set, test_search_2)
-        self.assertQuerysetEqual(test_query_set, test_search_3)
-        self.assertQuerysetEqual(test_query_set, test_search_4)
-        self.assertQuerysetEqual(test_query_set, test_search_5)
+        self.assertQuerySetEqual(test_query_set, test_search_1)
+        self.assertQuerySetEqual(test_query_set, test_search_2)
+        self.assertQuerySetEqual(test_query_set, test_search_3)
+        self.assertQuerySetEqual(test_query_set, test_search_4)
+        self.assertQuerySetEqual(test_query_set, test_search_5)
         self.assertEqual(test_search_6.count(), 0)
+
 
     def test_keyword_search_seeking(self):
         test_address = Address(street="Hello", city="World", pk=1)
@@ -68,14 +68,15 @@ class TestSearch(TestCase):
         test_search_7 = keyword_search_seeking("acme")
         test_search_8 = keyword_search_seeking("lazy DOG")
 
-        self.assertQuerysetEqual(test_query_set, test_search_1)
-        self.assertQuerysetEqual(test_query_set, test_search_2)
-        self.assertQuerysetEqual(test_query_set, test_search_3)
-        self.assertQuerysetEqual(test_query_set, test_search_4)
+        self.assertQuerySetEqual(test_query_set, test_search_1)
+        self.assertQuerySetEqual(test_query_set, test_search_2)
+        self.assertQuerySetEqual(test_query_set, test_search_3)
+        self.assertQuerySetEqual(test_query_set, test_search_4)
         self.assertEqual(test_search_5.count(), 0)
-        self.assertQuerysetEqual(test_query_set, test_search_6)
-        self.assertQuerysetEqual(test_query_set, test_search_7)
-        self.assertQuerysetEqual(test_query_set, test_search_8)
+        self.assertQuerySetEqual(test_query_set, test_search_6)
+        self.assertQuerySetEqual(test_query_set, test_search_7)
+        self.assertQuerySetEqual(test_query_set, test_search_8)
+
 
     def test_filter_search_listing(self):
         test_real_estate = RealEstate()
@@ -134,7 +135,7 @@ class TestSearch(TestCase):
         test_query_set = Listing.objects.filter(pk=1)
         test_search = filter_search_listing(test_params)
 
-        self.assertQuerysetEqual(test_query_set, test_search)
+        self.assertQuerySetEqual(test_query_set, test_search)
 
         test_params['max_rental_price'] = 800
         test_search = filter_search_listing(test_params)
@@ -157,7 +158,7 @@ class TestSearch(TestCase):
         test_listing.save()
         test_query_set = Listing.objects.filter(pk=1)
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search)
+        self.assertQuerySetEqual(test_query_set, test_search)
 
         test_params['max_for_sale_price'] = 150000
         test_params['max_minimum_down_payment'] = 30000
@@ -178,7 +179,7 @@ class TestSearch(TestCase):
 
         test_params.pop('latest_date_available')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['minimum_months'] = 7
         test_search = filter_search_listing(test_params)
@@ -191,7 +192,7 @@ class TestSearch(TestCase):
 
         test_params.pop('maximum_months')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['max_number_of_people'] = 2
         test_search = filter_search_listing(test_params)
@@ -214,7 +215,7 @@ class TestSearch(TestCase):
 
         test_params.pop('min_number_of_rooms')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_size_sq_m'] = 60
         test_search = filter_search_listing(test_params)
@@ -222,7 +223,7 @@ class TestSearch(TestCase):
 
         test_params.pop('min_size_sq_m')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_listing.apartment.has_internet = False
         test_listing.apartment.save()
@@ -233,7 +234,7 @@ class TestSearch(TestCase):
 
         test_params.pop('has_internet')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_listing.apartment.is_furnished = False
         test_listing.apartment.save()
@@ -244,7 +245,7 @@ class TestSearch(TestCase):
 
         test_params.pop('is_furnished')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_date_of_construction'] = "1970-01-02"
         test_search = filter_search_listing(test_params)
@@ -252,7 +253,7 @@ class TestSearch(TestCase):
 
         test_params.pop('min_date_of_construction')
         test_search = filter_search_listing(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
 
     def test_filter_search_seeking(self):
@@ -314,7 +315,7 @@ class TestSearch(TestCase):
         test_query_set = Seeking.objects.filter(pk=1)
 
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search) 
+        self.assertQuerySetEqual(test_query_set, test_search) 
         test_params['max_rent'] = 800
         test_search = filter_search_seeking(test_params)
         self.assertEqual(test_search.count(), 0)
@@ -326,7 +327,7 @@ class TestSearch(TestCase):
 
         test_params.pop('min_rent')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search)
+        self.assertQuerySetEqual(test_query_set, test_search)
 
         test_params['seeking_type'] = "for_sale"
         test_params['max_purchase_price'] = 300000
@@ -335,7 +336,7 @@ class TestSearch(TestCase):
         test_seeking.save()
         test_query_set = Seeking.objects.filter(pk=1)
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search) 
+        self.assertQuerySetEqual(test_query_set, test_search) 
 
         test_params['max_purchase_price'] = 200000
         test_search = filter_search_seeking(test_params)
@@ -343,7 +344,7 @@ class TestSearch(TestCase):
 
         test_params.pop('max_purchase_price')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_purchase_price'] = 300000
         test_search = filter_search_seeking(test_params)
@@ -351,7 +352,7 @@ class TestSearch(TestCase):
 
         test_params.pop('min_purchase_price')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_number_of_rooms'] = 4
         test_params['max_number_of_rooms'] = 2
@@ -362,7 +363,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_number_of_rooms')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_size_sq_m'] = 60
         test_params['max_size_sq_m'] = 40
@@ -373,7 +374,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_size_sq_m')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_number_of_persons'] = 4
         test_params['max_number_of_persons'] = 2
@@ -384,7 +385,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_number_of_persons')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_starting_date'] = "2022-08-01"
         test_params['max_starting_date'] = "2022-06-01"
@@ -395,7 +396,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_starting_date')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_ending_date'] = "2022-11-01"
         test_params['max_ending_date'] = "2022-09-01"
@@ -406,7 +407,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_ending_date')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_number_of_months'] = 4
         test_params['max_number_of_months'] = 2
@@ -417,7 +418,7 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_number_of_months')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['must_be_furnished'] = False
         test_params['must_have_internet'] = False
@@ -432,7 +433,7 @@ class TestSearch(TestCase):
         test_seeking.save()
         test_query_set = Seeking.objects.filter(pk=1)
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
 
         test_params['min_age'] = 31
         test_params['max_age'] = 29
@@ -443,7 +444,8 @@ class TestSearch(TestCase):
         self.assertEqual(test_search.count(), 0)
         test_params.pop('max_age')
         test_search = filter_search_seeking(test_params)
-        self.assertQuerysetEqual(test_search, test_query_set)
+        self.assertQuerySetEqual(test_search, test_query_set)
+
 
     def test_filter_search_matching(self):
 
@@ -465,7 +467,6 @@ class TestSearch(TestCase):
             pk=2
         )
         test_seeking.save()
-
 
         test_real_estate = RealEstate()
         test_real_estate.save()
@@ -508,11 +509,11 @@ class TestSearch(TestCase):
         }
         test_query_set = Matching.objects.filter(pk=1)
         test_search_result = filter_search_matching(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search_result)
+        self.assertQuerySetEqual(test_query_set, test_search_result)
 
         test_params.pop("listing_id")
         test_search_result = filter_search_matching(test_params)
-        self.assertQuerysetEqual(test_query_set, test_search_result)
+        self.assertQuerySetEqual(test_query_set, test_search_result)
 
         test_params = {
             "listing_id": 2,

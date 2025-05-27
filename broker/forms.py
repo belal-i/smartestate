@@ -1,11 +1,11 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+
 class ListingSearchForm(forms.Form):
 
     # These form fields go hand in hand with the parameters supported by
     # broker.utils.filter_search_listing
-
     listing_type = forms.ChoiceField(choices=[
         ('', '--'),
         ('rental', _('Rental')),
@@ -99,11 +99,11 @@ class ListingSearchForm(forms.Form):
         required=False
     )
 
+
 class SeekingSearchForm(forms.Form):
 
     # These form fields go hand in hand with the parameters supported by
     # broker.utils.filter_search_seeking
-
     seeking_type = forms.ChoiceField(choices=[
         ('', '--'),
         ('rental', _('Rental')),

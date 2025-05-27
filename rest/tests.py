@@ -1,24 +1,15 @@
 import json
-from pprint import pprint
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from rest_framework.request import Request
-from rest_framework.reverse import reverse
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_404_NOT_FOUND,
-    HTTP_201_CREATED,
-    HTTP_400_BAD_REQUEST,
-    HTTP_204_NO_CONTENT
-)
-from rest_framework.test import APIRequestFactory, APIClient
+from rest_framework.test import APIClient
 
 from listings.models import *
 from broker.models import *
 
 
 class RestSearch(TestCase):
+
     def test_post_matching(self):
         listing = Listing(pk=2)
         seeking = Seeking(pk=3)
@@ -43,6 +34,7 @@ class RestSearch(TestCase):
         self.assertEqual(response.status_code, 404)
 
         user.delete()
+
 
     def test_patch_matching(self):
         listing = Listing(pk=2)
@@ -71,7 +63,6 @@ class RestSearch(TestCase):
         response = client.patch('/rest/matchings/', request_data)
         content = json.loads(response.content.decode('utf8'))
 
-
         self.assertEqual(content["status"], "pending")
         self.assertEqual(content["note"], "some other note")
 
@@ -87,6 +78,5 @@ class RestSearch(TestCase):
         response = client.patch('/rest/matchings/', request_data)
         content = json.loads(response.content.decode('utf8'))
         self.assertEqual(response.status_code, 404)
-
 
         user.delete()
