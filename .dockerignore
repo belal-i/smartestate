@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+build
+dist
+*.egg-info
+
+# Environments
+.env
+.env.example
+.venv/
+venv/
+env/
+
+# Django static/media (if collected outside container)
+#staticfiles/
+#media/
+
+# Git
+.git
+.gitignore
+.github
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
