@@ -36,10 +36,18 @@ See the [docs for mysqlclient](https://github.com/PyMySQL/mysqlclient), you prob
 install similar libraries. Otherwise, if you don't need MySQL (ie. using SQLite locally),
 you can comment out `mysqlclient` from _requirements.txt_ and it should work.
 
-#### Install Python app dependencies
+#### Install Django package
 
-```python
-pip install -r requirements.txt
+##### Stable version from PyPI
+
+```
+pip install --upgrade smartestate
+```
+
+##### Install from local source code
+
+```
+pip install .
 ```
 
 ### Usage
