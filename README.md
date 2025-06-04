@@ -12,60 +12,51 @@ This is a legacy project from ca. 3 years ago, which I am recently revisiting. I
 and not ready for production use, but I am working to release a stable version soon.
 Until the stable version 1.0 appears, things can and will break between releases without notice.
 
-### Installing
+### Installing/usage
 
-#### Install platform requirements
+#### Production
 
-These are required for the MySQL driver, see https://github.com/PyMySQL/mysqlclient
+More info soon ;-)
 
-##### Debian/Ubuntu
+#### Local/dev via Docker-Compose
 
+Easiest and preferred method. Clone the repository, and run:
 ```
-apt install  python3-dev default-libmysqlclient-dev  build-essential  pkg-config
-```
-
-##### Red Hat / CentOS
-
-```
-yum install python3-devel mysql-devel pkgconfig
+docker compose up --detach --build
 ```
 
-##### Other distros / macOS / Windows
+#### Local/dev via Django
 
-See the [docs for mysqlclient](https://github.com/PyMySQL/mysqlclient), you probably have to
-install similar libraries. Otherwise, if you don't need MySQL (ie. using SQLite locally),
-you can comment out `mysqlclient` from _requirements.txt_ and it should work.
+* Install platform requirements (for the MySQL driver, see https://github.com/PyMySQL/mysqlclient)
 
-#### Install Django package
+  - Debian/Ubuntu
+    ```
+    apt install  python3-dev default-libmysqlclient-dev  build-essential  pkg-config
+    ```
 
-##### Stable version from PyPI
+  - Red Hat / CentOS
+    ```
+    yum install python3-devel mysql-devel pkgconfig
+    ```
 
-```
-pip install --upgrade smartestate
-```
+  - Other distros / macOS / Windows: See the [docs for mysqlclient](https://github.com/PyMySQL/mysqlclient), you probably have to
+    install similar libraries. Otherwise, if you don't need MySQL (ie. using SQLite locally),
+    you can comment out `mysqlclient` from the dependencies in _pyproject.toml_ and it should work.
 
-##### Install from local source code
-
+* Build app from source code:
 ```
 pip install .
 ```
 
-### Usage
+* Alternative: Install Python package:
+```
+pip install --upgrade smartestate
+```
 
-#### Local
-
-`cp .env.example .env` and configure with appropriate values.
-
-Then, usual Django setup:
-
+* `cp .env.example .env` and configure with appropriate values.
 * `python manage.py migrate`
 * `python manage.py createsuperuser`
 * `python manage.py runserver`
 * Unit tests: `python manage.py test`
 
-
 Set up the cookie group in the Django admin, and make it optional for the cookie banner to appear.
-
-#### Production
-
-Good luck ;-)
