@@ -16,7 +16,54 @@ Until the stable version 1.0 appears, things can and will break between releases
 
 #### Production
 
-More info soon ;-)
+The latest stable image is available from Docker Hub under `sainthilaire/smartestate:latest`.
+
+You can use it however you like. For example, the following _docker-compose.yml_
+will set up a very minimal staging environment, but please change the credentials
+to something more secure.
+
+Also, for a real production environment, you will need SSL, but there
+are many solutions for that.
+
+```yaml
+services:
+  db:
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_DATABASE: smartestate
+      MYSQL_USER: smartestate
+      MYSQL_PASSWORD: insecure-please-change
+      MYSQL_ROOT_PASSWORD: insecure-please-change
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    image: sainthilaire/smartestate:latest
+    restart: always
+    ports:
+      - "80:8000"
+    environment:
+      DEBUG: 0
+      SECRET_KEY: insecure-please-change
+      ALLOWED_HOSTS: your-web-host.com
+      DATABASE_ENGINE: django.db.backends.mysql
+      DATABASE_HOST: db
+      DATABASE_NAME: smartestate
+      DATABASE_USER: smartestate
+      DATABASE_PASSWORD: insecure-please-change
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
+```
 
 #### Local/dev via Docker-Compose
 
