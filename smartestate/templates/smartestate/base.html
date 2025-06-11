@@ -112,7 +112,7 @@
 				</ul>
 				{% for language in languages %}
 					{% if language.0 != current_language %}
-						<img src="/media/assets/language-flags/{{ language.0 }}.png" class="language-flag"
+						<img src="{% static 'assets/language-flags/' %}{{ language.0 }}.png" class="language-flag"
 							id="language-flag-{{ language.0 }}">
 					{% endif %}
 				{% endfor %}

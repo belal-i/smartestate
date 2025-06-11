@@ -1,6 +1,6 @@
 FROM python:3.12-slim-bullseye
 
-LABEL version="0.3.0-beta-1"
+LABEL version="0.3.0-rc-1"
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
