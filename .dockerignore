@@ -17,8 +17,8 @@ venv/
 env/
 
 # Django static/media (if collected outside container)
-#staticfiles/
-#media/
+staticfiles/
+media/
 
 # Git
 .git
