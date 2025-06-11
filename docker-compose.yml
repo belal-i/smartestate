@@ -1,0 +1,43 @@
+# WARNING! These are insecure settings, intended only for local
+# development usage! Please do not use this in production.
+services:
+  db:
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_DATABASE: smartestate
+      MYSQL_USER: smartestate
+      MYSQL_PASSWORD: smartestate
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    #image: sainthilaire/smartestate:latest
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    #volumes:
+    #  - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: 1
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      DATABASE_ENGINE: django.db.backends.mysql
+      DATABASE_HOST: db
+      DATABASE_NAME: smartestate
+      DATABASE_USER: smartestate
+      DATABASE_PASSWORD: smartestate
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

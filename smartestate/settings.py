@@ -17,7 +17,7 @@ from environs.exceptions import EnvValidationError
 
 env.read_env()
 
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 COPYRIGHT_TEXT = """
 Powered by <a href="https://github.com/saint-hilaire/smartestate">SmartEstate v{}</a>
 (C) Brian St. Hilaire 2022 - 2025
@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', 'insecure-local-dev-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
@@ -39,7 +39,12 @@ try:
 except EnvValidationError:
     DEBUG = False
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS',
+        ['http://localhost:8000', 'http://127.0.0.1:8000'])
+USE_X_FORWARDED_HOST = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 
 # Application definition
@@ -68,6 +73,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     # TODO: whitenoise is added as a workaround for serving
+     # staticfiles. Once the infrastructure is improved,
+     # it needs to be removed again.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -109,14 +118,14 @@ TEMPLATES = [
     },
 ]
 
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL  = '/media/'
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL  = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'staticfiles'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 
@@ -132,6 +141,8 @@ DATABASES = {
         'NAME': env('DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
         'USER': env('DATABASE_USER', None),
         'PASSWORD': env('DATABASE_PASSWORD', None),
+        'HOST': env('DATABASE_HOST', '127.0.0.1'),
+        'PORT': env('DATABASE_PORT', 3306),
     }
 }
 
@@ -183,11 +194,6 @@ LANGUAGES = (
     ('it', gettext('Italian')),
 )
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
