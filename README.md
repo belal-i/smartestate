@@ -52,6 +52,7 @@ services:
       DEBUG: 0
       SECRET_KEY: insecure-please-change
       ALLOWED_HOSTS: your-web-host.com
+      CSRF_TRUSTED_ORIGINS: "https://*.your-web-host.com"
       DATABASE_ENGINE: django.db.backends.mysql
       DATABASE_HOST: db
       DATABASE_NAME: smartestate
