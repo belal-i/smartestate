@@ -22,6 +22,10 @@ dependencies = [
   "django-modeltranslation",
   "environs",
   "mysqlclient",
+  # TODO: whitenoise is added as a workaround for serving
+  # staticfiles. Once the infrastructure is improved,
+  # it needs to be removed again.
+  "whitenoise",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
