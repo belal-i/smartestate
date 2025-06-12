@@ -6,24 +6,29 @@ Django app for real estate brokers. If you are a real estate broker, you can use
 to power your website, and the backend will allow you to manage your listings, apartments,
 offers for sale, as well as potentials - renters, buyers, etc.
 
-### Roadmap
+### Features
 
-This is a legacy project from ca. 3 years ago, which I am recently revisiting. It is not stable,
-and not ready for production use, but I am working to release a stable version soon.
-Until the stable version 1.0 appears, things can and will break between releases without notice.
+* Manage properties for rent and for sale
+* Manage potential clients
+* Manage your website, add custom pages
+* Multilingual database: English, German, French, Spanish, Italian
+* Your clients can filter available listings based on size, number of rooms, rent, etc.
+* Vice versa: In SmartEstate's backend broker app, if your apartment has 3 rooms and monthly
+  rent of $1000, you can click on it and SmartEstate shows you all registered clients who
+  might be interested.
 
 ### Installing/usage
 
-#### Production
+#### Pull latest Docker image
 
-The latest stable image is available from Docker Hub under `sainthilaire/smartestate:latest`.
+```
+docker pull sainthilaire/smartestate:latest
+```
 
-You can use it however you like. For example, the following _docker-compose.yml_
-will set up a very minimal staging environment, but please change the credentials
-to something more secure.
+#### Alternative: minimal docker-compose.yml
 
-Also, for a real production environment, you will need SSL, but there
-are many solutions for that.
+Paste the following into an empty file, name it _docker-compose.yml_,
+run `docker compose up -d`, and then brose to http://localhost (or whatever host you specified).
 
 ```yaml
 services:
@@ -51,8 +56,11 @@ services:
     environment:
       DEBUG: 0
       SECRET_KEY: insecure-please-change
-      ALLOWED_HOSTS: your-web-host.com
-      CSRF_TRUSTED_ORIGINS: "https://*.your-web-host.com"
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      CSRF_TRUSTED_ORIGINS: "http://localhost,http://127.0.0.1"
+      # Alternative: use these instead, if you have a public webserver
+      #ALLOWED_HOSTS: your-web-host.com
+      #CSRF_TRUSTED_ORIGINS: "https://*.your-web-host.com"
       DATABASE_ENGINE: django.db.backends.mysql
       DATABASE_HOST: db
       DATABASE_NAME: smartestate
@@ -66,14 +74,15 @@ volumes:
   db_data:
 ```
 
-#### Local/dev via Docker-Compose
+#### Alternative: Run locally from source via Docker Compose
 
-Easiest and preferred method. Clone the repository, and run:
 ```
+git clone https://github.com/saint-hilaire/smartestate
+cd smartestate
 docker compose up --detach --build
 ```
 
-#### Local/dev via Django
+#### Advanced: Run locally from source via Django's runserver (for developers)
 
 * Install platform requirements (for the MySQL driver, see https://github.com/PyMySQL/mysqlclient)
 
@@ -108,3 +117,10 @@ pip install --upgrade smartestate
 * Unit tests: `python manage.py test`
 
 Set up the cookie group in the Django admin, and make it optional for the cookie banner to appear.
+
+### Roadmap
+
+This project is still in beta stage, there are still some issues, things might still be
+a little unstable. However, it's come along nicely. If you decide to use this in production,
+and encounter issues, please don't hesitate to open a ticket. Also, if you wish to contribute,
+again, feel free to reach out :-)
