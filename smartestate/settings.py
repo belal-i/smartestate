@@ -17,10 +17,10 @@ from environs.exceptions import EnvValidationError
 
 env.read_env()
 
-VERSION = '0.3.1'
+VERSION = '0.3.2-dev'
 COPYRIGHT_TEXT = """
-Powered by <a href="https://github.com/saint-hilaire/smartestate">SmartEstate v{}</a>
-(C) Brian St. Hilaire 2022 - 2025
+Powered by <a href="https://github.com/belal-i/smartestate">SmartEstate v{}</a>
+(C) Belal Ibrahim 2025
 """.format(VERSION)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
