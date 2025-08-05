@@ -22,7 +22,7 @@ offers for sale, as well as potentials - renters, buyers, etc.
 #### Pull latest Docker image
 
 ```
-docker pull sainthilaire/smartestate:latest
+docker pull belalibrahim/smartestate:latest
 ```
 
 #### Alternative: minimal docker-compose.yml
@@ -49,7 +49,7 @@ services:
       retries: 10
 
   web:
-    image: sainthilaire/smartestate:latest
+    image: belalibrahim/smartestate:latest
     restart: always
     ports:
       - "80:8000"
@@ -77,7 +77,7 @@ volumes:
 #### Alternative: Run locally from source via Docker Compose
 
 ```
-git clone https://github.com/saint-hilaire/smartestate
+git clone https://github.com/belal-i/smartestate
 cd smartestate
 docker compose up --detach --build
 ```

@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Brian St. Hilaire", email = "brian.st-hilaire@sanctus-tech.com" }
+  { name = "Belal Ibrahim", email = "belal.ibrahim@proton.me" }
 ]
 dependencies = [
   "Django>=4.1",
@@ -46,5 +46,5 @@ packages = ["smartestate"]
 "smartestate" = ["**/*.html", "**/*.css", "**/*.js", "**/*.json", "**/*.txt", "**/*.po", "**/*.mo"]
 
 [project.urls]
-Homepage = "https://github.com/saint-hilaire/smartestate"
-Repository = "https://github.com/saint-hilaire/smartestate"
+Homepage = "https://github.com/belal-i/smartestate"
+Repository = "https://github.com/belal-i/smartestate"
