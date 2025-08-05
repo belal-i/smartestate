@@ -17,10 +17,10 @@ from environs.exceptions import EnvValidationError
 
 env.read_env()
 
-VERSION = '0.3.1'
+VERSION = '0.3.2'
 COPYRIGHT_TEXT = """
-Powered by <a href="https://github.com/saint-hilaire/smartestate">SmartEstate v{}</a>
-(C) Brian St. Hilaire 2022 - 2025
+Powered by <a href="https://github.com/belal-i/smartestate">SmartEstate v{}</a>
+(C) Belal Ibrahim 2025
 """.format(VERSION)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,8 +43,8 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS',
         ['http://localhost:8000', 'http://127.0.0.1:8000'])
 USE_X_FORWARDED_HOST = True
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
 
 # Application definition
