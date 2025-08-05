@@ -17,7 +17,7 @@ from environs.exceptions import EnvValidationError
 
 env.read_env()
 
-VERSION = '0.3.2-dev'
+VERSION = '0.3.2-rc-1'
 COPYRIGHT_TEXT = """
 Powered by <a href="https://github.com/belal-i/smartestate">SmartEstate v{}</a>
 (C) Belal Ibrahim 2025
