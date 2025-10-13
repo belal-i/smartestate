@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smartestate"
-version = "0.3.2"
+version = "0.3.3"
 description = "Django site for real estate brokers"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -13,7 +13,7 @@ authors = [
   { name = "Belal Ibrahim", email = "belal.ibrahim@proton.me" }
 ]
 dependencies = [
-  "Django>=4.1",
+  "Django (>=5.2.6,>=5.1.12,>=4.2.24)",
   "datetime",
   "Pillow",
   "django-cookie-consent>=0.3.2",
